@@ -1,0 +1,325 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wenneker Assignment
+% LaTeX Template
+% Version 2.0 (12/1/2019)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Vel (vel@LaTeXTemplates.com)
+% Frits Wenneker
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{scrartcl} % Font size
+\usepackage{hyperref} % for url
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{corollary}{Corollaire}[theorem]
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{Def}[theorem]{Definition}
+\newtheorem{pro}[theorem]{Proposition}
+
+%%newcommand
+\newcommand{\Xt}{$\left(X_t\right)_{t\in\mathbb{Z}}$}
+\newcommand{\Z}{$\mathbb{Z}$}
+\newcommand{\C}{$\mathbb{C}$}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{	
+	\normalfont\normalsize
+	\textsc{CNAM}\\ % Your university, school and/or department name(s)
+	\vspace{25pt} % Whitespace
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{20pt} % Whitespace
+	{\huge Assignment Title}\\ % The assignment title
+	\vspace{12pt} % Whitespace
+	\rule{\linewidth}{2pt}\\ % Thick bottom horizontal rule
+	\vspace{12pt} % Whitespace
+}
+
+\author{\LARGE Jérôme Petit} % Your name
+
+\date{\normalsize\today} % Today's date (\today) or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	FIGURE EXAMPLE
+%----------------------------------------------------------------------------------------
+%
+\section{Introduction}
+
+
+\section{Séries temporelles}
+Une série temporelle ou série chronologique est une suite d’observations d’un phénomène faites au cours du temps. Cette notion s'étend à de nombreux domaines, tout relvé de données, de flux ou d'information est une série temporelle : indice boursier, population française, trafic Internet, etc. Ses données réelles obtenues sont des suites finies indexés par un temps continu ou discret. Les modèles mathématiques utilisées pour modélisées ses séries temporelles sont eux de dimension infinie.
+\subsection{Etude de la stationarité}
+Une des premieres notions étudiés sur les séries temporelle est la stationnarité.
+\begin{Def}
+Stationnarité stricte ou forte~:~$\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire au sens strict si~:~$\forall n\in \mathbb{N}, \forall (t_1,...,t_n), \forall h\in\mathbb{Z}$ la loi de $(X_{t_1},...,X_{t_n})$ est identique à la loi de $(X_{t_1+h},...,X_{t_n+h})$
+\end{Def}
+D'apres le théorème de Kolmogorov, on en déduit que processus $\left(X_t\right)$ est stationnaire au sens fort si et seulement si la loi de $X_t$ est identique à la loi de $X_{t+h}$ quelque soit $h$. Cette condition de stationnarité est tres contraignante et relativement peu observé en pratique. On remarque pour un processus stationnaire strict $X_t$ avec des moments d'ordre 1 et 2 finis, on a~:
+$$
+\mathbb{E}\left(X_t\right)=\mathbb{E}\left(X_{t+h}\right), \forall h\in \mathbb{N}
+$$
+ansi comme l'esperance est constante et égale à~:~$\mathbb{E}\left(X_0\right)=\mu$. Pour la covariance, on a~:
+\begin{align*}
+Cov\left(X_t,X_{t+h}\right)& = Cov\left(X_t,X_{t+h_0}\right)\\
+&= \mathbb{E}\left((X_t-\mu)(X_{t+h_0}-\mu)\right)\\
+&= \mathbb{E}\left((X_0-\mu)(X_{h_0}-\mu)\right)
+\end{align*}
+la derniere égalité vient du fait que $X_t$ est égale à $X_{0+t}$ en loi et que $X_{t+h_0}$ est égale à $X_{h_0}$ en loi.
+On remarque donc que les processus stationnaire strict ont des moments d'ordre un et 2 independant du temps t. C'est cette notion qui va être utilisée pour des définir les processus stationnaire au sens faible.
+\begin{Def}
+Sationnarité faible~:~
+
+$\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire du second ordre (ou processus faiblement stationnaire ) s'il vérifie~:
+\begin{itemize}
+\item[i)]$\forall t\in\mathbb{Z},~\mathbb{E}\left(X_t\right)=m $ 
+\item[ii)]$\forall t\in\mathbb{Z},~\mathbb{V}\left(X_t\right)=\sigma^2 $ 
+\item[iii)]$\forall t,h\in\mathbb{Z},~Cov\left(X_t,X_{t+h}\right)=Cov\left(X_0,X_h\right)=\gamma\left(h\right) $ 
+\end{itemize}
+On note $\gamma(h)$ l'auto covariance d'ordre $h$ de $X_t$ .
+\end{Def} 
+Dans la suite les processus stationnaires désignent les processus stationnaire du second ordre. On note $\rho(h)=\frac{\gamma(h)}{\gamma(0)}$ la correlation d'ordre $h$ de $X_t$.
+
+\subsection{Exemples}
+\subsubsection{Processus stationnaires}
+\begin{itemize}
+\item Bruit blanc faible : un processus $\epsilon_t$ si et seulement si : $\mathbb{E}\left(X_t\right)=0$ et $\mathbb{V}\left(X_t\right)= \sigma^2$ et $Cov(\epsilon_t,\epsilon_{\tau})=0$ pour tout $t\not=\tau$.\\
+\item Bruit blanc fort : un processus i.i.d. $\epsilon_t$ avec $\mathbb{E}\left(X_t\right)=0$ et $\mathbb{V}\left(X_t\right)= \sigma^2$.
+\end{itemize}
+
+\subsubsection{Processus non stationnaires}
+Une marche aléatoire~:~$X_t=X_{t-1}+\epsilon_t$, avec $\epsilon_t$ un bruit blanc indépendant de $X_0$, est un processus non stationnaire. En effet~:~
+$$
+X_t=X_{t-2}+\epsilon_{t-1}+\epsilon_t=\epsilon_t+...+\epsilon_1+X_0
+$$
+on a donc~:~$\mathbb{E}\left(X_t\right)=\mathbb{E}\left(X_0\right)$ et $\mathbb{V}\left(X_t\right)=t\sigma^2+\mathbb{V}\left(X_0\right)$. Ainsi la variance dépend du temps.
+
+
+Tout processus admettant une tendance déterministe est non stationnaire également. Dans ce cas le moment d'ordre 1 dépend du temps.
+
+
+\subsection{Outil pour l'étude des processus stationnaires}
+\begin{theorem}
+Soit $X_t$ un processus stationnaire alors il existe une bruit blanc au sens faible $\epsilon_t$ et des coefficients réels $\left(\Psi_t\right)$ tel que~:
+$$
+X_t = m+\sum_{i\geq 0}\Psi_j\epsilon_j
+$$
+avec le moment d'ordre 1 de $X_t$
+\end{theorem}
+Cette décomposition est appelé décomposition de Wold. ou transformé par maoyenne mobile.
+Afin d'étudier les processus stationnaires, on utilisera les coefficients d'autocorrelation et les coefficents d'auto correlation partielles.
+\begin{Def}
+On appelle auto-correlation partielle d'ordre p~:
+$$
+r(p)=\frac{Cov\left(X_t-\mathbb{E}\left(X_t|X_{t-1},...,X_{t-p}\right),X_{t-p}-\mathbb{E}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)\right)}{\mathbb{V}\left(X_t|X_{t-1},...,X_{t-p}\right)\mathbb{V}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)}
+$$
+\end{Def}
+
+\section{Processus}
+\subsection{processus MA}
+\begin{Def}
+Le processus \Xt est une moyenne mobile d'ordre q s'il existe un bruit blanc $\epsilon_t\sim BB(0,\sigma^2)$ et des réels $\theta_1,...,\theta_q$ tels que~:~
+$$
+X_t=m+\epsilon_t+\theta_1\epsilon_{t-1}+...+\theta_q\epsilon_{t-q}
+$$ 
+On note MA(q) une moyenne mobile d'ordre q.
+\end{Def}
+Un processus MA(q) est stationnaire, la fonction d'auto-covariance est ~:
+$$
+\gamma(h)=\left\{\begin{array}{cc}
+0 & \textrm{si |h|>q}\\
+\sigma^2(1+\sum_{i=1}^q\theta^2_i & h=0\\
+\sigma^2 \theta^2_q & h=q\\
+\sigma^2(\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h} & si 0<h<q\\
+\end{array}
+\right.
+$$
+Il n'y a pas de résultats particulier pour les auto-correlations partielles.
+\subsection{processus AR}
+\begin{Def}
+Un processus \Xt est un processus auto-regressif d'ordre p noté AR(p) si~:
+\begin{itemize}
+\item[i)] \Xt est stationnaire
+\item[ii)] \Xt vérifie~:
+$$
+X_t = \mu + \phi_1X_{t-1}+...+\phi_pX_{t-p}+\epsilon_t
+$$
+avec $\phi_p\not=0$ et $\epsilon_t\sim BB(0,\sigma^2)$
+\end{itemize}
+\end{Def}
+On pose $\Phi(z)=1-\phi_1z-...-\phi_pz^p$, un processus AR(p) peut s'écrire à l'aide de polynome de retard~:
+$$
+\Phi(L)X_t = mu + \epsilon_t
+$$
+A l'aide de cette formulation, on en déduit les racines du polynome $\Phi$ sont toutes de module strictment supérieur à 1.
+\begin{pro}
+Soit \Xt un processus AR(p), alors~:
+\begin{itemize}
+\item $\mathbb{E}\left(X_t\right) = \frac{\mu}{1-\phi_1-...-\phi_p}$\\
+\item on pose $Y_t=X_t-\mathbb{E}\left(X_t\right)$ alors $Y_t$ est un processus AR(p) d'esperance nulle
+\end{itemize}
+\end{pro}
+Les processus AR(p) sont des processus stationnaires, on a vu que les racines du polynomes de retard sont toutes strictement supérieure à 1, cela signifie que l'on peut inverser le polynome de retard. Ainsi tout processus AR(p) peut s'écrire : $X_t = \Phi(L)^{-1}\left(\mu + \epsilon_t\right)$. L'inverse donnant une somme infinie, cela veut dire que tout processus AR(p) peut s'ecrire sous la forme MA($\infty$).
+
+\subsubsection{Proprietes des processus AR(p)}
+On a vu precedement que d'un processus AR(p) admettant une esperance non nulle, on pouvait toujours se remenait à un processus AR(p) d'esperance nulle. Dans la suite on considerera le processus AR(p) \Xt d'esperance nulle. L'auto covariance s'écrit pour tout h>0 : 
+\begin{align*}
+\gamma(h)&= Cov(X_t,X_{t-h})\\
+&= \mathbb{E}\left(X_tX_{t-h}\right)\\
+&= \sum_{i=1}^p\phi_i\mathbb{E}\left(X_{t-i}X_{t-h}\right)+\mathbb{E}\left(\epsilon_tX_{t-h}\right)\\
+&= \sum_{i=1}^p\phi_i\gamma(h-i)
+\end{align*}
+
+Pour h=0, on a~:
+\begin{align*}
+\gamma(0)&= \mathbb{E}\left(X_t^2\right)\\
+&= \sum_{i=1}^p\phi_i\mathbb{E}\left(X_{t-i}X_{t}\right)+\mathbb{E}\left(\epsilon_tX_{t}\right)\\
+&= \sum_{i=1}^p\phi_i\gamma(i)+\mathbb{E}\left(\epsilon_t\epsilon_{t}\right)\\
+&=\sum_{i=1}^p\phi_i\gamma(i)+\sigma^2
+\end{align*}
+On a de même pour l'autocorrelation~:~$\rho(h)=\phi_1\rho(h-1)+...+\phi_p\rho(h-p)$ pour tout h>0.
+Ces équations sont appelés equation de Yule-Walker. 
+On a une relation de récurrence~:
+$$
+r(0)=1=\sum_{i=1}^p\phi_i\rho(i)+\frac{\sigma^2}{\gamma(0)}
+$$
+d'où~:
+$$
+\gamma(0)=\frac{\sigma^2}{1-\sum_{i=1}^p\phi_i\rho(i)}
+$$
+Les equations de Yule-Walker peuvent s'écrire~:
+$$
+\left(
+\begin{array}{cccc}
+1 & \rho(1) & ... & \rho(p-1)\\
+\rho(1) & 1 & ... &  \rho(p-2)\\
+\rho(2) & \rho(1) & ... & \rho(p-3)\\
+.. & ... & ... & ...\\
+\rho(p-1) & \rho(p-1) & ... & 1
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\phi_1\\
+. \\
+. \\
+.\\
+\phi_p
+\end{array}
+\right)=\left(
+\begin{array}{c}
+\rho(1)\\
+. \\
+. \\
+.\\
+\rho(p)
+\end{array}
+\right)
+$$
+Les solutions de ce systeme sont données par les valeurs initiales $\rho(i)$. Ainsi si l'on peut estimer les correlation sur un échantillon donnée on pourra en déduire les coefficients du processus AR(p).
+\begin{pro}
+Soit \Xt un processus AR(p) alors~:
+\begin{itemize}
+\item[i)] $|\rho(h)|$ et $\gamma(h)$ décroissent exponentiellement avec h\\
+\item[ii)] l'auto corellation partielle est nulle pour h>p
+\end{itemize}
+\end{pro}
+\subsection{ARMA modeles}
+\subsection{SARMA modeles}
+\subsection{ARIMA modeles}
+\subsection{SARIMA modeles}
+\subsection{ARCH modeles}
+\subsection{GARCH modeles}
+
+\section{Annexe}
+\subsection{Convergence}
+Convergence $\mathcal{L}^2$~:
+$$
+X_n\rightarrow_{\mathcal{L^2}} X \Leftrightarrow  \lim_{n\rightarrow \infty}||X_n-X||_2=0
+$$
+On dit que $X_t$ convergen en loi vers $X$ si et seulement si pour toute fonction bornée $\phi$, on a~:~
+$$
+\lim_{n}\mathcal{E}(\phi(X_n))=\mathcal{E}\left(\phi(X)\right)
+$$
+\subsection{Densité spectrale}
+\begin{pro}
+Soit $(X_t)$ un processus stationnaire de la forme~:
+$$
+X_t = m+\sum_{j\geq 0}a_j\epsilon_{t-j}
+$$
+avec $\epsilon_t$ un bruit blanc $BB(0,\sigma^2)$ et $\sum_{j\geq 0}|a_j|<+\infty$. Alors~:
+\begin{itemize}
+\item $\sum_{h\in\mathbb{Z}}|\gamma(h)|<+\infty$\\
+\item $\forall \omega\in[-\pi,\pi],~f_X(\omega)=\frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma(h)e^{i\omega h}$ est la densité spectrale de $X_t$.
+\end{itemize}
+\end{pro}
+Sous les hypothèses précédentes, on a~:
+$$
+f_X(\omega)=\frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma(h)cos(\omega h)
+$$
+\subsection{Estimateur empirique des moments}
+Soit $(X_t)_{t\in\mathbb{Z}}$ un processus stationnaire, on cherche à estimer l'espérance, lea fonction d'autocovariance, d'autocorrelation et d'autocorellation partielle. On a un échantillon de taille T. On prend comme estimateur~:
+\begin{itemize}
+\item moyenne empirique~:~$\hat{m}=\frac{1}{T}\sum_{t=1}^TX_t=\overline{X}_T$\\
+\item autocovariance empirique d'ordre h~:~$\hat{\gamma}(h)=\frac{1}{T-h}\sum_{t=h+1}^T(X_t-\overline{X}_T)(X_{t-h}-\overline{X}_T)$\\
+\item autocorrelation empirique d'ordre h~:~$\hat{\rho}(h)=\frac{\hat{\gamma}(h)}{\hat{\gamma}(0)}$.\\
+\item l'autocorelation partielle est une régression empirique sur 1,$X_1$,...,$X-{t-h}$.
+\end{itemize}
+Pour estimer la fonction de densité spectrale on utilise la autocovariance empirique et un terme d'ajustement (coefficient de Newey-West) afin diminuer le poid de $\hat{\gamma}(h)$ pour des h grand.
+
+
+Si $X_t$ est un processus stationnaire alors d'après la loi des grands nombres tous les estimateurs empiriques présentés ci-dessus convergent.
+
+\begin{pro}
+Si $X_t=m+\sum_{j\geq 0}a_j\epsilon_{t-j}$ avec $\epsilon_t$ un bruit blanc de moment d'ordre 4 fini, alors tous ses estimateurs ont des lois jointes asymptotiquemetn gaussiennes~:
+$$
+\sqrt{T}\left(\hat{m}-m\right)\rightarrow \mathcal{N}(0,\sum_{h\in\mathcal{Z}}\gamma(h)
+$$
+convergence en loi
+\end{pro}
+\subsection{polynome de retard}
+\begin{Def}
+L'opérateur de retard est défini sur la classe des processus stationnaires comme étant~: 
+$$
+L(X_t)=X_{t-1}
+$$
+\end{Def}
+\begin{Def}
+Soit $P$ un polynome, $P(z)=\sum_{k=0}^{p}a_kz^k$ avec $a_k\in\mathbb{R}$, on lui associe le polynome de retard $P(L)$ défini comme suit~:
+$$
+P(L)=\sum_{k=0}^pa_kL^k
+$$
+et 
+$$
+P(L)X_t=\sum_{k=0}^pa_kX_{t-k}
+$$
+\end{Def}
+Un polynome de retard P(L) est inversible s'il existe un polynome de retard $Q(L)$ tel que $P(L)Q(L)=Id$. Dans $\mathbb{C}$, tout polynome reel $P$ se décompose~:
+$$
+P(z)=\prod_{i=1}^p(z-z_i)=\prod_{i=1}^p(-z_i)\prod_{i=1}^p(1-\frac{z}{z_i})=\alpha\prod_{i=1}^p(1-\lambda_i z)
+$$
+avec $\lambda_i=\frac{1}{z_i}$.
+Le polynome est $(1-\lambda z)$ est inversible si seulement si ses racines sont de modules strictement inferieur à 1. Ceci equivalent à $|\lambda|>1$. On peut généraliser ce résultat à tout polynome de degré p.
+\begin{pro}
+Soit $P(L) = \alpha\prod_{i=1}^p(1-\lambda_i L)$ un polynome de retard, si pour tout i $|\lambda_i|<1$ alors $P(L)$ est inversible et :
+$$
+P^{-1}(L)= \sum_{k\geq 0}b_kL^k
+$$
+\end{pro}
+\end{document}
