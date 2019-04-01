@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.3.21)  27 MAR 2019 08:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.3.21)  30 MAR 2019 15:27
 entering extended mode
 **./main.tex
 (main.tex
@@ -821,62 +821,62 @@ Package scrlayer-scrpage Info: auto-selection of `pagestyleset=KOMA-Script'.
  (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 56.
-LaTeX Font Info:    Try loading font information for FML+futm on input line 56.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 60.
+LaTeX Font Info:    Try loading font information for FML+futm on input line 60.
 
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fourier\fmlfutm
 .fd"
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 56.
-LaTeX Font Info:    Try loading font information for FMS+futm on input line 56.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 60.
+LaTeX Font Info:    Try loading font information for FMS+futm on input line 60.
 
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fourier\fmsfutm
 .fd"
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 56.
-LaTeX Font Info:    Try loading font information for FMX+futm on input line 56.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 60.
+LaTeX Font Info:    Try loading font information for FMX+futm on input line 60.
 
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fourier\fmxfutm
 .fd"
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 56.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 60.
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Try loading font information for T1+futs on input line 56.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Try loading font information for T1+futs on input line 60.
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fourier\t1futs.
 fd"
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 )
 \AtBeginShipoutBox=\box34
-Package hyperref Info: Link coloring OFF on input line 56.
+Package hyperref Info: Link coloring OFF on input line 60.
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\namere
 f.sty"
@@ -888,9 +888,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count140
 )
-LaTeX Info: Redefining \ref on input line 56.
-LaTeX Info: Redefining \pageref on input line 56.
-LaTeX Info: Redefining \nameref on input line 56.
+LaTeX Info: Redefining \ref on input line 60.
+LaTeX Info: Redefining \pageref on input line 60.
+LaTeX Info: Redefining \nameref on input line 60.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -901,7 +901,7 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           You can avoid loading `bookmark' with KOMA-Script option
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message with `\usepackage{bookmark}'
-(scrartcl)           before \begin{document} on input line 56.
+(scrartcl)           before \begin{document} on input line 60.
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\bookma
 rk.sty"
@@ -916,20 +916,20 @@ e 164.
 \BKM@id=\count141
 ))
 \c@lstlisting=\count142
-LaTeX Info: Redefining \degres on input line 56.
-LaTeX Info: Redefining \dots on input line 56.
+LaTeX Info: Redefining \degres on input line 60.
+LaTeX Info: Redefining \dots on input line 60.
 
 
 Package french.ldf Warning: Please load the "listings" package
-(french.ldf)                AFTER babel/french; reported on input line 56.
+(french.ldf)                AFTER babel/french; reported on input line 60.
 
 Package french.ldf Info: Setting StandardItemizeEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 56.
+(french.ldf)             reported on input line 60.
 Package french.ldf Info: Setting StandardEnumerateEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 56.
-LaTeX Info: Redefining \up on input line 56.
+(french.ldf)             reported on input line 60.
+LaTeX Info: Redefining \up on input line 60.
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\sup
 p-pdf.mkii"
@@ -995,11 +995,11 @@ G,.JBIG2,.JB2,.eps]
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 59.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 63.
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\t1cmss.fd"
 File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Try loading font information for FML+futmi on input line 59
+LaTeX Font Info:    Try loading font information for FML+futmi on input line 63
 .
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fourier\fmlfutm
@@ -1007,121 +1007,117 @@ i.fd"
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 59.
+(Font)              scaled to size 13.24796pt on input line 63.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 59.
+(Font)              scaled to size 9.19998pt on input line 63.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 59.
-LaTeX Font Info:    Try loading font information for U+msa on input line 59.
+(Font)              scaled to size 7.35999pt on input line 63.
+LaTeX Font Info:    Try loading font information for U+msa on input line 63.
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.f
 d"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 59.
+LaTeX Font Info:    Try loading font information for U+msb on input line 63.
 
 ("C:\Users\jerpetit\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.f
 d"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 59.
+(Font)              scaled to size 13.24796pt on input line 63.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 59.
+(Font)              scaled to size 9.19998pt on input line 63.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 59.
+(Font)              scaled to size 7.35999pt on input line 63.
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 69.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 73.
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 72.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 75.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 72.
+(Font)              scaled to size 10.07397pt on input line 75.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 72.
+(Font)              scaled to size 7.63599pt on input line 75.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 72.
+(Font)              scaled to size 5.51999pt on input line 75.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 72.
+(Font)              scaled to size 10.07397pt on input line 75.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 72.
+(Font)              scaled to size 7.63599pt on input line 75.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 72.
+(Font)              scaled to size 5.51999pt on input line 75.
  [1
 
 
 {C:/Users/jerpetit/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Overfull \hbox (10.40987pt too wide) in paragraph at lines 102--103
-[]\T1/futs/m/n/10.95 Bruit blanc faible : un pro-ces-sus $\FML/futmi/m/it/10.95
- []$ \T1/futs/m/n/10.95 si et seule-ment si : $\U/futm/m/n/10.95 E [] \FMS/fut
-m/m/n/10.95 Å \T1/futs/m/n/10.95 0$ et $\U/futm/m/n/10.95 V [] \FMS/futm/m/n/10
-.95 Å \FML/futmi/m/it/10.95 []$ \T1/futs/m/n/10.95 et $\FML/futmi/m/it/10.95 C
-ov\T1/futs/m/n/10.95 (\FML/futmi/m/it/10.95 []; []\T1/futs/m/n/10.95 ) \FMS/f
-utm/m/n/10.95 Å
+Overfull \hbox (3.33461pt too wide) in paragraph at lines 98--99
+[]\T1/futs/m/n/10.95 Dans la suite les pro-ces-sus sta-tion-naires dÈ-si-gne-ro
+nt les pro-ces-sus sta-tion-naire du se-cond ordre.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--103
+Underfull \hbox (badness 10000) in paragraph at lines 110--111
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
+Underfull \hbox (badness 10000) in paragraph at lines 187--188
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 239--240
+Underfull \hbox (badness 10000) in paragraph at lines 252--253
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 268--269
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 281--282
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 293--294
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 294--295
+
+ []
+
 [5]
-Overfull \hbox (12.63156pt too wide) in paragraph at lines 313--314
-[]\T1/futs/m/n/10.95 Un po-ly-nome de re-tard P(L) est in-ver-sible s'il existe
- un po-ly-nome de re-tard $\FML/futmi/m/it/10.95 Q\T1/futs/m/n/10.95 (\FML/futm
+Overfull \hbox (12.63156pt too wide) in paragraph at lines 326--327
+[]\T1/futs/m/n/10.95 Un po-ly-nÙme de re-tard P(L) est in-ver-sible s'il existe
+ un po-ly-nÙme de re-tard $\FML/futmi/m/it/10.95 Q\T1/futs/m/n/10.95 (\FML/futm
 i/m/it/10.95 L\T1/futs/m/n/10.95 )$ tel que $\FML/futmi/m/it/10.95 P\T1/futs/m/
 n/10.95 (\FML/futmi/m/it/10.95 L\T1/futs/m/n/10.95 )\FML/futmi/m/it/10.95 Q\T1/
 futs/m/n/10.95 (\FML/futmi/m/it/10.95 L\T1/futs/m/n/10.95 ) \FMS/futm/m/n/10.95
  Å
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 325.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 338.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 325.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 338.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 325.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 325.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 338.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 338.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 325.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 338.
  ) 
 Here is how much of TeX's memory you used:
  14181 strings out of 492945
- 254106 string characters out of 3124920
- 492071 words of memory out of 3000000
+ 254091 string characters out of 3124920
+ 492137 words of memory out of 3000000
  17818 multiletter control sequences out of 15000+200000
  106394 words of font info for 116 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 45i,19n,66p,9116b,515s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 45i,19n,66p,9116b,621s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/jerpetit/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.
 enc}<C:/Users/jerpetit/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/fou
 rier/fourier-bb.pfb><C:/Users/jerpetit/AppData/Local/Programs/MiKTeX 2.9/fonts/
@@ -1134,9 +1130,9 @@ c/fourier/fourier-ms.pfb><C:/Users/jerpetit/AppData/Local/Programs/MiKTeX 2.9/f
 onts/type1/adobe/utopia/putb8a.pfb><C:/Users/jerpetit/AppData/Local/Programs/Mi
 KTeX 2.9/fonts/type1/adobe/utopia/putr8a.pfb><C:/Users/jerpetit/AppData/Local/P
 rograms/MiKTeX 2.9/fonts/type1/adobe/utopia/putri8a.pfb>
-Output written on main.pdf (6 pages, 114776 bytes).
+Output written on main.pdf (6 pages, 115696 bytes).
 PDF statistics:
- 179 PDF objects out of 1000 (max. 8388607)
+ 170 PDF objects out of 1000 (max. 8388607)
  42 named destinations out of 1000 (max. 500000)
- 177 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 153 words of extra memory for PDF output out of 10000 (max. 10000000)
 
