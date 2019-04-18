@@ -135,7 +135,18 @@ X_t = m+\sum_{i\geq 0}\Psi_j\epsilon_j
 $$
 avec le moment d'ordre 1 de $X_t$
 \end{theorem}
-Cette décomposition est appelé décomposition de Wold. ou transformé par moyenne mobile.
+Cette décomposition est appelé décomposition de Wold ou également transformée par moyenne mobile.
+Les processus stationnaires sont stable par combinaison sous certaine condition sur les coefficients : 
+\begin{pro}
+Si $\Xt$ est un processus stationnaire et $(a_i)_{i\in \mathbb{Z}}$ est une suite de réels absolument convergente alors le processus : 
+$$
+Y_t=\sum_{i\in\mathbb{Z}}a_i X_{t-i}
+$$
+est un processus stationnaire
+\end{pro}
+Une conséquence de cette proposition est que la différence ou la moyenne de processus stationnaire est un processus stationnaire.
+
+
 Afin d'étudier les processus stationnaires, on utilisera les coefficients d'auto-corrélation et les coefficients d'auto corrélation partielles.
 \begin{Def}
 On appelle auto-corrélation partielle d'ordre p~:
@@ -143,7 +154,16 @@ $$
 r(p)=\frac{Cov\left(X_t-\mathbb{E}\left(X_t|X_{t-1},...,X_{t-p}\right),X_{t-p}-\mathbb{E}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)\right)}{\mathbb{V}\left(X_t|X_{t-1},...,X_{t-p}\right)\mathbb{V}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)}
 $$
 \end{Def}
-
+\subsection{Non stationnarité}
+La stationnarité d'ordre 2 se définie comme une invariance des moments d'ordre 1 et 2. Par opposition, on dira qu'une série est non-stationnaire si elle n'est pas stationnaire. La classe des processus non stationnaire est plus vaste que celle des processus stationnaire. Parmi les processus non stationnaire Nelson et Plosser \cite{NonSta} ont retenu deux classes de processus non-stationnaires : les processus TS \textit{(trend stationary)} et les processus DS \textit{(difference stationary)}. Les premiers correspondent à une non-stationnarité de type déterministe alors que les seconds correspondent à une non-stationnarité de type stochastique.
+\begin{Def}
+$\Xt$ est un processus non-stationnaire TS s'il peut s'écrire sous la forme $X_t = f(t)+Z_t$ où $f(t)$ est une fonction déterministe du temps et $Z_t$ est un processus stationnaire.
+\end{Def}
+L'exemple le plus simple est celui de la tendance linéaire bruitée~:~$X_t=a+bt+\epsilon_t$. Ce processus admet une tendance déterministe $a+bt$. Les processus non-stationnaire TS non pas de persistance des chocs. L'influence d'un choc subit à un instant $\tau$ aura tendance ) s'estomper au cours du temps et la variable rejoint alors sa dynamique à long terme déterminé par $f(t)$. Cette propriété une conséquence directe de la décomposition de Wold.
+\begin{Def}
+Un processus $\Xt$ est un processus non-stationnaire DS ou intégré d'ordre $d$ si le processus obtenu après $d$ différenciation est stationnaire.
+\end{Def}
+Le fait de différencer $d$ fois revient à multiplier par le polynôme de retard $(1-L)^d$ et cela revient donc à chercher les racines de l'unité. Car si le polynome $\Phi(L)X_t$ est stationnaire et si 1 est une racine du polynôme $\Phi$ alors $\left(X_t\right)$ sera non stationnaire. C'est pour cela que les tests de détections de racine de l'unité sont utilisés pour la détection de non stationnarité.
 \section{Processus}
 \subsection{processus MA}
 \begin{Def}
@@ -335,4 +355,20 @@ $$
 P^{-1}(L)= \sum_{k\geq 0}b_kL^k
 $$
 \end{pro}
+
+\subsection{Chaine de Markov}
+\begin{Def}
+Le processus $\left\{X_t\right\}_{t\in\mathbb{N}}$ est une chaîne de Markov d'ordre p si et seulement si, pour tout $t$, on a l'égalité de distributions~:
+$$
+\mathcal{L}\left(X_t|X_{t-1},X_{t-2},X_{t-3},....\right) = \mathcal{L}\left(X_t|X_{t-1},...,X_{t-p}\right)
+$$
+\end{Def}
+\begin{theorem}
+Le processus $\left\{\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
+\end{theorem}
+Un processus AR(1) est un processus markovien, de même toute marche aléatoire une porcessus markovien d'ordre 1.
+
+\bibliographystyle{amsplain}
+\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
+
 \end{document}
