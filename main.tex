@@ -122,11 +122,40 @@ Les processus non stationnaires sont des processus dont les moments d'ordre 1 ou
 Dans les cas pratiques, on aura une série observée pour $t=1,...,T$, dans ce cas là on devra calculer l'autocavariance (resp. autocorrelation) empirique~:
 
 \begin{align*}
-\overline{\gamma}(h)&=\frac{1}{T}\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y}), 0\leq h\leq T-1\\
-\overline{\rho}(h)&=\frac{\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y})}{\sum_{t=1}^T(y_t-\overline{y})^2}, 0\leq h\leq T-1,
+\overline{\gamma}(h)&=\frac{1}{T-h}\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y}), 0\leq h\leq T-1\\
+\overline{\rho}(h)&=\frac{T}{T-h}\frac{\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y})}{\sum_{t=1}^T(y_t-\overline{y})^2}, 0\leq h\leq T-1,\\
 \overline{y} &= \frac{1}{T}\sum_{t=1}^Ty_t
 \end{align*}
-Dans le cas ou le processus $y_t$ est stationnaire l
+Les moments empiriques convergent vers les moments théoriques. Mais malgré cette convergence, l'autocovariance empirique fournit un estimateur très pauvre de $\gamma(h)$ pour des valeurs h proche de la taille de l'échantillon. A titre indicatif, Box et Jenkins recommandent de n'utiliser ces quantités que si $T>50$ et $h<T/4$.
+Lorsque l'on estime les modèles, on calcule des autocavariances empiriques et l'on doit donc s'assurer que ces autocovariances sont significativement non nulles. Pour cela on utilise le résultat suivant~:
+\begin{pro}
+Si $\Xt$ est un processus linéaire tel que~:
+$$
+X_t = \sum_{j\in \mathbb{Z}}\phi_j\epsilon_{t-j},
+$$
+avec $\epsilon_t$ une suite de variable i.i.d centrée tel que $\mathbb{E}\left(\epsilon_t^4\right) = \eta\mathbb{E}\left(\epsilon_t^2\right)^2<+\infty$,* $\mathbb{E}\left(\epsilon_t^2\right)=\sigma^2$ et avec $\phi_j$ une série réelle absolument convergente. Alors l'autocovariance enmpirique converge en loi vers l'autocovariance :
+$$
+\left(\begin{array}{c}
+\overline{\gamma}_T(0)\\
+.\\
+.\\
+.\\
+\overline{\gamma}_T(p)\\
+\end{array}\right)\rightarrow
+ \mathcal{N}\left(
+\left(\begin{array}{c}
+\gamma(0)\\
+.\\
+.\\
+.\\
+\gamma(p)\\
+\end{array}\right),V\right)\,,
+$$
+avec $V$ la matrice de variance covariance~:
+$$
+V=\left[\eta\gamma(h)\gamma(k)+\sum_{i\in\mathbb{Z}}\gamma(i)\gamma(i+k-h)+\gamma(i+k)\gamma(i-h)\right]_{h,k=0,...,p}
+$$
+\end{pro}
 \subsection{Outil pour l'étude des processus stationnaires}
 \begin{theorem}
 Soit $X_t$ un processus stationnaire alors il existe une bruit blanc au sens faible $\epsilon_t$ et des coefficients réels $\left(\Psi_t\right)$ tel que~:
@@ -154,6 +183,53 @@ $$
 r(p)=\frac{Cov\left(X_t-\mathbb{E}\left(X_t|X_{t-1},...,X_{t-p}\right),X_{t-p}-\mathbb{E}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)\right)}{\mathbb{V}\left(X_t|X_{t-1},...,X_{t-p}\right)\mathbb{V}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)}
 $$
 \end{Def}
+\subsubsection{Densité spectrale}
+Les coefficients d'autocovariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgues sur $[-\pi,\pi]$ que nous noterons $f_X$.
+\begin{Def}
+Soit $\Xt$ un processus stationnaire de fonction d'autocovariance $\gamma_X$ la densité spectrale de $\Xt$ s'écrit~:
+$$
+f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)exp(i\omega h)\,.
+$$
+\end{Def}
+\begin{pro}
+Si $f_X$ est la densité spectrale de $\Xt$ alors~:
+$$
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)exp(i\omega h)d\omega
+$$
+\end{pro}
+Par exemple pour un bruit blanc fort, on a~:
+$$
+\left\{
+\begin{array}{cc}
+\gamma(0)=\sigma^2&\\
+\gamma(h)= 0,& \textrm{pour $h\not=0$} 
+\end{array}
+\right.
+$$
+et donc la densité spectrale du bruit blanc fort est~:
+$$
+f_X(\omega) = \frac{\sigma^2}{2\pi}
+$$
+La densité spectrale peut être utilisée pour déterminer un processus est un bruit blanc.
+\begin{pro}
+Si la densité spectrale d'une série $\Xt$ est constante alors ce processus est un bruit blanc fort.
+\end{pro}
+En effet~:
+$$
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)exp(i\omega h)d\omega = K\int_{-\pi}^{\pi}exp(i\omega h)d\omega
+$$
+et donc si $h=0$ alors $\gamma_X(h)=2\pi K$ et si $h\not=0$ alors $\gamma_X(h)=0$. Ceci charactérise un bruit blanc. La densité spectrale peut être utilisée pour décrire les dépendances entre les processus.
+\begin{pro}
+Si $\Xt$ est une moyenne mobile~:
+$$
+X_t = \sum_{k\in\mathbb{Z}}a_k\epsilon_{t-k}\,,
+$$
+où $\epsilon_t$ est un bruit blanc fort de variance $\sigma^2$ et tel que $\sum_{k\in\mathbb{Z}}|a_k| <+\infty$. Si on considère $Y_t = \sum_{j\in\mathbb{Z}}\beta_jX_{t-j}$, alors on a la relation suivante~:
+$$
+f_Y(\omega)=f_X(\omega)\left|\sum_{j\in\mathbb{Z}}\beta_je^{i\omega j}\right|^2
+$$
+\end{pro}
+Par exemple si $Y_t=X_t-\phi X_{t-1}$ on a~:$f_Y(\omega)=f_X(\omega)\left|1+\phi e^{i\omega}\right|^2.$
 \subsection{Non stationnarité}
 La stationnarité d'ordre 2 se définie comme une invariance des moments d'ordre 1 et 2. Par opposition, on dira qu'une série est non-stationnaire si elle n'est pas stationnaire. La classe des processus non stationnaire est plus vaste que celle des processus stationnaire. Parmi les processus non stationnaire Nelson et Plosser \cite{NonSta} ont retenu deux classes de processus non-stationnaires : les processus TS \textit{(trend stationary)} et les processus DS \textit{(difference stationary)}. Les premiers correspondent à une non-stationnarité de type déterministe alors que les seconds correspondent à une non-stationnarité de type stochastique.
 \begin{Def}
