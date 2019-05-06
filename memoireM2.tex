@@ -188,13 +188,13 @@ Les coefficients d'autocovariance d'une série stationnaire correspondent aux co
 \begin{Def}
 Soit $\Xt$ un processus stationnaire de fonction d'autocovariance $\gamma_X$ la densité spectrale de $\Xt$ s'écrit~:
 $$
-f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)exp(i\omega h)\,.
+f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)e^{i\omega h}\,.
 $$
 \end{Def}
 \begin{pro}
 Si $f_X$ est la densité spectrale de $\Xt$ alors~:
 $$
-\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)exp(i\omega h)d\omega
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega
 $$
 \end{pro}
 Par exemple pour un bruit blanc fort, on a~:
@@ -216,7 +216,7 @@ Si la densité spectrale d'une série $\Xt$ est constante alors ce processus est
 \end{pro}
 En effet~:
 $$
-\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)exp(i\omega h)d\omega = K\int_{-\pi}^{\pi}exp(i\omega h)d\omega
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega = K\int_{-\pi}^{\pi}e^{i\omega h)d\omega}
 $$
 et donc si $h=0$ alors $\gamma_X(h)=2\pi K$ et si $h\not=0$ alors $\gamma_X(h)=0$. Ceci charactérise un bruit blanc. La densité spectrale peut être utilisée pour décrire les dépendances entre les processus.
 \begin{pro}
@@ -240,6 +240,26 @@ L'exemple le plus simple est celui de la tendance linéaire bruitée~:~$X_t=a+bt
 Un processus $\Xt$ est un processus non-stationnaire DS ou intégré d'ordre $d$ si le processus obtenu après $d$ différenciation est stationnaire.
 \end{Def}
 Le fait de différencer $d$ fois revient à multiplier par le polynôme de retard $(1-L)^d$ et cela revient donc à chercher les racines de l'unité. Car si le polynome $\Phi(L)X_t$ est stationnaire et si 1 est une racine du polynôme $\Phi$ alors $\left(X_t\right)$ sera non stationnaire. C'est pour cela que les tests de détections de racine de l'unité sont utilisés pour la détection de non stationnarité.
+\subsection{Processus à mémoire}
+L'auto correlation est aussi utilisé pour décrire la mémoire des processus.
+\begin{Def}
+Un processus est dit à mémoire courte s'il possède une ACF, $\rho(k)$, telle que~:
+$$
+\rho(k)\leq Cr^{-k}
+$$
+avec $C>0$ et $0<r<1$
+\end{Def}
+Par exemple, les modèles MA(1) et AR(1) sont des processus à mémoire courte.
+\begin{Def}
+Un processus est dit à mémoire longue s'il possède une ACF, $\rho(k)$, qui est approchée comme suit~:
+$$
+\rho(k)\sim_{k\rightarrow \infty} Ck^{-\alpha}
+$$
+avec $C>0$ une constante et $\alpha\in ]0,1[$.
+\end{Def}
+Pour des processus à mémoire longue la série des autocorellations est absolument divergente. Les processus fractionnaires de type ARFIMA permettent de reproduire ce comportement.
+\subsection{Prédiction de séries temporelles}
+La prédiction des séries temporelles consiste à 
 \section{Processus}
 \subsection{processus MA}
 \begin{Def}
@@ -350,6 +370,7 @@ Soit $\Xt$ un processus AR(p) alors~:
 \end{itemize}
 \end{pro}
 \subsection{ARMA modèles}
+
 \subsection{SARMA modèles}
 \subsection{ARIMA modèles}
 \subsection{SARIMA modèles}
