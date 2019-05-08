@@ -183,6 +183,78 @@ $$
 r(p)=\frac{Cov\left(X_t-\mathbb{E}\left(X_t|X_{t-1},...,X_{t-p}\right),X_{t-p}-\mathbb{E}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)\right)}{\mathbb{V}\left(X_t|X_{t-1},...,X_{t-p}\right)\mathbb{V}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)}
 $$
 \end{Def}
+On peut utiliser l'auto correlation pour définir l'autocorellation partielle~:
+\begin{pro}
+L'auto-correlation partielle d'ordre k d'un processus $X_t$ d'espérance $m$ est le dernier coefficient de la projection lineaire de $x_{t+1}$ sur ces k plus récentes valeurs~:
+$$
+x_{t+1}-m = c_1(x_t-m)+c_2(x_{t-1}-m)+...+c_{k-1}(x_{t-k}-m)+p_k(x_{t-k+1}-m))
+$$
+ou de façon équivalente~:
+$$
+\left(
+\begin{tabular}{c}
+$c_1$\\
+$c_2$\\
+. \\
+. \\
+r(k)
+\end{tabular}
+\right) = 
+\left(
+\begin{tabular}{cccc}
+1 & $\rho(1)$ & . & $\rho(k-1)$\\
+$\rho(1)$ & 1 & . & $\rho(k-2)$\\
+. & . & . & . \\
+. & . & . & . \\
+$\rho(k-1)$ & $\rho(k-2)$ & . & 1
+\end{tabular}
+\right)^{-1}
+\left(
+\begin{tabular}{c}
+$\rho(1)$\\
+$\rho(2)$\\
+. \\
+. \\
+$\rho(k)$
+\end{tabular}
+\right)
+$$
+\end{pro}
+Ainsi pour un processus stationnaire, la fonction d'auto-correlation partielle satisfait la relation~:
+$$
+r(k) = \frac{\left|P_k^*\right|}{\left|P_k\right|}
+$$
+avec~:
+$$
+P_k=\left(\begin{tabular}{cccc}
+1 & $\rho(1)$ & . & $\rho(k-1)$\\
+$\rho(1)$ & 1 & . & $\rho(k-2)$\\
+. & . & . & .\\
+$\rho(k-1)$ & $\rho(k-2)$ & . & 1
+\end{tabular}
+\right)
+$$
+et 
+$$
+P_k^*=\left(\begin{tabular}{cccc}
+1 & $\rho(1)$ & . & $\rho(1)$\\
+$\rho(1)$ & 1 & . & $\rho(k-2)$\\
+. & . & . & .\\
+$\rho(k-1)$ & $\rho(k-2)$ & . & 1\\
+\end{tabular}
+\right)
+$$
+Les 3 premières autocrrélations partielles sont donc déterminées par les relation suivantes~:
+\begin{align*}
+r(1)&=\rho(1)\\
+r(2)&= \frac{\rho(2)-\rho(1)^2}{1-\rho(1)^2}\\
+r(3)&=\frac{\rho(1)^3-\rho(1)\rho(2)(2-\rho(2))+\rho(3)(1-\rho(1)^2)}{1-\rho(2)^2-2\rho(1)^2(1-\rho(2))}
+\end{align*}
+On peut estimer l'auto correlation partielle par une méthodes des moindres carrées~:
+$$
+x_{t+1} = \hat{c} + \hat{r}(1)x_{t-1}+\hat{r}(2)x_{t-2}+...+\hat{r}(k)x_{t-k+1}\,,\forall k \in \Z
+$$
+A l'aide de la relation précédente $\hat{r}(k)=\frac{\left|P_k^*\right|}{\left| P_k \right|}$, l'estimation de $\hat{r}(k)$ permet d'obtenir les estimations de $\hat{\rho}$.
 \subsubsection{Densité spectrale}
 Les coefficients d'autocovariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgues sur $[-\pi,\pi]$ que nous noterons $f_X$.
 \begin{Def}
@@ -323,9 +395,18 @@ Un processus MA(q) est stationnaire, la fonction d'auto-covariance est ~:
 $$
 \gamma(h)=\left\{\begin{array}{cc}
 0 & \textrm{si |h|>q}\\
-\sigma^2(1+\sum_{i=1}^q\theta^2_i & h=0\\
+\sigma^2(1+\sum_{i=1}^q\theta^2_i) & h=0\\
 \sigma^2 \theta^2_q & h=q\\
-\sigma^2(\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h} & si 0<h<q\\
+\sigma^2(\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h}) & si 0<h<q\\
+\end{array}
+\right.
+$$
+Il en résulte que la fonction d'auto-correlation s'écrit~:
+$$
+\gamma(h)=\left\{\begin{array}{cc}
+0 & \textrm{si |h|>q}\\
+1 & h=0\\
+\frac{\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h})}{1+\theta_1^2+...+\theta_q^2} & si 0<h\leq q\\
 \end{array}
 \right.
 $$
@@ -419,8 +500,52 @@ Soit $\Xt$ un processus AR(p) alors~:
 \item[ii)] l'auto corrélation partielle est nulle pour h>p
 \end{itemize}
 \end{pro}
+On peut utiliser le polynome de retard afin déterminer l'auto correlation des processus AR.
+\begin{pro}
+Si le polynome de retard $\Phi(L)$ définissant le processus AR(p) (i.e. $\Phi(L)X_t=m+\epsilon_t$ admet $p$ racines distinctes $(\lambda_i)^p_{i=1}$, l'autocorellation d'ordre k est déterminée par la relation~:
+$$
+\rho_k = A_1\left(\frac{1}{\lambda_1}\right)^k+...+A_p\left(\frac{1}{\lambda_p}\right)^k\,,
+$$
+où les paramètres $A_i$ sont des constantes déterminées par les conditions initiales.
+\end{pro}
+Il en résulte que si les racines du  de retard sont de module strictement supérieur à 1 alors l'auto corrélation tend vers zéro. Si les racines sont réels on a une exponentielle amortie et si les racines sont complexes on aura une sinusoïdale amortie.
 \subsection{ARMA modèles}
-
+\begin{Def}
+Un processus $X_t$ d'ordre 2 (espérance $\mu$)est un processus ARMA(p,q), si et seulement si il est stationnaire et si pour $t$ il vérifie~:
+$$
+\phi(L)(X_t-\mu) = \theta(L)\epsilon_t
+$$
+avec $\epsilon_t$ est un bruit blanc de variance $\sigma^2$, $L$ le polynome de retard et~:
+\begin{align*}
+\phi(z)&=1-\phi_1z-...-\phi_pz^p\\
+\theta(z)&=1+\theta_1z+...+\theta_qz^q
+\end{align*}
+\end{Def}
+La fonction d'autoconvariance des processus ARMA(p,q) suit la relation de récurrence~:
+$$
+\gamma_k=\phi_1\gamma_{k-1}+...+\phi_p\gamma_{k-p}\,,\forall k>q
+$$
+Il s'agit de la même relation de récurrence qu'un processus AR(p) (équations de Yule-Walker). On n'a pas la relation pour $k\leq q$. On obtient la même relation pour l'autocorellation. L'auto-corellation partielle d'un processus à le même comportement que pour les processus MA. L'écriture des processus ARMA va dépendre des racines des polynomes de retard correspondant au composant AR et MA
+\begin{pro}
+Soit $X_t$ un processus ARMA(p,q)~:~$\phi(L)X_t=\mu+\theta(L)\epsilon_t$, alors~:
+\begin{itemize}
+\item[i)] Si le polynome $\phi$ ne s'annule pas sur le cercle unité alors $X_t$ est un processus linéaire
+\item[ii)]Si le polynome $\phi$ ne s'annule pas sur le disque unité alors $X_t$ admet une représentation causale
+\item[iii)]Si le polynome $\theta$ ne s'annule pas sur le disque unité alors $X_t$ admet une représentation inversible
+\end{itemize}
+\end{pro}
+En résumé~:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Modèles & MA(q) & AR(p) & ARMA(p,q)\\
+\hline
+auto-correlation & $\rho(h)=0, \forall h>q$ &  $\rho(h)\rightarrow 0$ & $\rho(h)\rightarrow 0$ \\
+\hline
+auto-correlation partielle & $r(h)\rightarrow 0$ & $r(h)=0, \forall h>p$ &$r(h)\rightarrow 0$  \\
+\hline
+\end{tabular}
+\end{center}
 \subsection{SARMA modèles}
 \subsection{ARIMA modèles}
 \subsection{SARIMA modèles}

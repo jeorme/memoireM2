@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf45f2ce-ace1-4cd1-9989-8d538256740d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/R_User_Library.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/memoireM2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/memoireM2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biblio.bib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biblio.bib.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biblio2.bib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biblio2.bib.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.bbl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.blg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.aux" beforeDir="false" afterPath="$PROJECT_DIR$/main.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.log" beforeDir="false" afterPath="$PROJECT_DIR$/main.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memoireM2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,12 +20,122 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/simulation/AR_model.py">
+        <entry file="file://$PROJECT_DIR$/memoireM2.tex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+            <state relative-caret-position="1428">
+              <caret line="276" column="2" lean-forward="true" selection-start-line="276" selection-start-column="2" selection-end-line="276" selection-end-column="2" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#9886#9890#2" expanded="true" />
+                <element signature="e#9902#9906#2" expanded="true" />
+                <element signature="e#9916#9920#2" expanded="true" />
+                <element signature="e#9936#9940#2" expanded="true" />
+                <element signature="e#9984#9988#2" expanded="true" />
+                <element signature="e#9998#10002#2" expanded="true" />
+                <element signature="e#10071#10075#2" expanded="true" />
+                <element signature="e#10083#10087#2" expanded="true" />
+                <element signature="e#10105#10109#2" expanded="true" />
+                <element signature="e#10356#10360#2" expanded="true" />
+                <element signature="e#10372#10376#2" expanded="true" />
+                <element signature="e#10386#10390#2" expanded="true" />
+                <element signature="e#10406#10410#2" expanded="true" />
+                <element signature="e#10436#10440#2" expanded="true" />
+                <element signature="e#10450#10454#2" expanded="true" />
+                <element signature="e#10540#10544#2" expanded="true" />
+                <element signature="e#10556#10560#2" expanded="true" />
+                <element signature="e#10568#10572#2" expanded="true" />
+                <element signature="e#10588#10592#2" expanded="true" />
+                <element signature="e#10618#10622#2" expanded="true" />
+                <element signature="e#10632#10636#2" expanded="true" />
+                <element signature="e#11324#11328#3" expanded="true" />
+                <element signature="e#11661#11664#2" expanded="true" />
+                <element signature="e#11665#11668#2" expanded="true" />
+                <element signature="e#11775#11781#2" expanded="true" />
+                <element signature="e#12669#12675#2" expanded="true" />
+                <element signature="e#12682#12685#2" expanded="true" />
+                <element signature="e#12712#12718#2" expanded="true" />
+                <element signature="e#12955#12963#2" expanded="true" />
+                <element signature="e#13004#13010#2" expanded="true" />
+                <element signature="e#13026#13030#2" expanded="true" />
+                <element signature="e#13033#13036#3" expanded="true" />
+                <element signature="e#13055#13061#2" expanded="true" />
+                <element signature="e#13087#13091#2" expanded="true" />
+                <element signature="e#13094#13097#3" expanded="true" />
+                <element signature="e#13108#13113#2" expanded="true" />
+                <element signature="e#13279#13283#2" expanded="true" />
+                <element signature="e#13304#13310#2" expanded="true" />
+                <element signature="e#13316#13322#2" expanded="true" />
+                <element signature="e#13331#13335#2" expanded="true" />
+                <element signature="e#13340#13346#3" expanded="true" />
+                <element signature="e#14323#14331#2" expanded="true" />
+                <element signature="e#14499#14503#3" expanded="true" />
+                <element signature="e#15029#15033#2" expanded="true" />
+                <element signature="e#15094#15098#3" expanded="true" />
+                <element signature="e#15449#15453#2" expanded="true" />
+                <element signature="e#15679#15683#2" expanded="true" />
+                <element signature="e#15802#15808#2" expanded="true" />
+                <element signature="e#15808#15811#2" expanded="true" />
+                <element signature="e#16148#16152#2" expanded="true" />
+                <element signature="e#16154#16158#2" expanded="true" />
+                <element signature="e#16217#16224#2" expanded="true" />
+                <element signature="e#18096#18102#3" expanded="true" />
+                <element signature="e#18128#18134#2" expanded="true" />
+                <element signature="e#18896#18907#2" expanded="true" />
+                <element signature="e#19668#19672#2" expanded="true" />
+                <element signature="e#19923#19934#2" expanded="true" />
+                <element signature="e#19935#19941#2" expanded="true" />
+                <element signature="e#20029#20033#3" expanded="true" />
+                <element signature="e#20175#20183#2" expanded="true" />
+                <element signature="e#20185#20189#2" expanded="true" />
+                <element signature="e#20195#20201#2" expanded="true" />
+                <element signature="e#20220#20226#2" expanded="true" />
+                <element signature="e#20233#20239#2" expanded="true" />
+                <element signature="e#21267#21271#2" expanded="true" />
+                <element signature="e#21285#21293#2" expanded="true" />
+                <element signature="e#21295#21299#2" expanded="true" />
+                <element signature="e#21305#21311#2" expanded="true" />
+                <element signature="e#21349#21353#2" expanded="true" />
+                <element signature="e#21359#21363#2" expanded="true" />
+                <element signature="e#21371#21375#2" expanded="true" />
+                <element signature="e#21553#21557#3" expanded="true" />
+                <element signature="e#21717#21720#3" expanded="true" />
+                <element signature="e#21724#21728#3" expanded="true" />
+                <element signature="e#21735#21739#3" expanded="true" />
+                <element signature="e#22125#22129#2" expanded="true" />
+                <element signature="e#22143#22146#2" expanded="true" />
+                <element signature="e#22149#22157#2" expanded="true" />
+                <element signature="e#22278#22284#3" expanded="true" />
+                <element signature="e#23183#23187#2" expanded="true" />
+                <element signature="e#23191#23195#2" expanded="true" />
+                <element signature="e#23197#23201#2" expanded="true" />
+                <element signature="e#23211#23215#2" expanded="true" />
+                <element signature="e#23217#23221#2" expanded="true" />
+                <element signature="e#23941#23945#2" expanded="true" />
+                <element signature="e#24156#24160#2" expanded="true" />
+                <element signature="e#24170#24176#2" expanded="true" />
+                <element signature="e#24433#24437#2" expanded="true" />
+                <element signature="e#24480#24484#2" expanded="true" />
+                <element signature="e#24493#24501#2" expanded="true" />
+                <element signature="e#24536#24543#2" expanded="true" />
+                <element signature="e#25143#25146#3" expanded="true" />
+                <element signature="e#25294#25302#2" expanded="true" />
+                <element signature="e#25338#25344#2" expanded="true" />
+                <element signature="e#25774#25778#2" expanded="true" />
+                <element signature="e#26092#26096#2" expanded="true" />
+                <element signature="e#26103#26106#2" expanded="true" />
+                <element signature="e#26107#26113#2" expanded="true" />
+                <element signature="e#26116#26124#2" expanded="true" />
+                <element signature="e#26179#26183#3" expanded="true" />
+                <element signature="e#26285#26289#3" expanded="true" />
+                <element signature="e#26399#26405#3" expanded="true" />
+                <element signature="e#24112#24116#2" expanded="true" />
+                <element signature="e#24123#24130#2" expanded="true" />
+                <element signature="e#24140#24144#2" expanded="true" />
+                <element signature="e#24147#24158#2" expanded="true" />
+                <element signature="e#24165#24169#2" expanded="true" />
+                <element signature="e#24172#24183#2" expanded="true" />
+                <element signature="e#24231#24242#2" expanded="true" />
+                <element signature="e#24257#24264#2" expanded="true" />
+                <element signature="e#24276#24287#2" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,10 +160,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="x" value="85" />
+    <option name="y" value="25" />
+    <option name="width" value="1750" />
+    <option name="height" value="980" />
   </component>
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
@@ -125,14 +234,21 @@
       <option name="project" value="LOCAL" />
       <updated>1556437061934</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge branch 'master' of https://github.com/jeorme/memoireM2&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557304472318</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557304472318</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29758713" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="aws.explorer" order="3" side_tool="true" />
@@ -145,10 +261,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49597856" visible="true" weight="0.32843137" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4953083" visible="true" weight="0.32956153" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="11" sideWeight="0.50402147" side_tool="true" visible="true" weight="0.32956153" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50469166" side_tool="true" visible="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -159,6 +275,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="rename file" />
-    <option name="LAST_COMMIT_MESSAGE" value="rename file" />
+    <MESSAGE value="add estimation" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/jeorme/memoireM2&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/jeorme/memoireM2&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
   </component>
 </project>
