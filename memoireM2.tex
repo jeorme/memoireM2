@@ -157,12 +157,12 @@ V=\left[\eta\gamma(h)\gamma(k)+\sum_{i\in\mathbb{Z}}\gamma(i)\gamma(i+k-h)+\gamm
 $$
 \end{pro}
 \subsection{Outil pour l'étude des processus stationnaires}
-\begin{theorem}
+\begin{theorem}\label{Wold}
 Soit $X_t$ un processus stationnaire alors il existe une bruit blanc au sens faible $\epsilon_t$ et des coefficients réels $\left(\Psi_t\right)$ tel que~:
 $$
 X_t = m+\sum_{i\geq 0}\Psi_j\epsilon_j
 $$
-avec le moment d'ordre 1 de $X_t$
+avec $m$ le moment d'ordre 1 de $X_t$
 \end{theorem}
 Cette décomposition est appelé décomposition de Wold ou également transformée par moyenne mobile.
 Les processus stationnaires sont stable par combinaison sous certaine condition sur les coefficients : 
@@ -218,7 +218,7 @@ En effet~:
 $$
 \gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega = K\int_{-\pi}^{\pi}e^{i\omega h)d\omega}
 $$
-et donc si $h=0$ alors $\gamma_X(h)=2\pi K$ et si $h\not=0$ alors $\gamma_X(h)=0$. Ceci charactérise un bruit blanc. La densité spectrale peut être utilisée pour décrire les dépendances entre les processus.
+et donc si $h=0$ alors $\gamma_X(h)=2\pi K$ et si $h\not=0$ alors $\gamma_X(h)=0$. Ceci caractérise un bruit blanc. La densité spectrale peut être utilisée pour décrire les dépendances entre les processus.
 \begin{pro}
 Si $\Xt$ est une moyenne mobile~:
 $$
@@ -259,7 +259,57 @@ avec $C>0$ une constante et $\alpha\in ]0,1[$.
 \end{Def}
 Pour des processus à mémoire longue la série des autocorellations est absolument divergente. Les processus fractionnaires de type ARFIMA permettent de reproduire ce comportement.
 \subsection{Prédiction de séries temporelles}
-La prédiction des séries temporelles consiste à 
+La prédiction des séries temporelles consiste à construire à partir des données $X_t$ avec $0\leq t\leq T$ une série $\hat{X}_T(h)$ tel que pour tout $h$ $X_{T+h}\approx \hat{X}_T(h)$. La qualité de la prédiction dépendra de la qualité de l'approximation pour tout h.
+
+
+Les propriétés qui caractérisent un bon estimateur sont le fait d'être sans biais et de variance minimale. Afin d'étudier ses propriété on introduit la variable d'erreur de prévision à l'horizon h définie par~:
+$$
+e_{T+h} = X_{T+h}-\hat{X}_T(h)
+$$
+La caractéristique principale d'un bon prédicteur set de minimiser cette erreur de prevision au sens d'un certain critère. Généralement, 3 critères d'erreur de prévision à l'horizon h sont retenues~:~l'erreur moyenne \textit{ME}, l'erreur absolue moyenne \textit{MAE}, l'erreur quadratique moyenne \textit{MSE}~:
+\begin{align*}
+ME&=E\left(e_{T+h}\right)\\
+MAE&=E\left(\left|e_{T+h}\right|\right)\\
+MSE&=E\left(e_{T+h}^2\right)
+\end{align*}
+Un prédicteur couramment utilisé est le processus linéaire. Une justification de l'utilisation extensive en prévision des processus linaire provient du théorème de Wold (\ref{Wold}) qui montre que tout processus stationnaire d'ordre 2 peut s'écrire sous la forme d'un processus linéaire. Il reste alors à estimer les coefficients du processus linéaire. Dans ce cas là, on connait le meilleur prédicteur au sens de la plus faible erreur quadratique, il s'agit du prédicteur des moindres carrées~:
+$$
+\hat{X}_T(h)=E\left(X_{T+h}|X_1, ..., X_T\right)=argmin_{Y}\left(||X_{T+h}-Y||^2\right)
+$$
+Dans le cas des processus linéaire, l'erreur de prévision est d'espérance nulle~:
+$$
+E(e_{T+h}) = E(X_{T+h})-m-\sum_{i= 0}^{h-1}\Psi_iE(\epsilon_{i})=0
+$$
+et dans la cas où l'espérance nulle, la variance est~:
+$$
+V(e_{T+h}) = \sigma^2\sum_{i=0}^{h-1}\Psi_i^2=0
+$$
+La variance de l'erreur permet de déterminer l'intervalle de confiance. Ainsi pour un processus gaussien, on obtient un intervalle de confiance~:
+$$
+\hat{X}_T(h)\pm t_{1-\alpha}\sigma\sqrt{\sum_{i=0}^{h-1}\Psi_i^2}
+$$
+avec $t_{1-\alpha}$ le quantile d'ordre $1-\alpha$. Ces résultats sur la qualité de l'estimateur sont valable dans le cas où l'on connait les coefficient de l'estimateur ce qui en pratique n'arrive pas. Donc la qualité de la prédiction des coefficients va impacter la qualité de la prédiction et ajouter de l'incertitude.
+
+
+Dans l'intevalle de confiance la variance de l'erreur est constante au cours du temps, mais ce n'est pas le cas pour des processus de type GARCH par example dans ces cas là, il est intéressant d'étudier la variance conditionnelle et l'espérance conditionnelle.
+\subsection{Horizon de prévision}
+Dans le cas de processus stationnaire, la loi de distribution conditionnelle converge vers la loi de distribution non conditionnelle lorsque l'horizon tend vers l'infini, i.e~: $L(X_{T+h}|I_T)\rightarrow L(X_0)$. Seule la vitesse de convergence diffère en fonction de la mémoire du processus. Plus la mémoire du processus est courte et plus la vitesse de convergence est grande et inversement.
+Ainsi lorsqu'on utilise en prevision un processus ARMA (voir ...), il est particulièrement recommandé que l'horizon soit de très court terme (h=1 ou 2) car ce type de processus étant à mémoire courte, au bout de quelques pas le prédicteur va être égal à la moyenne non conditionnelle de la série et l'on ne peut pas faire de prédiction à l'on terme. Si l'on désire effectuer des previsions à long terme les processus à mémoire longue sont plus interessants. 
+
+\subsection*{Exemple}
+Soit $X_t$ un processus AR(1) stationnaire~:
+$$
+X_t = \phi X_{t-1}+\epsilon_t
+$$
+avec $|\phi|<1$, le prédicteur d'horizon h=1 s'écrit~:
+$$
+\hat{X}_t(1)=E(X_{t+1}|X_t,...,X_1)=\phi X_t
+$$
+et donc pour $h>0$, on a~:
+$$
+\hat{X}_t(h)=E(X_{t+h}|X_t,...,X_1)=\phi^hX_t
+$$
+ains le prédicteur $\hat{X}_t(h)$ converge vers l'espérance de $X_t$ quand $h\rightarrow \infty$ . La vitesse de convergence est inversement proportionnelle à la valeur du paramètre $\phi$. 
 \section{Processus}
 \subsection{processus MA}
 \begin{Def}
