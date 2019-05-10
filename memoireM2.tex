@@ -69,127 +69,39 @@
 
 
 \section{Séries temporelles}
-Une série temporelle ou série chronologique est une suite d’observations d’un phénomène faites au cours du temps. Cette notion s'étend à de nombreux domaines, tout relevé de données, de flux ou d'information est une série temporelle : indice boursier, population française, trafic Internet, etc. Ses données réelles obtenues sont des suites finies indexés par un temps continu ou discret. Les modèles mathématiques utilisées pour modélisées ses séries temporelles sont eux de dimension infinie.
-\subsection{Stationnarité}
-\begin{Def}
-Stationnarité stricte ou forte~:~$\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire au sens strict si~:~$\forall n\in \mathbb{N}, \forall (t_1,...,t_n), \forall h\in\mathbb{Z}$ la loi de $(X_{t_1},...,X_{t_n})$ est identique à la loi de $(X_{t_1+h},...,X_{t_n+h})$
-\end{Def}
-D'après le théorème de Kolmogorov, on en déduit qu'un processus $\left(X_t\right)$ est stationnaire au sens fort si et seulement si la loi de $X_t$ est identique à la loi de $X_{t+h}$ quelque soit $h$. Cette condition de stationnarité est très contraignante et relativement peu observée en pratique. On remarque pour un processus stationnaire strict $X_t$ admettant des moments d'ordre 1 et 2 finis, on a~:
-$$
-\mathbb{E}\left(X_t\right)=\mathbb{E}\left(X_{t+h}\right), \forall h\in \mathbb{N}
-$$
-on pose~:~$\mathbb{E}\left(X_t\right)=\mathbb{E}\left(X_0\right)=\mu$. Pour la covariance, on a~:
-\begin{align*}
-Cov\left(X_t,X_{t+h}\right)& = \mathbb{E}\left((X_t-\mu)(X_{t+h}-\mu)\right)\\
-&= \mathbb{E}\left((X_0-\mu)(X_{h_0}-\mu)\right)
-\end{align*}
-la dernière égalité vient du fait que $(X_t,X_{t+h})$ a la même distribution que $(X_0,X_h)$.
-On remarque donc que les processus stationnaire strict ont des moments d'ordre 1 et 2 indépendant du temps $t$. C'est cette notion qui va être utilisée pour des définir les processus stationnaires au sens faible.
-\begin{Def}
-Stationnarité faible~:~
-$\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire du second ordre (ou processus faiblement stationnaire ) s'il vérifie~:
+Une série temporelle ou série chronologique est une suite d'observations d’un phénomène faites au cours du temps. Cette notion s'étend à de nombreux domaines, tout relevé de données, de flux ou d'information est une série temporelle : indice boursier, population française, trafic Internet, etc. Ses données réelles obtenues sont des suites finies indexés par un temps continu ou discret. Les modèles mathématiques utilisées pour modélisées ses séries temporelles sont eux de dimension infinie.
+
+
+Dans la suite de ce document, on notera l'observation $x_t$ pour tout $t=1,...,T$ d'une variable aléatoire $X_t(\omega)$. Si le processus a été spécifié, estimé et validé, on peut alors l'utiliser pour effectuer une prévision. On notera alors $\hat{X}_T(h)$ le prédicteur de la variable aléatoire $X_{T+h}$. Ce prédicteur permettra de calculer la prévision $\hat{x}_T(h)$ comme étant la réalisation de $\hat{X}_T(h)$. 
+
+
+Afin d'étudier les séries temporelles, nous allons utiliser les moment d'ordre 1 et 2. Le moment d'ordre 1 permet de déterminer la tendance d'un processus et les moments d'ordre 2 permet de déterminer la variance du processus et d'étudier la dépendance temporelle du processus.
+\begin{Def}\label{defMom}
+Soit un processus $\Xt$ un processus du second ordre (i.e. $\E{X_t^2}<\infty$).
 \begin{itemize}
-\item[i)]$\forall t\in\mathbb{Z},~\mathbb{E}\left(X_t\right)=m $ 
-\item[ii)]$\forall t\in\mathbb{Z},~\mathbb{V}\left(X_t\right)=\sigma^2 $ 
-\item[iii)]$\forall t,h\in\mathbb{Z},~Cov\left(X_t,X_{t+h}\right)=Cov\left(X_0,X_h\right)=\gamma\left(h\right) $ 
+\item[i)]La fonction moyenne $m$ du processus $\Xt$ est l'espérance non conditionnelle du processus~:~$m(t)=\E{X_t}$, $\forall t\in \Z$.
+\item[ii)]La fonction d'autocovaraince de retard $k$, notée $\gamma(k)$, du processus $\Xt$ est définie de la manière suivante, $\forall t, k\in\Z$~:
+$$
+\gamma(k)=cov\left(X_t,X_{t+k}\right)=\E{\left(X_t-\E{X_t}\right)\left(X_{t+k}-\E{X_{t+k}}\right)}
+$$
+\item[iii)]La fonction d'autocorrélation de retard $k$ (ACF), notée $\rho(k)$, du processus $\Xt$ est définie de la manière suivante, $\forall t, k\in\Z$~:
+$$
+\rho(k)=\frac{\gamma(k)}{\sigma_{X_t}\sigma_{X_{t+k}}}
+$$
+avec $\sigma_{X_t}$ l'écart type du processus au temps $t$~:~$\sigma_{X_t}=\sqrt{\gamma(0)}$
+\item[iv)]La fonction d'autocorrélation partielle de retard $k$ (PACF), notée $r(k)$, du processus $\Xt$ est définie de la manière suivante, $\forall t, k\in\Z$~:
+$$
+r(k)=\frac{cov(X_t-X_t^*,X_{t+k}-X_{t+k}^*)}{\sqrt{var(X_t-X_t^*)}\sqrt{var(X_{t+k}-X_{t+k}^*)}}
+$$
+avec $X_t^*$ la régression affine de $X_t$ sur $X_{t+1},X_{t+2},..., X_{t+k-1}$ et $X^*_{t+k}$ est la régression affine de $X_{t+k}$ sur $X_{t+k-1},X_{t+k-2},...,X_{t+1}$.
 \end{itemize}
-On note $\gamma(h)$ l'autocovariance d'ordre $h$ de $X_t$ .
-\end{Def} 
-Dans la suite les processus stationnaires désigneront les processus stationnaire du second ordre. La fonction d'autocovariance est paire et $\gamma(0)=\var{X_t}$.
-\begin{Def}
-Le coefficient d'autocorrélation d'ordre $h$ d'un processus stationnaire $\Xt$ est~:
-$$\rho(h)=\frac{\gamma(h)}{\gamma(0)}.$$
 \end{Def}
-La fonction $h\mapsto\rho(h)$ est appelée fonction d'autocorrelation.
-Parmi les processus stationnaires, il y a les processus appelés bruit blanc.
-\begin{Def}
-Un bruit blanc $\epsilon_t$ est une suite de variable aléatoire non corrélées, mais pas nécessairement indépendantes de moyenne nulle et de variance constante $\sigma^2$. On note $\epsilon_t\sim \bb{\sigma^2}$. 
-\end{Def}
-Un bruit blanc est donc un processus stationnaire d'ordre 2 tel que~:
-\begin{itemize}
-\item $\E{X_t}=0$\\
-\item $\gamma(h)=0$ si $h\not =0$
-\end{itemize}
-Un bruit blanc n'est pas nécessairement fortement stationnaire car les variables aléatoires ne sont pas nécessairement indépendantes.
-\begin{Def}
-Un bruit blanc gaussien $\epsilon_t$ est une suite de variable aléatoire i.i.d de loi normale $\mathcal{N}\left(0,\sigma^2\right)$. On note $\epsilon\sim \bbn{\sigma^2}$
-\end{Def}
-Un bruit blanc gaussien est un processus stationnaire au sens strict. 
-
-
-Les processus non stationnaires sont des processus dont les moments d'ordre 1 ou 2 ne sont pas un constant. La marche aléatoire est un exemple de processus non stationnaire car la variance est fonction du temps.
-
-Dans les cas pratiques, on aura une série observée pour $t=1,...,T$, dans ce cas là on devra calculer l'autocavariance (resp. autocorrelation) empirique~:
-
-\begin{align*}
-\overline{\gamma}(h)&=\frac{1}{T-h}\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y}), 0\leq h\leq T-1\\
-\overline{\rho}(h)&=\frac{T}{T-h}\frac{\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y})}{\sum_{t=1}^T(y_t-\overline{y})^2}, 0\leq h\leq T-1,\\
-\overline{y} &= \frac{1}{T}\sum_{t=1}^Ty_t
-\end{align*}
-Les moments empiriques convergent vers les moments théoriques. Mais malgré cette convergence, l'autocovariance empirique fournit un estimateur très pauvre de $\gamma(h)$ pour des valeurs h proche de la taille de l'échantillon. A titre indicatif, Box et Jenkins recommandent de n'utiliser ces quantités que si $T>50$ et $h<T/4$.
-Lorsque l'on estime les modèles, on calcule des autocavariances empiriques et l'on doit donc s'assurer que ces autocovariances sont significativement non nulles. Pour cela on utilise le résultat suivant~:
+On dit que le processus est centré si pour tout t $m(t)=0$. Le coefficient $r(k)$ mesure la liaison entre les variables $X_t$ et $X_{t+k}$ une fois que l'on a retranché l'influence des variables intermédiaires. On peut exprimer le terme d'autocorellation partielle à l'aide d'un régression linéaire.
 \begin{pro}
-Si $\Xt$ est un processus linéaire tel que~:
-$$
-X_t = \sum_{j\in \mathbb{Z}}\phi_j\epsilon_{t-j},
-$$
-avec $\epsilon_t$ une suite de variable i.i.d centrée tel que $\mathbb{E}\left(\epsilon_t^4\right) = \eta\mathbb{E}\left(\epsilon_t^2\right)^2<+\infty$,* $\mathbb{E}\left(\epsilon_t^2\right)=\sigma^2$ et avec $\phi_j$ une série réelle absolument convergente. Alors l'autocovariance enmpirique converge en loi vers l'autocovariance :
-$$
-\left(\begin{array}{c}
-\overline{\gamma}_T(0)\\
-.\\
-.\\
-.\\
-\overline{\gamma}_T(p)\\
-\end{array}\right)\rightarrow
- \mathcal{N}\left(
-\left(\begin{array}{c}
-\gamma(0)\\
-.\\
-.\\
-.\\
-\gamma(p)\\
-\end{array}\right),V\right)\,,
-$$
-avec $V$ la matrice de variance covariance~:
-$$
-V=\left[\eta\gamma(h)\gamma(k)+\sum_{i\in\mathbb{Z}}\gamma(i)\gamma(i+k-h)+\gamma(i+k)\gamma(i-h)\right]_{h,k=0,...,p}
-$$
+Le coefficient $r(k)$ définit dans (\ref{defMom}) est le coefficient de $X_t$ dans la régression linéaire de $X_{t+k}$ sur 1, $X_t$, $X_{t+1}$,..., $X_{t+k-1}$.
 \end{pro}
-\subsection{Outil pour l'étude des processus stationnaires}
-\begin{theorem}\label{Wold}
-Soit $X_t$ un processus stationnaire alors il existe une bruit blanc au sens faible $\epsilon_t$ et des coefficients réels $\left(\Psi_t\right)$ tel que~:
-$$
-X_t = m+\sum_{i\geq 0}\Psi_j\epsilon_j
-$$
-avec $m$ le moment d'ordre 1 de $X_t$
-\end{theorem}
-Cette décomposition est appelé décomposition de Wold ou également transformée par moyenne mobile.
-Les processus stationnaires sont stable par combinaison sous certaine condition sur les coefficients : 
-\begin{pro}
-Si $\Xt$ est un processus stationnaire et $(a_i)_{i\in \mathbb{Z}}$ est une suite de réels absolument convergente alors le processus : 
-$$
-Y_t=\sum_{i\in\mathbb{Z}}a_i X_{t-i}
-$$
-est un processus stationnaire
-\end{pro}
-Une conséquence de cette proposition est que la différence ou la moyenne de processus stationnaire est un processus stationnaire.
 
-
-Afin d'étudier les processus stationnaires, on utilisera les coefficients d'auto-corrélation et les coefficients d'auto corrélation partielles.
-\begin{Def}
-On appelle auto-corrélation partielle d'ordre p~:
-$$
-r(p)=\frac{Cov\left(X_t-\mathbb{E}\left(X_t|X_{t-1},...,X_{t-p}\right),X_{t-p}-\mathbb{E}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)\right)}{\mathbb{V}\left(X_t|X_{t-1},...,X_{t-p}\right)\mathbb{V}\left(X_{t-p}|X_{t-1},...,X_{t-p+1}\right)}
-$$
-\end{Def}
-On peut utiliser l'auto correlation pour définir l'autocorellation partielle~:
-\begin{pro}
-L'auto-correlation partielle d'ordre k d'un processus $X_t$ d'espérance $m$ est le dernier coefficient de la projection lineaire de $x_{t+1}$ sur ces k plus récentes valeurs~:
-$$
-x_{t+1}-m = c_1(x_t-m)+c_2(x_{t-1}-m)+...+c_{k-1}(x_{t-k}-m)+p_k(x_{t-k+1}-m))
-$$
-ou de façon équivalente~:
+La définition de l'autocorelation partielle peut s'écrire à l'aide de l'auto correlation~:
 $$
 \left(
 \begin{tabular}{c}
@@ -219,8 +131,129 @@ $\rho(k)$
 \end{tabular}
 \right)
 $$
+
+
+
+Dans la pratique, on aura un échantillon fini, il faudra donc estimer ses moments à partir de l'échantillon fourni. Dans la suite on appelera ses estimations des \textit{moments empiriques}~:
+\begin{align*}
+\overline{X}_T &= \frac{1}{T}\sum_{t=1}^TX_t\\
+\overline{\gamma}(h)&=\frac{1}{T-h}\sum_{t=h+1}^T(X_t-\overline{X})(X_{t-h}-\overline{X}), 0\leq h\leq T-1\\
+\overline{\rho}(h)&=\frac{T}{T-h}\frac{\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y})}{\sum_{t=1}^T(y_t-\overline{y})^2}, 0\leq h\leq T-1,\\
+\end{align*}
+en remplaçant $T-h$ par $T$ l'autocorellation on obtient un estimateur avec biais.
+\subsection{Densité spectrale}
+Les coefficients d'autocovariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgues sur $[-\pi,\pi]$ que nous noterons $f_X$.
+\begin{Def}
+Soit $\Xt$ un processus de fonction d'autocovariance $\gamma_X$ la densité spectrale $f$ de $\Xt$ s'écrit~:
+$$
+f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)e^{-i\omega h}\,.
+$$
+\end{Def}
+\begin{pro}
+Si $f_X$ est la densité spectrale de $\Xt$ alors~:
+$$
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega
+$$
 \end{pro}
-Ainsi pour un processus stationnaire, la fonction d'auto-correlation partielle satisfait la relation~:
+Le principal outil d'analyse dont on dispose pour estimer empiriquement la densité spectrale théorique du processus est le périodogramme $I_T$, défini sur l'intervalle $[0,2\pi[$ par~:
+$$
+I_T(\lambda)=\frac{1}{2\pi T}\left|\sum_{t=1}^Te^{-i\lambda t}X_t\right|^2
+$$
+
+\subsubsection{processus à mémoire}
+L'ACF permet de mesurer la persistence (ou la mémoire) d'un processus, elle va pouvoir classer les processus en fonction de leur mémoire. On va considérer les processus sans mémoire, à mémoire courte et à mémoire longue.
+
+
+Un \textit{processus sans mémoire} est un processus tel que pour tout $t$ $X_t$ n'est pas corrélé à $X_{t-1}, X_{t-2},...$. Les bruits blancs sont des processus sans mémoire.
+
+
+\begin{Def}\label{BB}
+Un bruit blanc $\epsilon_t$ est une suite de variable aléatoire non corrélées, mais pas nécessairement indépendantes de moyenne nulle et de variance constante $\sigma^2$. On note $\epsilon_t\sim \bb{\sigma^2}$.
+\newline 
+Un \textit{bruit blanc fort} est un bruit blanc dont les variables aléatoires sont indépendantes.
+\end{Def}
+Pour un bruit blanc $X_t$, on a~:
+\begin{itemize}
+\item $\E{X_t}=0$
+\item $\gamma(h)=0$ si $h\not =0$
+\end{itemize}
+De la même manière on définit~:
+\begin{Def}\label{BBG}
+Un bruit blanc gaussien $\epsilon_t$ est une suite de variable aléatoire i.i.d de loi normale $\mathcal{N}\left(0,\sigma^2\right)$. On note $\epsilon\sim \bbn{\sigma^2}$
+\end{Def}
+Un bruit blanc gaussien est également un processus sans mémoire.
+
+
+La dénomination de \textit{bruit} vient du fait que ce processus ne contient aucune information d'autocorrelation. Ainsi aucun signal déterministe ne peut être extrait de ce processus. 
+
+
+Il existe également des processus dont l'ACF est géométriquement bornée et décroit rapidement vers 0, on parle alors de processus à mémoire courte. C'est le cas des processus de ARMA, AR ou MA.
+\begin{Def}\label{defCourte}
+Un processus est dit à mémoire courte s'il possède une ACF, $\rho(k)$, telle que~:
+$$
+\rho(k)\leq Cr^{k}
+$$
+avec $C>0$ et $0<r<1$
+\end{Def}
+Par exemple, les modèles MA(1) et AR(1) sont des processus à mémoire courte. En effet, pour un processus $X_t$ qui est un processus MA(1), on a~:~$X_t=\epsilon_t+\theta\epsilon_{t-1}$ avec $\epsilon_t$ un bruit blanc de variance $\sigma^2$, on a~:
+\begin{align*}
+\E{X_t}&=0\\
+\gamma(0)&=\sigma^2(1+\theta^2)\\
+\gamma(1) &= \theta\sigma^2\\
+\gamma(h)&= 0, \forall h\not=0,1
+\end{align*}
+ainsi $\rho(h)=0$ pour tout $h>1$.
+\begin{Def}
+Un processus est dit à mémoire longue s'il possède une ACF, $\rho(k)$, qui est approchée comme suit~:
+$$
+\rho(k)\sim_{k\rightarrow \infty} Ck^{-\alpha}
+$$
+avec $C>0$ une constante et $\alpha\in ]0,1[$.
+\end{Def}
+Pour des processus à mémoire longue la série des autocorellations est absolument divergente. Les processus fractionnaires de type ARFIMA permettent de reproduire ce comportement.
+
+\subsection{Stationnarités}
+\subsubsection{Stationnarités faibles et fortes}
+\begin{Def}\label{staForte}
+Stationnarité stricte ou forte~:~$\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire au sens strict si~:~$\forall n\in \mathbb{N}, \forall (t_1,...,t_n), \forall h\in\mathbb{Z}$ la loi de $(X_{t_1},...,X_{t_n})$ est identique à la loi de $(X_{t_1+h},...,X_{t_n+h})$
+\end{Def}
+D'après le théorème de Kolmogorov, on en déduit qu'un processus $\left(X_t\right)$ est stationnaire au sens fort si et seulement si la loi de $X_t$ est identique à la loi de $X_{t+h}$ quelque soit $h$. Cette condition de stationnarité est très contraignante et relativement peu observée en pratique. On remarque que pour un processus stationnaire strict $X_t$ admettant des moments d'ordre 1 et 2 finis, on a~:
+$$
+\mathbb{E}\left(X_t\right)=\mathbb{E}\left(X_{t+h}\right), \forall h\in \mathbb{N}
+$$
+on pose~:~$\mathbb{E}\left(X_t\right)=\mathbb{E}\left(X_0\right)=\mu$. Pour la covariance, on a~:
+\begin{align*}
+Cov\left(X_t,X_{t+h}\right)& = \mathbb{E}\left((X_t-\mu)(X_{t+h}-\mu)\right)\\
+&= \mathbb{E}\left((X_0-\mu)(X_{h_0}-\mu)\right)
+\end{align*}
+la dernière égalité vient du fait que $(X_t,X_{t+h})$ a la même distribution que $(X_0,X_h)$.
+On remarque donc que les processus stationnaire strict ont des moments d'ordre 1 et 2 indépendant du temps $t$. C'est cette notion qui va être utilisée pour des définir les processus stationnaires au sens faible.
+\begin{Def}\label{staFaible}
+Stationnarité faible ou du second ordre~:~
+$\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire du second ordre (ou processus faiblement stationnaire ) s'il vérifie~:
+\begin{itemize}
+\item[i)]$\forall t\in\mathbb{Z},~\mathbb{E}\left(X_t\right)=m $ 
+\item[ii)]$\forall t\in\mathbb{Z},~\mathbb{V}\left(X_t\right)=\sigma^2 $ 
+\item[iii)]$\forall t,h\in\mathbb{Z},~Cov\left(X_t,X_{t+h}\right)=Cov\left(X_0,X_h\right)=\gamma\left(h\right) $ 
+\end{itemize}
+On note $\gamma(h)$ l'autocovariance d'ordre $h$ de $X_t$ .
+\end{Def} 
+Un processus fortement stationnaire est un processus stationnaire du second ordre. L'inverse n'est pas généralement vrai. Dans la suite les processus stationnaires désigneront les processus stationnaires du second ordre.
+
+
+Les processus stationnaires sont stables par combinaison sous certaine condition sur les coefficients : 
+\begin{pro}
+Si $\Xt$ est un processus stationnaire et $(a_i)_{i\in \mathbb{Z}}$ est une suite de réels absolument convergente alors le processus : 
+$$
+Y_t=\sum_{i\in\mathbb{Z}}a_i X_{t-i}
+$$
+est un processus stationnaire
+\end{pro}
+Une conséquence de cette proposition est que la différence ou la moyenne de processus stationnaire est un processus stationnaire.
+
+
+
+Pour un processus stationnaire, la fonction d'auto-correlation partielle satisfait la relation~:
 $$
 r(k) = \frac{\left|P_k^*\right|}{\left|P_k\right|}
 $$
@@ -255,54 +288,27 @@ $$
 x_{t+1} = \hat{c} + \hat{r}(1)x_{t-1}+\hat{r}(2)x_{t-2}+...+\hat{r}(k)x_{t-k+1}\,,\forall k \in \Z
 $$
 A l'aide de la relation précédente $\hat{r}(k)=\frac{\left|P_k^*\right|}{\left| P_k \right|}$, l'estimation de $\hat{r}(k)$ permet d'obtenir les estimations de $\hat{\rho}$.
-\subsubsection{Densité spectrale}
-Les coefficients d'autocovariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgues sur $[-\pi,\pi]$ que nous noterons $f_X$.
-\begin{Def}
-Soit $\Xt$ un processus stationnaire de fonction d'autocovariance $\gamma_X$ la densité spectrale de $\Xt$ s'écrit~:
+
+
+
+La stationnarité d'un processus permet d'estimer les moments non conditionnels de $X_{T+h}$ en utilisant les moments empiriques. Ainsi on peut utiliser comme prédicateur naturel de $X_{T+h}$ un estimateur de l'espérance non conditionnelle $\E{X_{T+h}}$ en particulier la moyenne empirique, i.e.~:~$\hat{X}_{T+h}=\frac{1}{T}\sum_{t=1}^TX_t$. Mais on se rend compte que cette prévision est extrêmement grossière car pour n'importe quel horizon $h>0$, le prédicateur est identique, illustrant ainsi que la dynamique du processus n'est pas prise en compte dans ce type de prédicateur. Ainsi une fois choisi le prédicateur il faut pouvoir déterminer la qualité de la prédiction.
+
+
+\subsubsection{localement stationnaire}
+Dahlaus a défini dans \cite{locally} la notion de stationnarité local pour les processus linéaire. Afin de la définir, j'ai introduit quelques notions nécessaires. La notion de localement stationnaire est utilisé pour des processus dont la représentation dépend du temps. Cela signifie, par example qu'un processus AR(1) dépendant du temps s'écrit : $X_t+\alpha_tX_{t-1}=\epsilon_t$, les coefficients du modèle dépendante du temps. On ne peut plus avoir de stationnarité globale car la valeur de se coefficient va dépendre de t. De plus sont estimation va dépendre de t et de la taille de l'échantillon T à l'instant t. Le paramètre du modèle dépendent de t et sont calculés sur l'échantillon $[1,T]$, afin d'éviter les problème d'estimation sur une taille finie et de passage à la lime quand $t\rightarrow \infty$, on réalise un changement d'échelle $\frac{t}{T}$ afin d'étudier sur l'intervalle $[0,1]$ et le passage à la limite se fera quand $t\rightarrow 1$. Dans \cite{locally}, la définition est donnée pour des processus linéaire (MA($\infty$)). Rappelons que la représentation d'un processus linéaire $X_{t,T}$ est~:
 $$
-f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)e^{i\omega h}\,.
+X_{t,T}=\mu\left(\frac{t}{T}\right)+\sum_{j=-\infty}^\infty a_{t,T}(j)\epsilon_{t-j}
 $$
-\end{Def}
-\begin{pro}
-Si $f_X$ est la densité spectrale de $\Xt$ alors~:
+L'approximation de se processus va reposer sur l'estimation de $a_{t,T}(j)\approx a(\frac{t}{T},j)$ et donc imposer certaine régularité sur le coefficient a. Les conditions sur a telles que pour tout $u_0$
+Avec cette précision, l'idée principale de la stationnarité locale est que pour tout $u_0\in [0,1]$ le processus $X_{t,T}$ peut être approché par un processus stationnaire $\tilde{X}_t(u_0)$. Le processus stationnaire $\tilde{X}_t(u_0)$ s'écrit~:
 $$
-\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega
+\tilde{X}_t(u)=\mu(u)+\sum_{j=-\infty}^\infty a(u,j)\epsilon_{t-j}
 $$
-\end{pro}
-Par exemple pour un bruit blanc fort, on a~:
-$$
-\left\{
-\begin{array}{cc}
-\gamma(0)=\sigma^2&\\
-\gamma(h)= 0,& \textrm{pour $h\not=0$} 
-\end{array}
-\right.
-$$
-et donc la densité spectrale du bruit blanc fort est~:
-$$
-f_X(\omega) = \frac{\sigma^2}{2\pi}
-$$
-La densité spectrale peut être utilisée pour déterminer un processus est un bruit blanc.
-\begin{pro}
-Si la densité spectrale d'une série $\Xt$ est constante alors ce processus est un bruit blanc fort.
-\end{pro}
-En effet~:
-$$
-\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega = K\int_{-\pi}^{\pi}e^{i\omega h)d\omega}
-$$
-et donc si $h=0$ alors $\gamma_X(h)=2\pi K$ et si $h\not=0$ alors $\gamma_X(h)=0$. Ceci caractérise un bruit blanc. La densité spectrale peut être utilisée pour décrire les dépendances entre les processus.
-\begin{pro}
-Si $\Xt$ est une moyenne mobile~:
-$$
-X_t = \sum_{k\in\mathbb{Z}}a_k\epsilon_{t-k}\,,
-$$
-où $\epsilon_t$ est un bruit blanc fort de variance $\sigma^2$ et tel que $\sum_{k\in\mathbb{Z}}|a_k| <+\infty$. Si on considère $Y_t = \sum_{j\in\mathbb{Z}}\beta_jX_{t-j}$, alors on a la relation suivante~:
-$$
-f_Y(\omega)=f_X(\omega)\left|\sum_{j\in\mathbb{Z}}\beta_je^{i\omega j}\right|^2
-$$
-\end{pro}
-Par exemple si $Y_t=X_t-\phi X_{t-1}$ on a~:$f_Y(\omega)=f_X(\omega)\left|1+\phi e^{i\omega}\right|^2.$
-\subsection{Non stationnarité}
+
+\subsubsection{Stationnarité pour processus multivarié}
+TODO
+
+\subsubsection{Non stationnarité}
 La stationnarité d'ordre 2 se définie comme une invariance des moments d'ordre 1 et 2. Par opposition, on dira qu'une série est non-stationnaire si elle n'est pas stationnaire. La classe des processus non stationnaire est plus vaste que celle des processus stationnaire. Parmi les processus non stationnaire Nelson et Plosser \cite{NonSta} ont retenu deux classes de processus non-stationnaires : les processus TS \textit{(trend stationary)} et les processus DS \textit{(difference stationary)}. Les premiers correspondent à une non-stationnarité de type déterministe alors que les seconds correspondent à une non-stationnarité de type stochastique.
 \begin{Def}
 $\Xt$ est un processus non-stationnaire TS s'il peut s'écrire sous la forme $X_t = f(t)+Z_t$ où $f(t)$ est une fonction déterministe du temps et $Z_t$ est un processus stationnaire.
@@ -312,24 +318,8 @@ L'exemple le plus simple est celui de la tendance linéaire bruitée~:~$X_t=a+bt
 Un processus $\Xt$ est un processus non-stationnaire DS ou intégré d'ordre $d$ si le processus obtenu après $d$ différenciation est stationnaire.
 \end{Def}
 Le fait de différencer $d$ fois revient à multiplier par le polynôme de retard $(1-L)^d$ et cela revient donc à chercher les racines de l'unité. Car si le polynome $\Phi(L)X_t$ est stationnaire et si 1 est une racine du polynôme $\Phi$ alors $\left(X_t\right)$ sera non stationnaire. C'est pour cela que les tests de détections de racine de l'unité sont utilisés pour la détection de non stationnarité.
-\subsection{Processus à mémoire}
-L'auto correlation est aussi utilisé pour décrire la mémoire des processus.
-\begin{Def}
-Un processus est dit à mémoire courte s'il possède une ACF, $\rho(k)$, telle que~:
-$$
-\rho(k)\leq Cr^{-k}
-$$
-avec $C>0$ et $0<r<1$
-\end{Def}
-Par exemple, les modèles MA(1) et AR(1) sont des processus à mémoire courte.
-\begin{Def}
-Un processus est dit à mémoire longue s'il possède une ACF, $\rho(k)$, qui est approchée comme suit~:
-$$
-\rho(k)\sim_{k\rightarrow \infty} Ck^{-\alpha}
-$$
-avec $C>0$ une constante et $\alpha\in ]0,1[$.
-\end{Def}
-Pour des processus à mémoire longue la série des autocorellations est absolument divergente. Les processus fractionnaires de type ARFIMA permettent de reproduire ce comportement.
+
+
 \subsection{Prédiction de séries temporelles}
 La prédiction des séries temporelles consiste à construire à partir des données $X_t$ avec $0\leq t\leq T$ une série $\hat{X}_T(h)$ tel que pour tout $h$ $X_{T+h}\approx \hat{X}_T(h)$. La qualité de la prédiction dépendra de la qualité de l'approximation pour tout h.
 
@@ -338,21 +328,37 @@ Les propriétés qui caractérisent un bon estimateur sont le fait d'être sans 
 $$
 e_{T+h} = X_{T+h}-\hat{X}_T(h)
 $$
-La caractéristique principale d'un bon prédicteur set de minimiser cette erreur de prevision au sens d'un certain critère. Généralement, 3 critères d'erreur de prévision à l'horizon h sont retenues~:~l'erreur moyenne \textit{ME}, l'erreur absolue moyenne \textit{MAE}, l'erreur quadratique moyenne \textit{MSE}~:
+La caractéristique principale d'un bon prédicteur set de minimiser cette erreur de prévision au sens d'un certain critère. Généralement, 3 critères d'erreur de prévision à l'horizon h sont retenues~:~l'erreur moyenne \textit{ME}, l'erreur absolue moyenne \textit{MAE}, l'erreur quadratique moyenne \textit{MSE}~:
 \begin{align*}
 ME&=E\left(e_{T+h}\right)\\
 MAE&=E\left(\left|e_{T+h}\right|\right)\\
 MSE&=E\left(e_{T+h}^2\right)
 \end{align*}
-Un prédicteur couramment utilisé est le processus linéaire. Une justification de l'utilisation extensive en prévision des processus linaire provient du théorème de Wold (\ref{Wold}) qui montre que tout processus stationnaire d'ordre 2 peut s'écrire sous la forme d'un processus linéaire. Il reste alors à estimer les coefficients du processus linéaire. Dans ce cas là, on connait le meilleur prédicteur au sens de la plus faible erreur quadratique, il s'agit du prédicteur des moindres carrées~:
+Un prédicteur couramment utilisé est le processus linéaire. 
+\begin{Def}
+Un processus $\Xt$ est un processus linéaire s'il admet une décomposition de la forme suivante, $\forall t \in \Z$~:
 $$
-\hat{X}_T(h)=E\left(X_{T+h}|X_1, ..., X_T\right)=argmin_{Y}\left(||X_{T+h}-Y||^2\right)
+X_t = \sum_{i=-\infty}^{\infty}a_i\epsilon_{t-i}\,,
+$$
+où $\epsilon_t$ est un bruit blanc fort et $a_i$ est absolument sommable.
+\end{Def}
+L'utilisation des processus linéaire vient du Théorème de Wold, qui montre que tout processus stationnaire à l'ordre 2 peut s'écrire sous la forme d'un processus linéaire
+\begin{theorem}\label{Wold}
+Soit $X_t$ un processus stationnaire alors il existe une bruit blanc au sens faible $\epsilon_t$ et des coefficients réels $\left(\Psi_t\right)$ tel que~:
+$$
+X_t = m+\sum_{i\geq 0}\Psi_j\epsilon_j
+$$
+avec $m$ le moment d'ordre 1 de $X_t$
+\end{theorem}
+En utilisant le théorème de Wold, on sait que le processus stationnaire $X_t$ est aussi un processus linéaire. Ainsi sur un échantillon de taille $T$, on connait le meilleur prédicateur $\hat{X}_T(h)$ au sens de la plus faible erreur quadratique moyenne. On note $I_T$ la sigma algèbre engendrée par $X_1,...,X_T$ et $M_T$ le sous espace vectoriel engendré par les variables $X_1,...,X_T$ muni de la norme $L^2$. Il s'agit du prédicteur des moindres carrées~:
+$$
+\hat{X}_T(h)=E\left(X_{T+h}|I_T\right)=argmin_{Y\in M_T}\left(||X_{T+h}-Y||^2\right)
 $$
 Dans le cas des processus linéaire, l'erreur de prévision est d'espérance nulle~:
 $$
 E(e_{T+h}) = E(X_{T+h})-m-\sum_{i= 0}^{h-1}\Psi_iE(\epsilon_{i})=0
 $$
-et dans la cas où l'espérance nulle, la variance est~:
+et de variance~:
 $$
 V(e_{T+h}) = \sigma^2\sum_{i=0}^{h-1}\Psi_i^2=0
 $$
@@ -366,7 +372,7 @@ avec $t_{1-\alpha}$ le quantile d'ordre $1-\alpha$. Ces résultats sur la qualit
 Dans l'intevalle de confiance la variance de l'erreur est constante au cours du temps, mais ce n'est pas le cas pour des processus de type GARCH par example dans ces cas là, il est intéressant d'étudier la variance conditionnelle et l'espérance conditionnelle.
 \subsection{Horizon de prévision}
 Dans le cas de processus stationnaire, la loi de distribution conditionnelle converge vers la loi de distribution non conditionnelle lorsque l'horizon tend vers l'infini, i.e~: $L(X_{T+h}|I_T)\rightarrow L(X_0)$. Seule la vitesse de convergence diffère en fonction de la mémoire du processus. Plus la mémoire du processus est courte et plus la vitesse de convergence est grande et inversement.
-Ainsi lorsqu'on utilise en prevision un processus ARMA (voir ...), il est particulièrement recommandé que l'horizon soit de très court terme (h=1 ou 2) car ce type de processus étant à mémoire courte, au bout de quelques pas le prédicteur va être égal à la moyenne non conditionnelle de la série et l'on ne peut pas faire de prédiction à l'on terme. Si l'on désire effectuer des previsions à long terme les processus à mémoire longue sont plus interessants. 
+Ainsi lorsqu'on utilise en prévision un processus ARMA, il est particulièrement recommandé que l'horizon soit de très court terme (h=1 ou 2) car ce type de processus étant à mémoire courte, au bout de quelques pas le prédicteur va être égal à la moyenne non conditionnelle de la série et l'on ne peut pas faire de prédiction à l'on terme. Si l'on désire effectuer des prévisions à long terme les processus à mémoire longue sont plus intéressants. 
 
 \subsection*{Exemple}
 Soit $X_t$ un processus AR(1) stationnaire~:
@@ -381,7 +387,40 @@ et donc pour $h>0$, on a~:
 $$
 \hat{X}_t(h)=E(X_{t+h}|X_t,...,X_1)=\phi^hX_t
 $$
-ains le prédicteur $\hat{X}_t(h)$ converge vers l'espérance de $X_t$ quand $h\rightarrow \infty$ . La vitesse de convergence est inversement proportionnelle à la valeur du paramètre $\phi$. 
+ainsi le prédicteur $\hat{X}_t(h)$ converge vers l'espérance de $X_t$ quand $h\rightarrow \infty$ . La vitesse de convergence est inversement proportionnelle à la valeur du paramètre $\phi$. 
+
+
+
+Les moments empiriques convergent vers les moments théoriques. Mais malgré cette convergence, l'autocovariance empirique fournit un estimateur très pauvre de $\gamma(h)$ pour des valeurs h proche de la taille de l'échantillon. A titre indicatif, Box et Jenkins recommandent de n'utiliser ces quantités que si $T>50$ et $h<T/4$.
+Lorsque l'on estime les modèles, on calcule des autocavariances empiriques et l'on doit donc s'assurer que ces autocovariances sont significativement non nulles. Pour cela on utilise le résultat suivant~:
+\begin{pro}
+Si $\Xt$ est un processus linéaire tel que~:
+$$
+X_t = \sum_{j\in \mathbb{Z}}\phi_j\epsilon_{t-j},
+$$
+avec $\epsilon_t$ une suite de variable i.i.d centrée tel que $\mathbb{E}\left(\epsilon_t^4\right) = \eta\mathbb{E}\left(\epsilon_t^2\right)^2<+\infty$,* $\mathbb{E}\left(\epsilon_t^2\right)=\sigma^2$ et avec $\phi_j$ une série réelle absolument convergente. Alors l'autocovariance enmpirique converge en loi vers l'autocovariance :
+$$
+\left(\begin{array}{c}
+\overline{\gamma}_T(0)\\
+.\\
+.\\
+.\\
+\overline{\gamma}_T(p)\\
+\end{array}\right)\rightarrow
+ \mathcal{N}\left(
+\left(\begin{array}{c}
+\gamma(0)\\
+.\\
+.\\
+.\\
+\gamma(p)\\
+\end{array}\right),V\right)\,,
+$$
+avec $V$ la matrice de variance covariance~:
+$$
+V=\left[\eta\gamma(h)\gamma(k)+\sum_{i\in\mathbb{Z}}\gamma(i)\gamma(i+k-h)+\gamma(i+k)\gamma(i-h)\right]_{h,k=0,...,p}
+$$
+\end{pro}
 \section{Processus}
 \subsection{processus MA}
 \begin{Def}
@@ -578,6 +617,45 @@ Sous les hypothèses précédentes, on a~:
 $$
 f_X(\omega)=\frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma(h)cos(\omega h)
 $$
+\subsubsection*{Exemple}
+Par exemple pour un bruit blanc fort (\ref{BB}), on a~:
+$$
+\left\{
+\begin{array}{cc}
+\gamma(0)=\sigma^2&\\
+\gamma(h)= 0,& \textrm{pour $h\not=0$} 
+\end{array}
+\right.
+$$
+et donc la densité spectrale du bruit blanc fort est~:
+$$
+f_X(\omega) = \frac{\sigma^2}{2\pi}
+$$
+
+
+
+
+
+La densité spectrale peut être utilisée pour déterminer un processus est un bruit blanc.
+\begin{pro}
+Si la densité spectrale d'une série $\Xt$ est constante alors ce processus est un bruit blanc fort.
+\end{pro}
+En effet~:
+$$
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega = K\int_{-\pi}^{\pi}e^{i\omega h)d\omega}
+$$
+et donc si $h=0$ alors $\gamma_X(h)=2\pi K$ et si $h\not=0$ alors $\gamma_X(h)=0$. Ceci caractérise un bruit blanc. La densité spectrale peut être utilisée pour décrire les dépendances entre les processus.
+\begin{pro}
+Si $\Xt$ est une moyenne mobile~:
+$$
+X_t = \sum_{k\in\mathbb{Z}}a_k\epsilon_{t-k}\,,
+$$
+où $\epsilon_t$ est un bruit blanc fort de variance $\sigma^2$ et tel que $\sum_{k\in\mathbb{Z}}|a_k| <+\infty$. Si on considère $Y_t = \sum_{j\in\mathbb{Z}}\beta_jX_{t-j}$, alors on a la relation suivante~:
+$$
+f_Y(\omega)=f_X(\omega)\left|\sum_{j\in\mathbb{Z}}\beta_je^{i\omega j}\right|^2
+$$
+\end{pro}
+Par exemple si $Y_t=X_t-\phi X_{t-1}$ on a~:$f_Y(\omega)=f_X(\omega)\left|1+\phi e^{i\omega}\right|^2.$
 \subsection{Estimateur empirique des moments}
 Soit $(X_t)_{t\in\mathbb{Z}}$ un processus stationnaire, on cherche à estimer l'espérance, les fonction d'auto-covariance, d'auto-corrélation et d'auto-corrélation partielle. On a un échantillon de taille T. On prend comme estimateur~:
 \begin{itemize}
@@ -641,6 +719,6 @@ Le processus $\left\{\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre
 Un processus AR(1) est un processus markovien, de même toute marche aléatoire une porcessus markovien d'ordre 1.
 
 \bibliographystyle{amsplain}
-\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
-
+%\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
+\bibliography{C:/Users/jerom/PycharmProjects/memoireM2/biblio}
 \end{document}

@@ -10,4 +10,11 @@
   pages   = {139-162},
 }
 
+@Unpublished{locally,
+  author = {R. Dahlaus},
+  title  = {Locally Stationary Process},
+  note   = {arxiv:1109.4174v2},
+  year   = {2012},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
