@@ -160,7 +160,7 @@ $$
 I_T(\lambda)=\frac{1}{2\pi T}\left|\sum_{t=1}^Te^{-i\lambda t}X_t\right|^2
 $$
 
-\subsubsection{processus à mémoire}
+\subsection{processus à mémoire}
 L'ACF permet de mesurer la persistence (ou la mémoire) d'un processus, elle va pouvoir classer les processus en fonction de leur mémoire. On va considérer les processus sans mémoire, à mémoire courte et à mémoire longue.
 
 
@@ -548,7 +548,7 @@ $$
 où les paramètres $A_i$ sont des constantes déterminées par les conditions initiales.
 \end{pro}
 Il en résulte que si les racines du  de retard sont de module strictement supérieur à 1 alors l'auto corrélation tend vers zéro. Si les racines sont réels on a une exponentielle amortie et si les racines sont complexes on aura une sinusoïdale amortie.
-\subsection{ARMA modèles}
+\subsection{processus ARMA}
 \begin{Def}
 Un processus $X_t$ d'ordre 2 (espérance $\mu$)est un processus ARMA(p,q), si et seulement si il est stationnaire et si pour $t$ il vérifie~:
 $$
@@ -568,8 +568,8 @@ Il s'agit de la même relation de récurrence qu'un processus AR(p) (équations 
 \begin{pro}
 Soit $X_t$ un processus ARMA(p,q)~:~$\phi(L)X_t=\mu+\theta(L)\epsilon_t$, alors~:
 \begin{itemize}
-\item[i)] Si le polynome $\phi$ ne s'annule pas sur le cercle unité alors $X_t$ est un processus linéaire
-\item[ii)]Si le polynome $\phi$ ne s'annule pas sur le disque unité alors $X_t$ admet une représentation causale
+\item[i)] Si le polynôme $\phi$ ne s'annule pas sur le cercle unité alors $X_t$ est un processus linéaire
+\item[ii)]Si le polynôme $\phi$ ne s'annule pas sur le disque unité alors $X_t$ admet une représentation causale
 \item[iii)]Si le polynome $\theta$ ne s'annule pas sur le disque unité alors $X_t$ admet une représentation inversible
 \end{itemize}
 \end{pro}
