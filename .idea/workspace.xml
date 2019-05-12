@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bf45f2ce-ace1-4cd1-9989-8d538256740d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memoireM2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulation/AR_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation/simulation_modelARMA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biblio2.bib" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -304,14 +303,21 @@
       <option name="project" value="LOCAL" />
       <updated>1557465514261</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Merge branch 'master' of https://github.com/jeorme/memoireM2&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557562129152</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1557562129152</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28686327" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29088473" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="aws.explorer" order="3" side_tool="true" />
@@ -324,10 +330,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4919571" visible="true" weight="0.3026874" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49128687" visible="true" weight="0.3026874" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5080429" side_tool="true" visible="true" weight="0.3026874" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5087131" side_tool="true" visible="true" weight="0.3026874" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
