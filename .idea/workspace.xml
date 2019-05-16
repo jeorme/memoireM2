@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bf45f2ce-ace1-4cd1-9989-8d538256740d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biblio2.bib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memoireM2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/memoireM2.tex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4947">
-              <caret line="291" selection-start-line="291" selection-end-line="291" />
+            <state relative-caret-position="5134">
+              <caret line="302" selection-start-line="302" selection-end-line="302" />
               <folding>
                 <element signature="e#2934#2937#3" expanded="true" />
                 <element signature="e#3001#3008#2" expanded="true" />
@@ -216,6 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,7 +233,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -310,14 +310,20 @@
       <option name="project" value="LOCAL" />
       <updated>1557562129152</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merge branch 'master' of https://github.com/jeorme/memoireM2&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557652340141</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557652340141</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29088473" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2989276" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="aws.explorer" order="3" side_tool="true" />
@@ -330,10 +336,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49128687" visible="true" weight="0.3026874" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4899464" visible="true" weight="0.3026874" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5087131" side_tool="true" visible="true" weight="0.3026874" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.51005363" side_tool="true" visible="true" weight="0.3026874" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -351,8 +357,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/memoireM2.tex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4947">
-          <caret line="291" selection-start-line="291" selection-end-line="291" />
+        <state relative-caret-position="5134">
+          <caret line="302" selection-start-line="302" selection-end-line="302" />
           <folding>
             <element signature="e#2934#2937#3" expanded="true" />
             <element signature="e#3001#3008#2" expanded="true" />

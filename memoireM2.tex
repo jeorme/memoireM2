@@ -241,6 +241,17 @@ On note $\gamma(h)$ l'autocovariance d'ordre $h$ de $X_t$ .
 Un processus fortement stationnaire est un processus stationnaire du second ordre. L'inverse n'est pas généralement vrai. Dans la suite les processus stationnaires désigneront les processus stationnaires du second ordre.
 
 
+On peut généraliser la définition de processus stationnaire à l'ordre deux aux cas vectoriel~:
+\begin{Def}\label{staFaibleVec}
+Stationnarité vectorielle faible ou du second ordre~:~
+$\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire vectoriel (n,1) du second ordre (ou processus faiblement stationnaire ) s'il vérifie~:
+\begin{itemize}
+\item[i)]$\forall t\in\mathbb{Z},~\mathbb{E}\left(X_t\right)=m $ 
+\item[ii)]$\forall t,h\in\mathbb{Z},~\E{(X_t-m)(X_{t+h}-m)}=\gamma\left(h\right) $ est indépendant de $t$ 
+\end{itemize}
+\end{Def} 
+Ainsi pour tout $h$ la matrice $\gamma(h)$ est une matrice carrée de taille n indépendante de t.
+
 Les processus stationnaires sont stables par combinaison sous certaine condition sur les coefficients : 
 \begin{pro}
 Si $\Xt$ est un processus stationnaire et $(a_i)_{i\in \mathbb{Z}}$ est une suite de réels absolument convergente alors le processus : 
@@ -283,7 +294,7 @@ r(1)&=\rho(1)\\
 r(2)&= \frac{\rho(2)-\rho(1)^2}{1-\rho(1)^2}\\
 r(3)&=\frac{\rho(1)^3-\rho(1)\rho(2)(2-\rho(2))+\rho(3)(1-\rho(1)^2)}{1-\rho(2)^2-2\rho(1)^2(1-\rho(2))}
 \end{align*}
-On peut estimer l'auto correlation partielle par une méthodes des moindres carrées~:
+On peut estimer l'auto corrélation partielle par une méthodes des moindres carrées~:
 $$
 x_{t+1} = \hat{c} + \hat{r}(1)x_{t-1}+\hat{r}(2)x_{t-2}+...+\hat{r}(k)x_{t-k+1}\,,\forall k \in \Z
 $$
@@ -305,9 +316,6 @@ $$
 \tilde{X}_t(u)=\mu(u)+\sum_{j=-\infty}^\infty a(u,j)\epsilon_{t-j}
 $$
 
-\subsubsection{Stationnarité pour processus multivarié}
-TODO
-
 \subsubsection{Non stationnarité}
 La stationnarité d'ordre 2 se définie comme une invariance des moments d'ordre 1 et 2. Par opposition, on dira qu'une série est non-stationnaire si elle n'est pas stationnaire. La classe des processus non stationnaire est plus vaste que celle des processus stationnaire. Parmi les processus non stationnaire Nelson et Plosser \cite{NonSta} ont retenu deux classes de processus non-stationnaires : les processus TS \textit{(trend stationary)} et les processus DS \textit{(difference stationary)}. Les premiers correspondent à une non-stationnarité de type déterministe alors que les seconds correspondent à une non-stationnarité de type stochastique.
 \begin{Def}
@@ -317,7 +325,7 @@ L'exemple le plus simple est celui de la tendance linéaire bruitée~:~$X_t=a+bt
 \begin{Def}
 Un processus $\Xt$ est un processus non-stationnaire DS ou intégré d'ordre $d$ si le processus obtenu après $d$ différenciation est stationnaire.
 \end{Def}
-Le fait de différencer $d$ fois revient à multiplier par le polynôme de retard $(1-L)^d$ et cela revient donc à chercher les racines de l'unité. Car si le polynome $\Phi(L)X_t$ est stationnaire et si 1 est une racine du polynôme $\Phi$ alors $\left(X_t\right)$ sera non stationnaire. C'est pour cela que les tests de détections de racine de l'unité sont utilisés pour la détection de non stationnarité.
+Le fait de différencier $d$ fois revient à multiplier par le polynôme de retard $(1-L)^d$ et cela revient donc à chercher les racines de l'unité. Car si le polynôme $\Phi(L)X_t$ est stationnaire et si 1 est une racine du polynôme $\Phi$ alors $\left(X_t\right)$ sera non stationnaire. C'est pour cela que les tests de détections de racine de l'unité sont utilisés pour la détection de non stationnarité.
 
 
 \subsection{Prédiction de séries temporelles}
@@ -450,6 +458,21 @@ $$
 \right.
 $$
 Il n'y a pas de résultats particulier pour les auto-corrélations partielles.
+\subsubsection{processus multidimensionnel : VMA(q)}
+\begin{Def}
+Un processus vectoriel $\Xt$ de dimension (n,1) admet une représentation VMA d'ordre q, notée VMA(q) si~:
+$$
+X_t = \mu + \epsilon_t +\Psi_1\epsilon_{t-1}+\Psi_2\epsilon_{t-2}+...+ \Psi_q\epsilon_{t-q}
+$$
+ou de façon équivalent~:
+$$
+X_t = \mu+\Psi(L)\epsilon_t
+$$
+où $\mu$ désigne l'espérance du processus vectoriel, $\Psi(L)=\sum_i\Psi_iL^i$. Le vecteur des innovation $\epsilon_t$ est i.i.d. centrée et de matrice covariance définie positive.
+\end{Def}
+
+
+Le théorème de Wold (\ref{Wold}) s'applique également dans le cas multidimensionnel. En effet si un processus vectoriel est stationnaire à l'ordre 2 alors on peut le représenter sous la forme d'un processus VMA($\infty$).
 \subsection{processus AR}
 \begin{Def}
 Un processus $\Xt$ est un processus auto-régressif d'ordre p noté AR(p) si~:
@@ -548,6 +571,179 @@ $$
 où les paramètres $A_i$ sont des constantes déterminées par les conditions initiales.
 \end{pro}
 Il en résulte que si les racines du  de retard sont de module strictement supérieur à 1 alors l'auto corrélation tend vers zéro. Si les racines sont réels on a une exponentielle amortie et si les racines sont complexes on aura une sinusoïdale amortie.
+
+\subsubsection{processus mutlidimensionnel : VAR(p)}
+\begin{Def}
+Un processus vectoriel $\Xt$ de dimension (n,1) admet une représentation VAR d'ordre p, notée VAR(p) si~:
+$$
+X_t = c - \Phi_1X_{t-1}-\Phi_2X_{t-2}-...- \Phi_pX_{t-p}+\epsilon_t
+$$
+ou de façon équivalent~:
+$$
+\Phi(L)X_t = c+\epsilon_t
+$$
+où $c$ désigne un vecteur constant de dimension (n,1), $\Phi(L)=\sum_i\Phi_iL^i$. Le vecteur des innovation $\epsilon_t$ est i.i.d. centrée et de matrice covariance définie positive.
+\end{Def}
+Ainsi pour un vecteur de dimension (n,1) qui suit un processu VAR(p), on aura pour tout $j$~:
+\begin{align*}
+x_{j,t}=&c_1+\Phi_{j,1}^1x_{1,t-1}+\Phi_{j,2}^1x_{2,t-1}+....+\Phi_{j,n}^1x_{n,t-1}\\
+& \Phi_{j,1}^2x_{1,t-2}+\Phi_{j,2}^2x_{2,t-2}+....+\Phi_{j,n}^2x_{n,t-2}\\
+&+...+\\
+& \Phi_{j,1}^px_{1,t-p}+\Phi_{j,2}^1x_{2,t-p}+....+\Phi_{j,n}^px_{n,t-p}
+\end{align*}
+Comme pour les processus AR(p) un processus VAR(p) sera stationnaire si et seulement si toutes racines du déterminant polynôme de retard $\Phi(L)$ sont toutes supérieures à l'unité en module. Ce qui est équivalent au fait que toute les valeurs propres de la 'application linéaire $\Phi(L)$ sont toutes inférieur à l'unité en module. Une conséquence du théorème de Wold (\ref{Wold}) est que tout processus VAR(p) stationnaire peut s'écrire sous la forme d'un processus VMA($\infty$). On peut également écrire le polynome $\Psi$ de la moyenne mobile à l'aide du polynome $\Phi$.
+\begin{pro}
+Le polynôme matriciel $\Psi(L)=\sum_i \psi_iL^i$ associé à la représentation VMA($\infty$) d'un processus VAR(p) stationnaire $\Phi(L)X_t = c + \epsilon_t$, satisfait la relation de récurrence suivante~:
+\begin{align*}
+\psi_0&=I_n\\
+\psi_s &= \Phi_1\psi_{s-1}+\Phi_2\psi_{s-2}+...+\Phi_p\psi_{s-p},\forall s\geq 1\\
+\psi_s&=0, \forall s <0.
+\end{align*}
+\end{pro}
+
+
+Un propriété intéressante pour les processus VAR(p) stationnaire est qu'ils peuvent être transformé en un processus VAR(1) d'espérance nulle.
+\begin{pro}
+Tout processus vectoriel stationnaire $\Xt$ satisfaisant une représentation VAR(p) peut être transformé en un processus $\tilde{X}_t$ satisfaisant une représentation VAR(1) d'espérance nulle.
+\end{pro}
+\textit{preuve : }
+\newline
+On a pour tout $t$~:~$\Phi(L)X_t = c + \epsilon_t$ avec $\Phi(L)$ une matrice carrée de taille n. Comme $X_t$ est stationnaire, on a~:
+$$
+\E{X_t}=\Phi(L)^{-1}\E{c+\epsilon_t}=\Phi^{-1}(L)c=\mu
+$$
+On a donc~:
+\begin{align*}
+\Phi(L)(X_t-\mu) & = \epsilon_t\\
+(X_t-\mu) & = \Phi_1(X_{t-1}-\mu)+...+\Phi_p(X_{t-p}-\mu)+\epsilon_t
+\end{align*}
+On pose~:
+$$
+\tilde{X}_t = \left(
+\begin{array}{c}
+X_t-\mu \\
+X_{t-1}-\mu \\
+X_{t-2}-\mu \\
+...\\
+X_{t-p+1}-\mu 
+\end{array}
+\right)
+\quad
+v_t = \left(
+\begin{array}{c}
+\epsilon_t \\
+0_{(n,1)} \\
+0_{(n,1)} \\
+...\\
+0_{(n,1)} 
+\end{array}
+\right)
+$$
+et 
+$$
+A = \left(
+\begin{array}{ccccc}
+\Phi_1 & \Phi_2 & ... & \Phi_{p-1} & \Phi_p \\
+I_n & 0_{(n,n)} & ... & 0_{(n,n)} & 0_{(n,n)} \\
+0_{(n,n)}& I_n & ... & 0_{(n,n)} & 0_{(n,n)} \\
+...\\
+0_{(n,n)}& 0_{(n,n)} & ... &  I_n& 0_{(n,n)} 
+\end{array}
+\right)
+$$
+il en résulte que $\tilde{X}_t$ est un processus VAR(1) qui s'écrit~:~$\tilde{X}_t = A\tilde{X_{t-1}}+v_t$, avec A une matrice carrée de taille np.
+\subsubsection*{Exemple}
+On considère le processus bi-varié $Y_t$~:
+\begin{align*}
+y_{1,t}&=3+ .2y_{1,t-2}+.7y_{2,t-1}-.4y_{1,t-2}-.6y_{2,t-2}+\epsilon_{1,t}\\
+y_{2,t}&=1+ .3y_{1,t-2}+.4y_{2,t-1}-.1y_{1,t-2}-.8y_{2,t-2}+\epsilon_{2,t}
+\end{align*}
+le processus $Y_t$ sous forme matricielle~:
+$$
+\Phi(L)Y_t = c +\epsilon_t =
+ \left(
+\begin{array}{c}
+3\\
+1
+\end{array}
+\right)+
+\left(
+\begin{array}{c}
+\epsilon_{1,t}\\
+\epsilon_{2,t}
+\end{array}
+\right)
+$$
+avec 
+\begin{align*}
+\Phi(L)&=\Phi_0+\Phi_1L+\phi_2L^2\\
+&=\left(
+\begin{array}{cc}
+1 & 0\\
+0 & 1
+\end{array}
+\right) + 
+\left(
+\begin{array}{cc}
+-.2 & -.7\\
+-.3 & -.4
+\end{array}
+\right)L +
+\left(
+\begin{array}{cc}
+.4 & .6\\
+.1 & .8
+\end{array}
+\right)L^2 \\
+&= \left( \begin{array}{cc}
+1-.2L+.4L^2 & -.7L+.6L^2\\
+-.3L+.1L^2 & 1-.4L+.8L^2\\
+\end{array}
+\right)
+\end{align*}
+Déterminons $\E{Y_t}$~:
+$$
+\E{Y_t} = \Phi(1)^{-1}c=\left(
+\begin{array}{c}
+2.59\\
+1.8
+\end{array}
+\right)=\mu
+$$
+on pose alors~:
+$$
+\tilde{Y}_t = \left(
+\begin{array}{c}
+Y_t-\mu\\
+Y_{t-1}-\mu
+\end{array}
+\right)=
+\left(
+\begin{array}{c}
+y_{1,t}-2.59\\
+y_{2,t}-1.8\\
+y_{1,t-1}-2.59\\
+y_{2,t-1}-1.8\\
+\end{array}
+\right)\quad \textrm{et}\quad v_t=\left(\begin{array}{c}
+\epsilon_{1,t}\\
+\epsilon_{2,t}\\
+0\\
+0
+\end{array}\right)
+$$
+et
+$$
+A=\left(
+\begin{array}{cccc}
+-.2 & -.7 & .4 & .6\\
+-.3 & -.4 & .1 & .8\\
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0
+\end{array}
+\right)
+$$
+on obtient alors~:~$\tilde{Y}_t=A\tilde{Y}_{t-1}+v_t$
 \subsection{processus ARMA}
 \begin{Def}
 Un processus $X_t$ d'ordre 2 (espérance $\mu$)est un processus ARMA(p,q), si et seulement si il est stationnaire et si pour $t$ il vérifie~:
@@ -560,7 +756,7 @@ avec $\epsilon_t$ est un bruit blanc de variance $\sigma^2$, $L$ le polynome de 
 \theta(z)&=1+\theta_1z+...+\theta_qz^q
 \end{align*}
 \end{Def}
-La fonction d'autoconvariance des processus ARMA(p,q) suit la relation de récurrence~:
+La fonction d'autocovariance des processus ARMA(p,q) suit la relation de récurrence~:
 $$
 \gamma_k=\phi_1\gamma_{k-1}+...+\phi_p\gamma_{k-p}\,,\forall k>q
 $$
