@@ -250,7 +250,7 @@ $\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire vectoriel (n,1
 \item[ii)]$\forall t,h\in\mathbb{Z},~\E{(X_t-m)(X_{t+h}-m)}=\gamma\left(h\right) $ est indépendant de $t$ 
 \end{itemize}
 \end{Def} 
-Ainsi pour tout $h$ la matrice $\gamma(h)$ est une matrice carrée de taille n indépendante de t.
+Ainsi pour tout $h$ la matrice $\gamma(h)$ est une matrice carrée de taille n indépendante de t. Dans le cas des 
 
 Les processus stationnaires sont stables par combinaison sous certaine condition sur les coefficients : 
 \begin{pro}
@@ -785,6 +785,46 @@ auto-correlation partielle & $r(h)\rightarrow 0$ & $r(h)=0, \forall h>p$ &$r(h)\
 \subsection{ARIMA modèles}
 \subsection{SARIMA modèles}
 \subsection{ARCH modèles}
+Un des problèmes des modèles stationnaires est que la volatilité est constante dans le temps, pour certain types de données cela n'est pas le cas. Par exemple pour des données financières on observe des clusters de volatilité, i.e. une hausse est souvent suivi d'une hausse encore plus importante. Cela signifie que la série temporelle est corrélé en temps. Campbell, Lo and Mackinglay \cite{NonLinDef} ont défini différentes notions de non linéarité~:
+\begin{Def}\label{nonlin}
+\begin{itemize}
+\item[i)] série temporelle linéaire~:~les chocs sont non corrélés mais nécessairement indépendant et identiquement distribué.\\
+\item[ii)] série temporelle non linéaire~:~ les chocs sont supposés i.i.d, mais il y a des fonctions non linéaire associées à la série temporelle et aux chocs.
+$$
+X_t= g(\epsilon_{t-1},\epsilon_{t-2},...)+\epsilon_th(\epsilon_{t-1},\epsilon_{t-2},...)
+$$
+ainsi l'espérance de $X_t$ est donnée par g et la variance conditionnelle est donnée par $h^2$
+\end{itemize}
+\end{Def}
+Ainsi on controle la variance conditionnelle via la fonction $h$. Les processus ARCH sont des processus non linéaires en variance conditionelle, d'espérance nulle et de variance constante. Ce type de comportement n'est pas possible pour des processus stationnaire. En effet d'après le théorème de Wold (\ref{Wold}) un processus stationnaire d'espérance nulle va s'écrire comme la somme infinie de bruit blanc~:
+$$
+X_t = \sum_{i\geq 0}\psi_i\epsilon_{t-i}
+$$
+avec $\psi_0=1$. Il en résulte que la variance est constante et que l'espérance conditionnelle s'écrit~: 
+$$
+\E{X_t|\epsilon_{t-1},\epsilon_{t-2},...}=\sum_{i\geq 1}\psi_i \epsilon_{t-i}
+$$
+Ainsi la variance conditionnelle d'un processus stationnaire est~:
+\begin{align*}
+\mathbb{V}\left(X_t|\epsilon_{t-1},\epsilon_{t-2},...\right)&= \E{\left(X_t-\E{X_t|\epsilon_{t-1},\epsilon_{t-2},...}\right)^2} \\
+&= \E{\left(X_t-\E{X_t|\epsilon_{t-1},\epsilon_{t-2},...}\right)^2|\epsilon_{t-1},\epsilon_{t-2},...}\\
+&= \E{\epsilon_t^2}\\
+&= \sigma^2
+\end{align*}
+On obtient une variance conditionnelle qui est constante ce qui ne permet pas de modéliser les variances conditionnelles non linéaires. Afin de pouvoir le faire Engle \cite{archEngle} a défini les processus ARCH
+\begin{Def}\label{archDef}
+Un processus $z_t$ est un processus de ARCH(q), si l'on peut l'écrire sous la forme~:
+\begin{align*}
+z_t &= \epsilon_t\sigma_t\\
+\sigma_t^2 &= \omega + \sum_{i=1}^q \alpha_i \epsilon_{t-i}^2\,,
+\end{align*}
+avec $\epsilon_t$ un bruit blanc de variance $\sigma^2$ et $\omega,\alpha_1,\alpha_2,...,\alpha_q\geq 0$. 
+\end{Def}
+On peut vérifier que ce modèle à les propriétés souhaitées~:
+\begin{align*}
+\E{z_t}&=\E{\epsilon_t\sigma_t}
+\end{align*}
+
 \subsection{GARCH modèles}
 
 \section{Annexe}

@@ -17,4 +17,12 @@
   year   = {2012},
 }
 
+@Book{NonLinDef,
+  title     = {The econometrics of financial Markets},
+  publisher = {Princeton, New Jersey},
+  year      = {1997},
+  author    = {Campbell J. Y., Lo A. W. and Mackinlay A. C.},
+  editor    = {Princeton University Press},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
