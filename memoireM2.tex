@@ -818,13 +818,28 @@ Un processus $z_t$ est un processus de ARCH(q), si l'on peut l'écrire sous la f
 z_t &= \epsilon_t\sigma_t\\
 \sigma_t^2 &= \omega + \sum_{i=1}^q \alpha_i \epsilon_{t-i}^2\,,
 \end{align*}
-avec $\epsilon_t$ un bruit blanc de variance $\sigma^2$ et $\omega,\alpha_1,\alpha_2,...,\alpha_q\geq 0$. 
+avec $\epsilon_t$ un bruit blanc fort de variance $1$ et $\omega,\alpha_1,\alpha_2,...,\alpha_q\geq 0$. 
 \end{Def}
+Dans le cas où le bruit blanc est un bruit blanc gaussien alors  la distribution conditionnelle de $z_t$ suit une loi normale~:
+$$
+z_t|z_{t-q},...,z_0\sim \mathcal{N}\left(0,\sigma_t^2\right)
+$$
 On peut vérifier que ce modèle à les propriétés souhaitées~:
 \begin{align*}
-\E{z_t}&=\E{\epsilon_t\sigma_t}
+\E{z_t|z_{t-1},...,z_0}&=\E{\epsilon_t\sigma_t|z_{t-1},...,z_0}\\
+&=\E{\epsilon_t}\E{\sigma_t|z_{t-1},...,z_0}\\
+&= 0\\
+V(z_t|z_{t-1},...,z_0)&=\E{z_t^2|z_{t-1},...,z_0)}\\
+&=\E{\sigma_t^2\epsilon_t^2|z_{t-1},...,z_0)}\\
+&=\E{\sigma_t^2|z_{t-1},...,z_0)}\\
+&= \sigma_t^2
 \end{align*}
-
+Si le processus admet des moments d'ordre 4, on en déduit tel que $\E{z_t^2}=\sigma^2<\infty$ et $\E{z_t^4}=c<\infty$, on en déduit pour un processus ARCH(q)~:
+\begin{align*}
+\E{z_t^2} &= \frac{\omega}{1-\alpha_1-...-\alpha_q},\textrm{ avec }\sum_{i=1}^q\alpha_i<1\\
+\E{z_t^4}&\geq 3\E{\epsilon_t^2}^2
+\end{align*}
+Les processus ARCH(q) sont des processus dit \textit{fat tail}. C'est souvent le cas pour des données financières.
 \subsection{GARCH modèles}
 
 \section{Annexe}
@@ -952,7 +967,7 @@ $$
 \begin{theorem}
 Le processus $\left\{\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
 \end{theorem}
-Un processus AR(1) est un processus markovien, de même toute marche aléatoire une porcessus markovien d'ordre 1.
+Un processus AR(1) est un processus markovien, de même toute marche aléatoire une processus markovien d'ordre 1.
 
 \bibliographystyle{amsplain}
 %\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
