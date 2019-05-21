@@ -6,10 +6,12 @@
 #    May 21, 2019 12:26:14 PM CEST  platform: Windows NT
 
 import sys
+import statsmodels.tsa.arima_process as ts
 import statsmodels.api as sm
-from scipy import stats
+
 
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 try:
     import Tkinter as tk
@@ -49,6 +51,21 @@ def destroy_Toplevel1():
     global w
     w.destroy()
     w = None
+
+
+def getVal(qVal,pVal):
+    q = qVal.get().split(";")
+    p = pVal.get().split(";")
+    ar=[1]
+    ma=[1]
+    for val in q:
+        if val != "":
+            ar.append(-float(val))
+    for val in p:
+        if val != "":
+            ma.append(float(val))
+    return ar,ma
+
 
 class Toplevel1:
     def __init__(self, top=None):
@@ -216,17 +233,59 @@ class Toplevel1:
         self.dimension.configure(selectbackground="#c4c4c4")
         self.dimension.configure(selectforeground="black")
 
+        self.labelFit = tk.Label(top)
+        self.labelFit.place(relx=0.05, rely=0.486, height=31, width=44)
+        self.labelFit.configure(activebackground="#f9f9f9")
+        self.labelFit.configure(activeforeground="black")
+        self.labelFit.configure(background="#d9d9d9")
+        self.labelFit.configure(disabledforeground="#a3a3a3")
+        self.labelFit.configure(foreground="#000000")
+        self.labelFit.configure(highlightbackground="#d9d9d9")
+        self.labelFit.configure(highlightcolor="black")
+        self.labelFit.configure(text='''fit''')
+
+        self.labelFitAR = tk.Label(top)
+        self.labelFitAR.place(relx=0.15, rely=0.486, height=31, width=44)
+        self.labelFitAR.configure(activebackground="#f9f9f9")
+        self.labelFitAR.configure(activeforeground="black")
+        self.labelFitAR.configure(background="#d9d9d9")
+        self.labelFitAR.configure(disabledforeground="#a3a3a3")
+        self.labelFitAR.configure(foreground="#000000")
+        self.labelFitAR.configure(highlightbackground="#d9d9d9")
+        self.labelFitAR.configure(highlightcolor="black")
+        self.labelFitAR.configure(text='''ar''')
+
+        self.labelFitMA = tk.Label(top)
+        self.labelFitMA.place(relx=0.25, rely=0.486, height=31, width=44)
+        self.labelFitMA.configure(activebackground="#f9f9f9")
+        self.labelFitMA.configure(activeforeground="black")
+        self.labelFitMA.configure(background="#d9d9d9")
+        self.labelFitMA.configure(disabledforeground="#a3a3a3")
+        self.labelFitMA.configure(foreground="#000000")
+        self.labelFitMA.configure(highlightbackground="#d9d9d9")
+        self.labelFitMA.configure(highlightcolor="black")
+        self.labelFitMA.configure(text='''ma''')
+
+
     def generate(self):
-        d = int(self.dVal)
-        p = int(self.pVal)
-        q = int(self.qVal)
-        n = int(self.sampleSize)
+
+        ar, ma = getVal(self.qVal, self.pVal)
+        n = int(self.sampleSize.get())
+        #d = getVal(self.dVal)
+        #dimension = getVal(self.dimension)
+
         if self.modelCombo.get()=="AR":
-            sample = sm.tsa.arma_generate_sample(d,0,n)
+            sample = ts.arma_generate_sample(ar,ma,n)
 
         fig = plt.figure(figsize=(12, 8))
-        ax = fig.add_subplot(111)
+        ax = fig.add_subplot(311)
         ax.plot(sample)
+        ax1 = fig.add_subplot(312)
+        fig  = sm.graphics.tsa.plot_acf(sample, lags=40, ax=ax1)
+        ax2 = fig.add_subplot(313)
+        fig = sm.graphics.tsa.plot_pacf(sample, lags=40, ax=ax2)
+        plt.show()
+
 
     def callback(self,event):
         if self.modelCombo.get() == "AR":
