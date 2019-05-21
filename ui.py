@@ -234,7 +234,7 @@ class Toplevel1:
         self.dimension.configure(selectforeground="black")
 
         self.labelFit = tk.Label(top)
-        self.labelFit.place(relx=0.05, rely=0.486, height=31, width=44)
+        self.labelFit.place(relx=0.05, rely=0.556, height=31, width=44)
         self.labelFit.configure(activebackground="#f9f9f9")
         self.labelFit.configure(activeforeground="black")
         self.labelFit.configure(background="#d9d9d9")
@@ -266,6 +266,17 @@ class Toplevel1:
         self.labelFitMA.configure(highlightcolor="black")
         self.labelFitMA.configure(text='''ma''')
 
+        self.arFit = tk.Entry(top)
+        self.arFit.place(relx=0.1, rely=0.506, height=30, relwidth=0.14)
+        self.arFit.configure(background="white")
+        self.arFit.configure(disabledforeground="#a3a3a3")
+        self.arFit.configure(font=font10)
+        self.arFit.configure(foreground="#000000")
+        self.arFit.configure(highlightbackground="#d9d9d9")
+        self.arFit.configure(highlightcolor="black")
+        self.arFit.configure(insertbackground="black")
+        self.arFit.configure(selectbackground="#c4c4c4")
+        self.arFit.configure(selectforeground="black")
 
     def generate(self):
 
