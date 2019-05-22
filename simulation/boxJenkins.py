@@ -8,8 +8,9 @@ def boxJenkinsAlgo(sample):
     d = getD(sample)
     acf  = sm.tsa.stattools.acf(sample,qstat =True, alpha=0.01)
     pacf = sm.tsa.stattools.pacf(sample,alpha  =0.01)
-    p = getP(acf[3],0.01)
-    q = getQ(pacf[1])
+    q = getQ(acf[1])
+    p = getQ(pacf[1])
+    print(p,d,q)
     aic = []
     Best = None
     for i in range(d+1):
@@ -38,7 +39,7 @@ def getD(sample):
 def getP(acf,alpha):
    if( max(acf)<alpha):
        return 0
-   index = np.where(acf.values>alpha)
+   index = np.where(acf>alpha)
    return min(index) - 1
 
 
@@ -54,5 +55,10 @@ def getQ(vals):
 ar=[1,0.8,0.5,0.6,0.4]
 ma=[1]
 
-sample = ts.arma_generate_sample(ar, ma, 1000)
-boxJenkinsAlgo(sample)
+sampleAR = ts.arma_generate_sample(ar, ma, 1000)
+boxJenkinsAlgo(sampleAR)
+
+ar=[1]
+ma=[1,-0.8,-0.5,-0.6,-0.4]
+sampleMA = ts.arma_generate_sample(ar, ma, 1000)
+boxJenkinsAlgo(sampleMA)
