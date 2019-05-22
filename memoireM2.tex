@@ -839,9 +839,29 @@ Si le processus admet des moments d'ordre 4, on en déduit tel que $\E{z_t^2}=\s
 \E{z_t^2} &= \frac{\omega}{1-\alpha_1-...-\alpha_q},\textrm{ avec }\sum_{i=1}^q\alpha_i<1\\
 \E{z_t^4}&\geq 3\E{\epsilon_t^2}^2
 \end{align*}
-Les processus ARCH(q) sont des processus dit \textit{fat tail} car la valeur de la kurtosis est supérieur à celle d'une loi normale. C'est souvent le cas pour des données financières.
+Les processus ARCH(q) sont des processus dit \textit{fat tail}. C'est souvent le cas pour des données financières.
 \subsection{GARCH modèles}
-
+\begin{Def}\label{GARCHDef}
+Un processus $z_t$ est un processus GARCH(p,q), si~:
+\begin{align*}
+z_t&=\epsilon_t\sigma_t,\textrm{ avec }\epsilon_t \textrm{ un bruit blanc fort de variance 1}\\
+\sigma_t^2 &= \omega  +\sum_{i=1}^q\alpha_i z_{t-1}^2+\sum_{j=1}^p\beta_j\epsilon_{t-j}^2
+\end{align*}
+\end{Def}
+Les processus de type GARCH vérifient les propriétés suivantes~: l'espérance est nulle, autocorellation est nulle pour tout lag h>0.
+\begin{align*}
+\E{z_t}&= \E{\sigma_t\epsilon_t}=\E{\E{\sigma\epsilon_t|z_{t-1},...}}=\E{\sigma_t\E{\epsilon_t|z_{t-1},...}}=\E{\sigma_t\E{\epsilon_t}}=0\\
+\E{z_tz_{t+h}}&=\E{\sigma_t\epsilon_t\sigma_{t+h}\epsilon_{t+h}}=\E{\E{\sigma_t\epsilon_t\sigma_{t+h}\epsilon_{t+h}|z_{t+h-1},...}}=0
+\end{align*}
+On remarque aussi le processus $z_t^2$ est un processus ARMA(p,q)~:
+$$
+z_t^2= \sigma_k^2+(y_k^2-\sigma_k^2)=\sigma_k^2+\sigma_k^2(\epsilon_k^2-1)
+$$
+en posant $\tilde{\epsilon_t}=\sigma_k^2(\epsilon_k^2-1)$ on a~:
+\begin{align*}
+z_t^2&= \omega  +\sum_{i=1}^q\alpha_i z_{t-1}^2+\sum_{j=1}^p\beta_j\epsilon_{t-j}^2 + \tilde{\epsilon_t}\\
+&=...
+\end{align*}
 \section{Annexe}
 \subsection{Convergence}
 Convergence $\mathcal{L}^2$~:
