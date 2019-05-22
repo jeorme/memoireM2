@@ -295,9 +295,7 @@ class Toplevel1:
         n = int(self.sampleSize.get())
         #d = getVal(self.dVal)
         #dimension = getVal(self.dimension)
-
-        if self.modelCombo.get()=="AR":
-            sample = ts.arma_generate_sample(ar,ma,n)
+        sample = ts.arma_generate_sample(ar, ma, n)
 
         fig = plt.figure(figsize=(12, 8))
         ax = fig.add_subplot(311)

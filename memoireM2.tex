@@ -571,6 +571,17 @@ $$
 où les paramètres $A_i$ sont des constantes déterminées par les conditions initiales.
 \end{pro}
 Il en résulte que si les racines du  de retard sont de module strictement supérieur à 1 alors l'auto corrélation tend vers zéro. Si les racines sont réels on a une exponentielle amortie et si les racines sont complexes on aura une sinusoïdale amortie.
+\subsubsection{Exemples}
+Contrairement aux processus MA(q) les processus ne sont pas forcement des processus stationnaires. Cela va dépendre des valeurs des racines du polyname de retard définissant le processus.  Par exemple, ci dessous on a défini un processus AR(4), graphiquement on voit que la stationnarité semble respecter et on a le comportment attendu au niveau des coefficients ACF et PACF.
+\begin{figure}[h]
+   \includegraphics[scale=.5]{AR4.png}
+\end{figure}
+Afin de confirmer que la série n'est pas stationnaire, on peut utiliser le test de Dicker-Fuller augmenté. Dans ce cas on trouve unADF d'environ -33 alors que le seuil à 1\% est de  -3.437. On peut rejeter l'hypothèse de non stationnarité avec un seuil de confiance à 99%. 
+En générant un serie AR(4) non stationnaire on obtient les résultats suivants~:
+\begin{figure}[h]
+   \includegraphics[scale=.5]{AR4NS.png}
+\end{figure}
+Graphiquement, on observe la non stationnarité des données et cela et vérifié par le test Dicker-Fuller augmenté : ADF : -1.4735 alors que les valeurs critiques sont 1\% : -3.437 5\%: -2.864 et 10\%: -2.568. On accepte l'hypothèse $H_0$ de non stationnarité.
 
 \subsubsection{processus mutlidimensionnel : VAR(p)}
 \begin{Def}
@@ -781,9 +792,16 @@ auto-correlation partielle & $r(h)\rightarrow 0$ & $r(h)=0, \forall h>p$ &$r(h)\
 \hline
 \end{tabular}
 \end{center}
-\subsection{SARMA modèles}
 \subsection{ARIMA modèles}
-\subsection{SARIMA modèles}
+Les problèmes ARMA sont utilisés pour des processus stationnaires. Lorsque les processus ne sont plus stationnaires on doit utiliser d'autre processus. Parmi ceux là il y a les processus ARIMA. Les processus ARIMA sont des processus non stationnaire mais qui deviennent stationnaire en transformant la série par différence finie.
+\begin{Def}
+Un processus $X_t$ admet une représentation ARIMA(p,q) s'il satisfait~:
+$$
+\Phi(L)(1-L)^dX_t=\theta(L)\epsilon_t
+$$
+avec $\epsilon_t$ un bruit blanc de variance $\sigma_t^2$. La représentation est minimale lorsque les polynomes $\Phi(L)$ et $\theta(L)$ non pas de racine commune.
+\end{Def}
+Une des propriété des processus ARIMA(p,d,q) est que le processus $(1-L)^dX_t$ est un processus stationnaire ARMA(p,q). On utilise la différence finie pour rendre stationnaire un processus non stationnaire.
 \subsection{ARCH modèles}
 Un des problèmes des modèles stationnaires est que la volatilité est constante dans le temps, pour certain types de données cela n'est pas le cas. Par exemple pour des données financières on observe des clusters de volatilité, i.e. une hausse est souvent suivi d'une hausse encore plus importante. Cela signifie que la série temporelle est corrélé en temps. Campbell, Lo and Mackinglay \cite{NonLinDef} ont défini différentes notions de non linéarité~:
 \begin{Def}\label{nonlin}
@@ -845,7 +863,7 @@ Les processus ARCH(q) sont des processus dit \textit{fat tail}. C'est souvent le
 Un processus $z_t$ est un processus GARCH(p,q), si~:
 \begin{align*}
 z_t&=\epsilon_t\sigma_t,\textrm{ avec }\epsilon_t \textrm{ un bruit blanc fort de variance 1}\\
-\sigma_t^2 &= \omega  +\sum_{i=1}^q\alpha_i z_{t-1}^2+\sum_{j=1}^p\beta_j\epsilon_{t-j}^2
+\sigma_t^2 &= \omega  +\sum_{i=1}^p\alpha_i z_{t-1}^2+\sum_{j=1}^q\beta_j\sigma_{t-j}^2
 \end{align*}
 \end{Def}
 Les processus de type GARCH vérifient les propriétés suivantes~: l'espérance est nulle, autocorellation est nulle pour tout lag h>0.
@@ -859,9 +877,33 @@ z_t^2= \sigma_k^2+(y_k^2-\sigma_k^2)=\sigma_k^2+\sigma_k^2(\epsilon_k^2-1)
 $$
 en posant $\tilde{\epsilon_t}=\sigma_k^2(\epsilon_k^2-1)$ on a~:
 \begin{align*}
-z_t^2&= \omega  +\sum_{i=1}^q\alpha_i z_{t-1}^2+\sum_{j=1}^p\beta_j\epsilon_{t-j}^2 + \tilde{\epsilon_t}\\
-&=...
+z_t^2&= \omega  +\sum_{i=1}^p\alpha_i z_{t-1}^2+\sum_{j=1}^q\beta_j\sigma_{t-j}^2 + \tilde{\epsilon_t}\\
+&=\omega  +\sum_{i=1}^p\alpha_i z_{t-1}^2+\sum_{j=1}^q\beta_j\sigma_{t-j}^2 + \tilde{\epsilon_t}\\
+&=\omega  +\sum_{i=1}^p\alpha_i z_{t-1}^2+\sum_{j=1}^q\beta_j( z^2_{t_j}-\tilde{\epsilon}_{t-j} )+ \tilde{\epsilon_t}\\
+&=\omega  +\sum_{i=1}^{max(p,q)}\left(\alpha_i+\beta_i\right) z_{t-1}^2-\sum_{j=1}^q\beta_j\tilde{\epsilon}_{t-j}+ \tilde{\epsilon_t}\\
 \end{align*}
+On peut alors utiliser les résultats des processus ARMA afin de décrire le processu $z_t^2$ et donc d'obtenir la variance du processus $z_t$. Sous la condition de stationnarité, on a~:
+$$
+V(z_t)=\E{y_t^2}=\frac{\omega}{1-\sum_{i=1}^{max(p,q)}\alpha_i+\beta_i}
+$$
+Comme pour les processus ARCH, les processus GARCH sont des processus de type \textit{fat tails}. Il existe des extensions des processus GARCH tels que les processus EGARCH \textit{exponential GARCH} ou IGARCH \textit{integrated GARCH}.
+\subsection{méthodologie de Box Jenkins}
+Une fois le modèle choisi on peut générer des échantillons suivant la diffusion du processus choisi. Pour cela on peut par example utiliser la librairie statsmodels en python. Mais le problème inverse est plus complexe. Comment à partir de données peut-on trouver le modèle qui estime au mieux ses données. La méthodologie de Box Jenkins propose une façon d'estimer les paramètres du modèle ARIMA.
+
+
+La méthode de Box-Jenkins \cite{BoxJenkins} ne présuppose d'aucun pattern dans les données. Il utilise tros étapes itératives~:
+\begin{itemize}
+\item[i)] identification du modele
+\item[ii)] estimation des paraèmetres
+\item[iii)] verfication
+\end{itemize}
+Cette méthode itérative permet de déterminer parmi les modeles ARIMA ceux qui correspondent aux mieux (selon un critère donné : AIC, BIC, HQIC ...) aux données.
+Une étape crucial dans la selection du modele est l'estimation des paramètre et le choix de la métrique de classification. Un critère pour le choix des paramètres va être fourni par l'ACF et le PACF. En effet, on peut calculer l'ACF et le PACF sur l'échantillon fournit et à l'aide des résultats théorique sur les procesus ARMA et ARIMA en déduire un intevalle de valeur possible pour les paramètres p,q et d. Une fois la grille fournit de test fournit on calcule les critères AIC ou BIC pour chacun des paramètre. Le meilleur modèle sera celui qui minimise les critères. Les critères AIC et BIC sont définis de la manière suivante~:
+\begin{align*}
+AIC(p)&=n\ln\left({\frac{\hat{\sigma}_e^2}{n}}\right)+2p\\
+BIC(p)&=n\ln\left({\frac{\hat{\sigma}_e^2}{n}}\right)+p+p\ln(n)
+\end{align*}
+avec n le nombre d'observations utilisé pour estimer le modele, p est le nombre de paramètres du modèle et $\hat{sigma}_e^2$ est la somme des résidus (SSR). L'intéret des critères AIC et BIC et de tenir compte l'erreur quadratique (SSR) mais aussi de la complexity du modèle. Ainsi le modele qui minise les critères ACI ou BIC sera celui qui fournit une bonne approximation relativement à la complexité du modele.
 \section{Annexe}
 \subsection{Convergence}
 Convergence $\mathcal{L}^2$~:
@@ -991,5 +1033,5 @@ Un processus AR(1) est un processus markovien, de même toute marche aléatoire 
 
 \bibliographystyle{amsplain}
 %\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
-\bibliography{C:/Users/jerom/PycharmProjects/memoireM2/biblio}
+\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
 \end{document}
