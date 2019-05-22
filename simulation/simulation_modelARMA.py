@@ -5,26 +5,26 @@ from statsmodels.tsa.arima_process import arma_generate_sample
 import matplotlib.pyplot as plt
 
 
-arparams = np.array([.75, -.25])
-maparams = np.array([.65, .35])
+
+#global value :
+nobs = 10000
+
+#AR simulation and test
+arparams = np.array([.75, -.25,.5,-.1])
 arparams = np.r_[1, -arparams]
-maparams = np.r_[1, maparams]
-nobs = 2500
-sample = arma_generate_sample(arparams, maparams, nobs)
-y=pd.DataFrame(sample)
-arma_mod = sm.tsa.ARMA(y, order=(2,2))
-arma_res = arma_mod.fit(trend='nc', disp=1)
-arma_res.summary()
-arparams2 = np.array([.15, -.05])
-maparams2 = np.array([.95, 1.5])
-arparams2 = np.r_[1, -arparams2]
-maparams2 = np.r_[1, maparams2]
-nobs = 2500
-sample2 = arma_generate_sample(arparams2, maparams2, nobs)
-y2= pd.DataFrame(np.r_[sample,sample2])
-arma_mod2 = sm.tsa.ARMA(y2, order=(2,2))
-arma_res2 = arma_mod2.fit(trend='nc', disp=1)
-fig = plt.plot(sample2)
+sampleAR = arma_generate_sample(arparams, [1,0,0,0,0], nobs)
+fig = plt.plot(sampleAR)
 plt.show()
-print(arma_res2.summary())
+#estimation
+ar20 = sm.tsa.ARMA(pd.DataFrame(sampleAR), order=(4,0)).fit(disp=False)
+print(ar20.params)
+print(ar20.aic, ar20.bic, ar20.hqic)
+ar11 = sm.tsa.ARMA(pd.DataFrame(sampleAR), order=(2,2)).fit(disp=False)
+print(ar11.params)
+print(ar11.aic, ar11.bic, ar11.hqic)
+
+#MA simulation
+maparams = np.array([.65, .35])
+maparams = np.r_[1, maparams]
+
 

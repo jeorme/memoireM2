@@ -112,7 +112,6 @@ class Toplevel1:
         self.modelCombo.configure(textvariable=ui_support.combobox)
         self.modelCombo.configure(width=123)
         self.modelCombo.configure(takefocus="")
-        self.modelCombo.bind("<<ComboboxSelected>>",self.callback)
 
         self.Label1 = tk.Label(top)
         self.Label1.place(relx=0.033, rely=0.111, height=41, width=64)
@@ -290,7 +289,6 @@ class Toplevel1:
         self.entryAR.configure(selectbackground="#c4c4c4")
         self.entryAR.configure(selectforeground="black")
 
-
     def generate(self):
 
         ar, ma = getVal(self.qVal, self.pVal)
@@ -311,9 +309,7 @@ class Toplevel1:
         plt.show()
 
 
-    def callback(self,event):
-        if self.modelCombo.get() == "AR":
-            self.Label2_3.pack_forget()
+
 
 
 
