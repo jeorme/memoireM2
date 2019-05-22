@@ -234,7 +234,7 @@ class Toplevel1:
         self.dimension.configure(selectforeground="black")
 
         self.labelFit = tk.Label(top)
-        self.labelFit.place(relx=0.05, rely=0.486, height=31, width=44)
+        self.labelFit.place(relx=0.05, rely=0.556, height=31, width=44)
         self.labelFit.configure(activebackground="#f9f9f9")
         self.labelFit.configure(activeforeground="black")
         self.labelFit.configure(background="#d9d9d9")
@@ -265,6 +265,30 @@ class Toplevel1:
         self.labelFitMA.configure(highlightbackground="#d9d9d9")
         self.labelFitMA.configure(highlightcolor="black")
         self.labelFitMA.configure(text='''ma''')
+
+        self.entryMA = tk.Entry(top)
+        self.entryMA.place(relx=0.25, rely=0.556, height=30, relwidth=0.1)
+        self.entryMA.configure(background="white")
+        self.entryMA.configure(disabledforeground="#a3a3a3")
+        self.entryMA.configure(font=font10)
+        self.entryMA.configure(foreground="#000000")
+        self.entryMA.configure(highlightbackground="#d9d9d9")
+        self.entryMA.configure(highlightcolor="black")
+        self.entryMA.configure(insertbackground="black")
+        self.entryMA.configure(selectbackground="#c4c4c4")
+        self.entryMA.configure(selectforeground="black")
+
+        self.entryAR = tk.Entry(top)
+        self.entryAR.place(relx=0.14, rely=0.556, height=30, relwidth=0.1)
+        self.entryAR.configure(background="white")
+        self.entryAR.configure(disabledforeground="#a3a3a3")
+        self.entryAR.configure(font=font10)
+        self.entryAR.configure(foreground="#000000")
+        self.entryAR.configure(highlightbackground="#d9d9d9")
+        self.entryAR.configure(highlightcolor="black")
+        self.entryAR.configure(insertbackground="black")
+        self.entryAR.configure(selectbackground="#c4c4c4")
+        self.entryAR.configure(selectforeground="black")
 
 
     def generate(self):

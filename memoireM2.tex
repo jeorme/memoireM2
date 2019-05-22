@@ -288,8 +288,7 @@ $\rho(k-1)$ & $\rho(k-2)$ & . & 1\\
 \end{tabular}
 \right)
 $$
-Les 3 premières autocrrélations partiel
-les sont donc déterminées par les relation suivantes~:
+Les 3 premières autocrrélations partielles sont donc déterminées par les relation suivantes~:
 \begin{align*}
 r(1)&=\rho(1)\\
 r(2)&= \frac{\rho(2)-\rho(1)^2}{1-\rho(1)^2}\\
@@ -840,9 +839,15 @@ Si le processus admet des moments d'ordre 4, on en déduit tel que $\E{z_t^2}=\s
 \E{z_t^2} &= \frac{\omega}{1-\alpha_1-...-\alpha_q},\textrm{ avec }\sum_{i=1}^q\alpha_i<1\\
 \E{z_t^4}&\geq 3\E{\epsilon_t^2}^2
 \end{align*}
-Les processus ARCH(q) sont des processus dit \textit{fat tail} car la valeur de la kurtosis est supérieur à celle d'une loi normale. C'est souvent le cas pour des données financières.
+Les processus ARCH(q) sont des processus dit \textit{fat tail}. C'est souvent le cas pour des données financières.
 \subsection{GARCH modèles}
-
+\begin{Def}\label{GARCHDef}
+Un processus $z_t$ est un processus GARCH(p,q), si~:
+\begin{align*}
+z_t&=\epsilon_t\sigma_t,\textrm{ avec }\epsilon_t \textrm{ un bruit blanc fort de variance 1}\\
+\sigma_t^2 &= \omega  +\sum_{i=1}^q\alpha_i z_{t-1}^2+\sum_{j=1}^p\beta_j\epsilon_{t-j}^2
+\end{align*}
+\end{Def}
 \section{Annexe}
 \subsection{Convergence}
 Convergence $\mathcal{L}^2$~:
