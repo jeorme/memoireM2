@@ -134,7 +134,7 @@ $$
 
 
 
-Dans la pratique, on aura un échantillon fini, il faudra donc estimer ses moments à partir de l'échantillon fourni. Dans la suite on appelera ses estimations des \textit{moments empiriques}~:
+Dans la pratique, on aura un échantillon fini, il faudra donc estimer ses moments à partir de l'échantillon fourni. Dans la suite on appellera ses estimations des \textit{moments empiriques}~:
 \begin{align*}
 \overline{X}_T &= \frac{1}{T}\sum_{t=1}^TX_t\\
 \overline{\gamma}(h)&=\frac{1}{T-h}\sum_{t=h+1}^T(X_t-\overline{X})(X_{t-h}-\overline{X}), 0\leq h\leq T-1\\
@@ -326,6 +326,7 @@ L'exemple le plus simple est celui de la tendance linéaire bruitée~:~$X_t=a+bt
 Un processus $\Xt$ est un processus non-stationnaire DS ou intégré d'ordre $d$ si le processus obtenu après $d$ différenciation est stationnaire.
 \end{Def}
 Le fait de différencier $d$ fois revient à multiplier par le polynôme de retard $(1-L)^d$ et cela revient donc à chercher les racines de l'unité. Car si le polynôme $\Phi(L)X_t$ est stationnaire et si 1 est une racine du polynôme $\Phi$ alors $\left(X_t\right)$ sera non stationnaire. C'est pour cela que les tests de détections de racine de l'unité sont utilisés pour la détection de non stationnarité.
+
 
 
 \subsection{Prédiction de séries temporelles}
@@ -887,15 +888,55 @@ $$
 V(z_t)=\E{y_t^2}=\frac{\omega}{1-\sum_{i=1}^{max(p,q)}\alpha_i+\beta_i}
 $$
 Comme pour les processus ARCH, les processus GARCH sont des processus de type \textit{fat tails}. Il existe des extensions des processus GARCH tels que les processus EGARCH \textit{exponential GARCH} ou IGARCH \textit{integrated GARCH}.
-\subsection{méthodologie de Box Jenkins}
+\subsection{Estimation des paramètres}
+\subsubsection{modèle ARMA}
+L'estimation des paramètres d'un modèle ARMA(p,q) lorsque les ordres p et q sont supposés connus peut se réaliser par différentes méthodes dans le domaine temporel~:
+\begin{itemize}
+\item Moindres carrés Ordinaires pour les modèles sans composante MA. Dans ce cas on utilise les équations de Yule Walker. En remplacant les autocorrélations théoriques par leurs estimateurs, on peut retrouver les estimateurs des MCO des parmètres du modèle par la résolution des équations de Yule Walker.\\
+\item maximum de vraisemblance
+\end{itemize}
+Je vais détailler ici l'approche par maximum de vraisemblance, elle sera utilisée dans les tests pratiques. Un rappel sur l'estimateur du maximum de vraisemblance se trouve en annexe.
+
+Afin de pour voir appliquer l'estimation par maximum de vraisemblance sur les modèles ARMA, on doit décrire la vraisemblance du modèle. Pour cela on va supposer que le bruit blanc décrivant le processus ARMA est gaussien de variance $\sigma^2$. Ainsi pour tout processus ARMA(p,q)~:~$\Phi(L)x_t = c+ \Theta(L)\epsilon_t$, avec $\theta_0=\phi_0=1$,  la vraisemblance associé au vecteur de réalisation $(x_1,..,x_T)$ s'écrit alors~:
+\begin{equation}\label{MLEARMA}
+(2\pi\sigma^2)^{-\frac{T}{2}}det\left[\right]^{-\frac{1}{2}}exp\left(-\frac{1}{2\sigma^2}x'\left[(\theta_i,\phi_i)]\right]^{-1}x\right)
+\end{equation}
+
+Les paramètres $\hat{\phi}$ et $\hat{\theta}$ sont ceux qui maximise cette fonction de vraisemblance, comme la fonction est $C^2$ on peut utiliser les dérivées partielles à l'ordre 2 pour les déterminer. Une fois ces paramètres trouver on va devoir appliquer plusieurs tests afin de simplifier la forme obtenue. Un premier test est le \textit{test de redondance} dont le but est de vérifier si les composantes AR et MA de l'ARMA non pas de racines communes. Si tel est le cas on peut alors se ramener à une représentation minimal excluant ces racines. En effet si le processus ARMA(p,q) $x_t$ est tel que~:
+$$
+\Phi(L)x_t=\Theta(L)\epsilon_t
+$$
+et que les polynomes $\Theta(L)$ et $\Phi(L)$ ont une racine commune $\lambda$ alors on a~:
+\begin{align*}
+\Phi(L)&=(1-\frac{L}{\lambda})\tilde{\Phi}(L)\\
+\Theta(L)&=(1-\frac{L}{\lambda})\tilde{\Theta}(L)\\
+\end{align*}
+avec $\tilde{\Phi(L)}$ (resp. $\tilde{\Theta(L)}$) un polynome de degré p-1 (resp. q-1). En divisant les polynomes par ce facteur commun, on obtient une nouvelle représentation de $x_t$~:
+$$
+\tilde{\Phi}(L)x_t=\tilde{\Theta}(L)\epsilon_t
+$$
+en faisant de même pour toutes les racines communes ont obtient la représentation minimale du processus. 
+
+Afin de vérifier que les paramètres obtenus sont significativement différent de 0, on applique un test de significativité des coefficents obtenues. Pour cela on utilise le résultat suivant 
+\begin{theorem}
+L'estimateur du maximum de vraisemblance du vecteur des paramètres du modèle ARMA(p,q), noté $\hat{\Delta}=\left(\hat{\phi}_1,...,\hat{\phi}_p,\hat{\theta}_1,...,\hat{\theta}_q\right)$ est asymptotiquement distribué suivant une loi normale de moyenne $\Delta$ et de matrice de covariance $\mathbb{E}\left(\hat{\Delta}\hat{\Delta}'\right)=\mathcal{F}^{-1}$, avec $\mathcal{F}$ la matrice d'information de Fischer~:
+$$
+\mathcal{F}=-\mathbb{E}\left(\frac{\partial^2L(x,\Delta)}{\partial\delta_i\delta_j}\right)
+$$
+avec $\delta_i,\delta_j\in \Delta$.
+\end{theorem}
+On peut donc appliquer à ces estimateurs les méthodes d'inférence tradionnelle car assymptotiquement distribué selon une loi normale. Ainsi si l'on montre qu'un ou plusieurs paramètres ne sont pas significativement différents de 0, on estime à nouveau le modèle en excluant les variables correspondantes.
+\subsubsection{processus ARIMA}
+Pour les processus ARIMA, on va se ramener par différences premieres à un processus ARMA, on va estimer les paramètres sur les données ainsi filtrés. On reconstruit ensuite par inversion du filtre sur la série initiale.
+\subsubsection{méthodologie de Box Jenkins}
 Une fois le modèle choisi on peut générer des échantillons suivant la diffusion du processus choisi. Pour cela on peut par example utiliser la librairie statsmodels en python. Mais le problème inverse est plus complexe. Comment à partir de données peut-on trouver le modèle qui estime au mieux ses données. La méthodologie de Box Jenkins propose une façon d'estimer les paramètres du modèle ARIMA.
 
 
 La méthode de Box-Jenkins \cite{BoxJenkins} ne présuppose d'aucun pattern dans les données. Il utilise tros étapes itératives~:
 \begin{itemize}
 \item[i)] identification du modele
-\item[ii)] estimation des paraèmetres
-\item[iii)] verfication
+\item[ii)] estimation des paramètres
+\item[iii)] verification
 \end{itemize}
 Cette méthode itérative permet de déterminer parmi les modeles ARIMA ceux qui correspondent aux mieux (selon un critère donné : AIC, BIC, HQIC ...) aux données.
 Une étape crucial dans la selection du modele est l'estimation des paramètre et le choix de la métrique de classification. Un critère pour le choix des paramètres va être fourni par l'ACF et le PACF. En effet, on peut calculer l'ACF et le PACF sur l'échantillon fournit et à l'aide des résultats théorique sur les procesus ARMA et ARIMA en déduire un intevalle de valeur possible pour les paramètres p,q et d. Une fois la grille fournit de test fournit on calcule les critères AIC ou BIC pour chacun des paramètre. Le meilleur modèle sera celui qui minimise les critères. Les critères AIC et BIC sont définis de la manière suivante~:
@@ -914,6 +955,11 @@ On dit que $X_t$ convergent en loi vers $X$ si et seulement si pour toute foncti
 $$
 \lim_{n}\mathcal{E}(\phi(X_n))=\mathcal{E}\left(\phi(X)\right)
 $$
+\subsection{Inversibilité}
+Pour un processus définit à partir de bruit blanc, on aimerait pouvoir exprimer ce processus en fonction du passé (observé) et pas seulement en fonction du bruit blanc non observé. C'est la question de l'inversibilité du processus. Cela veut donc dire qu'un processus est inversible si on peut le représenter comme une autorégression infinie $AR(\infty)$. Ainsi un processus AR(p) est toujours inversible et pour un processus MA(q) la condition d'inversibilité est similaire à la condition de stationnarité des processus AR~:
+\begin{pro}
+Un processus MA(q) défini par : $X_t=\Theta(L)\epsilon_t$, avec $\epsilon_t$ un bruit blanc et $\theta_0=1$, est inversible si les racines du polynome $ \Theta(L)$ sont, en module, strictement supérieures à 1
+\end{pro}
 \subsection{Densité spectrale}
 \begin{pro}
 Soit $(X_t)$ un processus stationnaire de la forme~:
@@ -1030,7 +1076,58 @@ $$
 Le processus $\left\{\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
 \end{theorem}
 Un processus AR(1) est un processus markovien, de même toute marche aléatoire une processus markovien d'ordre 1.
+\subsection{Estimateur du maximum de vraisemblance}
+\begin{Def}\label{estimateur}
+Soit $X$ une variable aléatoire de loi $P_{\theta}$. On note $f(x,\theta)$ la densité de $P_{\theta}$ et $f(x_1,...x_n,\theta)$ la densité empirique correspondante. On appelle vraisemblance du paramètre $\theta$ l'application $\Theta\rightarrow\mathbb{R}^+$ définie par~:
+\begin{align*}
+\Theta &\rightarrow \mathbb{R}^+\\
+\theta &\mapsto L(x_1,...,x_n,\theta)=\prod_{i=1}^n f(x_i,\theta)
+\end{align*}
+\end{Def}
+\begin{Def}\label{MLE}
+Soit $L(x,\theta)$ la vraisemblance au point $\theta$, on appelle estimateur du maximum de vraisemblance pour $\theta$ la statistique $\hat{\theta}$ pour les observations $x_1,...,x_n$ telle que~:
+$$
+\forall \theta \, ,  L(x,\hat{\theta})\geq L(x,\theta)
+$$
+\end{Def}
+Le principe de vraisemblance revient à déterminer la valeur du paramètre $\theta$, fonction des observations $x_1,...,x_n$, qui assure la plus grande porbabilité d'apparition de ces observations $(x_1,...,x_n)$.
+\begin{corollary}
+Lorsque l'on suppose que $X$ est à valeur dans un ensemble qui est indépendant de $\theta$ et que la fonction de vraisemblance $L$ est $C^2$ par rapport à $\theta$, alors l'estimateur du maximum de vraisemblance $\hat{\theta}$ est solution du système~:
+\begin{eqnarray}
+\left(\frac{\partial L(x,\theta)}{\partial \theta}\right)&=&0\\
+\left(\frac{\partial^2 L(x,\theta)}{\partial \theta^2}\right)&<&0
+\end{eqnarray}
+\end{corollary}
+Afin de déterminer la qualité d'une estimation il existe différentes métriques comme par exemple le coefficient de détermination. Le coefficient de détermination donne une information sur la part de la variance de la variable endogène (ici $x_t$) qui peut être expliquée par la modèle estimé.
+\begin{Def}
+Soit un processus $x_t$, on note $\hat{\epsilon}_t$ le résidu d'estimation du modèle. Les coefficients de détermination $R^2$ et $\overline{R}^2$ sont alors définis par~:
 
+\begin{eqnarray}
+R^2&=&1-\frac{\sum_{t=1}^T\hat{\epsilon}_t^2}{\sum_{t=1}^T\left(x_t-\overline{x}\right)^2}\\
+\overline{R}^2&=&1-\frac{T-1}{T-n}\frac{\sum_{t=1}^T\hat{\epsilon}_t^2}{\sum_{t=1}^T\left(x_t-\overline{x}\right)}
+\end{eqnarray}
+avec $n$ le nombre de paramètres à estimer, par exemple pour un modèle ARMA(p,q) on a $n=p+q$.
+\end{Def}
+Un ajustement parfait est obtenue pour $R^2=1$.
+\subsection{Test statistiques}
+\subsubsection{Test de bruit blanc}
+Lorsque le processus est bien estimé, les résidus entre les valeurs observées et les valeurs estimées par le modèle doivent se conporter comme un bruit blanc. On notera par la suite $\hat{\epsilon}_t$ le résidu d'estimation du modèle. Pour un modèle ARMA ou ARIMA on suppose que le processus $\epsilon_t$ est un bruit blanc gaussien centré de variance $\sigma^2$, ainsi par le théorème centrale limite on doit avoir :
+$$
+\frac{\overline{\epsilon}_t\sqrt{T}}{\sigma^2}\rightarrow_{T\rightarrow\infty}\mathcal{N}(0,1)
+$$
+avec $\overline{\epsilon}_t$ la moyenne des résidus. on peut donc test la nullité de la moyenne des résidus en construisant un intervalle de confiance au seuil adequat.
+
+On peut aussi vérifier l'autocorellation des résidus via les tests de Durbin-Watson, test de Box et Pierce ou de Ljung-Box par exemple. Si les résidus obéissent à un bruit blanc il ne doit pas y avoir d'autocorrélation dans la série.
+
+Afin de vérifier si les résidus sont des processus gaussien on peut utiliser des tests de normalité tels que le test de Jarque et Bera.
+\subsection{Critère de convergence}
+Pour les modèles AR, MA, ARMA et ARIMA par exemple plutot que d'utiliser les métriques classiques telles que MAE, RMSE par exemple on va utiliser les critères tenant compte de la complexité du modèle~:
+\begin{itemize}
+\item[$\bullet$] Critère de Akaike (AIC) : le meilleur des modèles ARMA(p,q) est le modèle qui minimise~: $AIC(p,q)=T\log\left(\sigma_{\hat{\epsilon}_t}^2\right)+2(p+q)$\\
+\item[$\bullet$] Critère d'information Bayésien (BIC) : ce critère présente l'avantage de plus pénaliser les modèles où les paramètres sont en surnombre comparativement à l'AIC~: $$BIC(p,q)=T\log\left(\sigma_{\hat{\epsilon}_t}^2\right)-(n-p-q)\log\left(1-\frac{p+q}{T}\right)+(p+q)\log(T)+\log\left((p+q)^{-1}\left(\frac{\sigma_x^2}{\sigma_{\hat{\epsilon}^2}-1}\right)\right)$$
+\item[$\bullet$] le critère de Schwarz~:~$SC(p,q)=T\log\left(\sigma_{\hat{\epsilon}}^2\right)+(p+q)\log(T)$\\
+\item[$\bullet$] le critère de Hannan-Quin~:~$HQ(p,q)=\log(\sigma_{\hat{\epsilon}}^2)+(p+q)c\log\left(\frac{log(T)}{T}\right)$ avec $c$ une constante à spécifier.
+\end{itemize}
 \bibliographystyle{amsplain}
 %\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
 \bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
