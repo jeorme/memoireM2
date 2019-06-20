@@ -75,7 +75,7 @@ Une série temporelle ou série chronologique est une suite d'observations d’u
 Dans la suite de ce document, on notera l'observation $x_t$ pour tout $t=1,...,T$ d'une variable aléatoire $X_t(\omega)$. Si le processus a été spécifié, estimé et validé, on peut alors l'utiliser pour effectuer une prévision. On notera alors $\hat{X}_T(h)$ le prédicteur de la variable aléatoire $X_{T+h}$. Ce prédicteur permettra de calculer la prévision $\hat{x}_T(h)$ comme étant la réalisation de $\hat{X}_T(h)$. 
 
 
-Afin d'étudier les séries temporelles, nous allons utiliser les moment d'ordre 1 et 2. Le moment d'ordre 1 permet de déterminer la tendance d'un processus et les moments d'ordre 2 permet de déterminer la variance du processus et d'étudier la dépendance temporelle du processus.
+Afin d'étudier les séries temporelles, nous allons utiliser les moments d'ordre 1 et 2. Le moment d'ordre 1 permet de déterminer la tendance d'un processus et le moment d'ordre 2 permet de déterminer la variance du processus et d'étudier la dépendance temporelle du processus.
 \begin{Def}\label{defMom}
 Soit un processus $\Xt$ un processus du second ordre (i.e. $\E{X_t^2}<\infty$).
 \begin{itemize}
@@ -134,37 +134,19 @@ $$
 
 
 
-Dans la pratique, on aura un échantillon fini, il faudra donc estimer ses moments à partir de l'échantillon fourni. Dans la suite on appelera ses estimations des \textit{moments empiriques}~:
+Dans la pratique, on aura un échantillon fini, il faudra donc estimer ses moments à partir de l'échantillon fourni. Dans la suite on appellera ses estimations des \textit{moments empiriques}~:
 \begin{align*}
 \overline{X}_T &= \frac{1}{T}\sum_{t=1}^TX_t\\
 \overline{\gamma}(h)&=\frac{1}{T-h}\sum_{t=h+1}^T(X_t-\overline{X})(X_{t-h}-\overline{X}), 0\leq h\leq T-1\\
 \overline{\rho}(h)&=\frac{T}{T-h}\frac{\sum_{t=h+1}^T(y_t-\overline{y})(y_{t-h}-\overline{y})}{\sum_{t=1}^T(y_t-\overline{y})^2}, 0\leq h\leq T-1,\\
 \end{align*}
-en remplaçant $T-h$ par $T$ l'autocorellation on obtient un estimateur avec biais.
-\subsection{Densité spectrale}
-Les coefficients d'autocovariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgues sur $[-\pi,\pi]$ que nous noterons $f_X$.
-\begin{Def}
-Soit $\Xt$ un processus de fonction d'autocovariance $\gamma_X$ la densité spectrale $f$ de $\Xt$ s'écrit~:
-$$
-f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)e^{-i\omega h}\,.
-$$
-\end{Def}
-\begin{pro}
-Si $f_X$ est la densité spectrale de $\Xt$ alors~:
-$$
-\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega
-$$
-\end{pro}
-Le principal outil d'analyse dont on dispose pour estimer empiriquement la densité spectrale théorique du processus est le périodogramme $I_T$, défini sur l'intervalle $[0,2\pi[$ par~:
-$$
-I_T(\lambda)=\frac{1}{2\pi T}\left|\sum_{t=1}^Te^{-i\lambda t}X_t\right|^2
-$$
+en remplaçant $T-h$ par $T$ dans le calcul de l'autocorrélation (resp. d'autocovariance), on obtient un estimateur avec biais. On remarque que lorsque h est proche du nombre de termes dans l'échantillon alors le calcul de l'autocorrélation (resp. autocovariance) empirique est de faible qualité car elle dépend de peu de terme de la série temporelle.
 
-\subsection{processus à mémoire}
+\subsection{Processus à mémoire}
 L'ACF permet de mesurer la persistence (ou la mémoire) d'un processus, elle va pouvoir classer les processus en fonction de leur mémoire. On va considérer les processus sans mémoire, à mémoire courte et à mémoire longue.
 
 
-Un \textit{processus sans mémoire} est un processus tel que pour tout $t$ $X_t$ n'est pas corrélé à $X_{t-1}, X_{t-2},...$. Les bruits blancs sont des processus sans mémoire.
+Un \textit{processus sans mémoire} est un processus tel que pour tout $t\in\Z$ $X_t$ n'est pas corrélé à $X_{t-1}, X_{t-2},...$. Les bruits blancs sont des processus sans mémoire.
 
 
 \begin{Def}\label{BB}
@@ -184,10 +166,10 @@ Un bruit blanc gaussien $\epsilon_t$ est une suite de variable aléatoire i.i.d 
 Un bruit blanc gaussien est également un processus sans mémoire.
 
 
-La dénomination de \textit{bruit} vient du fait que ce processus ne contient aucune information d'autocorrelation. Ainsi aucun signal déterministe ne peut être extrait de ce processus. 
+La dénomination de \textit{bruit} vient du fait que ce processus ne contient aucune information d'autocorrélation. Ainsi aucun signal déterministe ne peut être extrait de ce processus. 
 
 
-Il existe également des processus dont l'ACF est géométriquement bornée et décroit rapidement vers 0, on parle alors de processus à mémoire courte. C'est le cas des processus de ARMA, AR ou MA.
+Il existe également des processus dont l'ACF est géométriquement bornée et décroit rapidement vers 0, on parle alors de processus à mémoire courte. C'est le cas des processus de type ARMA, AR ou MA.
 \begin{Def}\label{defCourte}
 Un processus est dit à mémoire courte s'il possède une ACF, $\rho(k)$, telle que~:
 $$
@@ -200,11 +182,11 @@ Par exemple, les modèles MA(1) et AR(1) sont des processus à mémoire courte. 
 \E{X_t}&=0\\
 \gamma(0)&=\sigma^2(1+\theta^2)\\
 \gamma(1) &= \theta\sigma^2\\
-\gamma(h)&= 0, \forall h\not=0,1
+\gamma(h)&= 0, \forall h\not=0,1,-1
 \end{align*}
 ainsi $\rho(h)=0$ pour tout $h>1$.
 \begin{Def}
-Un processus est dit à mémoire longue s'il possède une ACF, $\rho(k)$, qui est approchée comme suit~:
+Un processus est dit à mémoire longue s'il possède une ACF, $\rho(k)$ qui a le comportement asymptotique suivant~:
 $$
 \rho(k)\sim_{k\rightarrow \infty} Ck^{-\alpha}
 $$
@@ -224,7 +206,7 @@ $$
 on pose~:~$\mathbb{E}\left(X_t\right)=\mathbb{E}\left(X_0\right)=\mu$. Pour la covariance, on a~:
 \begin{align*}
 Cov\left(X_t,X_{t+h}\right)& = \mathbb{E}\left((X_t-\mu)(X_{t+h}-\mu)\right)\\
-&= \mathbb{E}\left((X_0-\mu)(X_{h_0}-\mu)\right)
+&= \mathbb{E}\left((X_0-\mu)(X_{h}-\mu)\right)
 \end{align*}
 la dernière égalité vient du fait que $(X_t,X_{t+h})$ a la même distribution que $(X_0,X_h)$.
 On remarque donc que les processus stationnaire strict ont des moments d'ordre 1 et 2 indépendant du temps $t$. C'est cette notion qui va être utilisée pour des définir les processus stationnaires au sens faible.
@@ -250,9 +232,11 @@ $\left(X_t\right)_{t\in\mathbb{Z}}$ est un processus stationnaire vectoriel (n,1
 \item[ii)]$\forall t,h\in\mathbb{Z},~\E{(X_t-m)(X_{t+h}-m)}=\gamma\left(h\right) $ est indépendant de $t$ 
 \end{itemize}
 \end{Def} 
-Ainsi pour tout $h$ la matrice $\gamma(h)$ est une matrice carrée de taille n indépendante de t. Dans le cas des 
+Ainsi pour tout $h$ la matrice $\gamma(h)$ est une matrice carrée de taille n indépendante de t.
 
-Les processus stationnaires sont stables par combinaison sous certaine condition sur les coefficients : 
+ 
+
+Sous certaine condition sur les coefficients, les processus stationnaires sont stables par combinaison linaires : 
 \begin{pro}
 Si $\Xt$ est un processus stationnaire et $(a_i)_{i\in \mathbb{Z}}$ est une suite de réels absolument convergente alors le processus : 
 $$
@@ -288,7 +272,7 @@ $\rho(k-1)$ & $\rho(k-2)$ & . & 1\\
 \end{tabular}
 \right)
 $$
-Les 3 premières autocrrélations partielles sont donc déterminées par les relation suivantes~:
+Les 3 premières autocorrélations partielles sont donc déterminées par les relation suivantes~:
 \begin{align*}
 r(1)&=\rho(1)\\
 r(2)&= \frac{\rho(2)-\rho(1)^2}{1-\rho(1)^2}\\
@@ -302,16 +286,17 @@ A l'aide de la relation précédente $\hat{r}(k)=\frac{\left|P_k^*\right|}{\left
 
 
 
-La stationnarité d'un processus permet d'estimer les moments non conditionnels de $X_{T+h}$ en utilisant les moments empiriques. Ainsi on peut utiliser comme prédicateur naturel de $X_{T+h}$ un estimateur de l'espérance non conditionnelle $\E{X_{T+h}}$ en particulier la moyenne empirique, i.e.~:~$\hat{X}_{T+h}=\frac{1}{T}\sum_{t=1}^TX_t$. Mais on se rend compte que cette prévision est extrêmement grossière car pour n'importe quel horizon $h>0$, le prédicateur est identique, illustrant ainsi que la dynamique du processus n'est pas prise en compte dans ce type de prédicateur. Ainsi une fois choisi le prédicateur il faut pouvoir déterminer la qualité de la prédiction.
-
+La stationnarité d'un processus permet d'estimer les moments non conditionnels de $X_{T+h}$ en utilisant les moments empiriques. Ainsi on peut utiliser comme prédicateur naturel de $X_{T+h}$ un estimateur de l'espérance non conditionnelle $\E{X_{T+h}}$ en particulier la moyenne empirique, i.e.~:~$\hat{X}_{T+h}=\frac{1}{T}\sum_{t=1}^TX_t$. Mais on se rend compte que cette prévision est extrêmement grossière car pour n'importe quel horizon $h>0$, le prédicateur est identique, illustrant ainsi que la dynamique du processus n'est pas prise en compte dans ce type de prédicateur.
 
 \subsubsection{localement stationnaire}
-Dahlaus a défini dans \cite{locally} la notion de stationnarité local pour les processus linéaire. Afin de la définir, j'ai introduit quelques notions nécessaires. La notion de localement stationnaire est utilisé pour des processus dont la représentation dépend du temps. Cela signifie, par example qu'un processus AR(1) dépendant du temps s'écrit : $X_t+\alpha_tX_{t-1}=\epsilon_t$, les coefficients du modèle dépendante du temps. On ne peut plus avoir de stationnarité globale car la valeur de se coefficient va dépendre de t. De plus sont estimation va dépendre de t et de la taille de l'échantillon T à l'instant t. Le paramètre du modèle dépendent de t et sont calculés sur l'échantillon $[1,T]$, afin d'éviter les problème d'estimation sur une taille finie et de passage à la lime quand $t\rightarrow \infty$, on réalise un changement d'échelle $\frac{t}{T}$ afin d'étudier sur l'intervalle $[0,1]$ et le passage à la limite se fera quand $t\rightarrow 1$. Dans \cite{locally}, la définition est donnée pour des processus linéaire (MA($\infty$)). Rappelons que la représentation d'un processus linéaire $X_{t,T}$ est~:
+Dahlaus a défini dans \cite{locally} la notion de stationnarité locale pour les processus linéaires. Afin de la définir, j'introduit quelques notions nécessaires. La notion de localement stationnaire est utilisée pour des processus dont la représentation dépend du temps. Cela signifie, par example qu'un processus AR(1) dépendant du temps s'écrit : $X_t+\alpha_tX_{t-1}=\epsilon_t$, les coefficients du modèle dépendent du temps. On ne peut plus avoir de stationnarité globale car la valeur de se coefficient va changer selon $t$. De plus son estimation va dépendre de $t$ et de la taille de l'échantillon $T$ à l'instant $t$. Le paramètres du modèle sont calculés sur l'échantillon $[1,T]$ pour chaque instant $t$, afin d'éviter les problèmes d'estimation sur une taille finie et de passage à la lime quand $t\rightarrow \infty$, on réalise un changement d'échelle $\frac{t}{T}$ afin d'estimer les paramètres sur l'intervalle $[0,1]$ et le passage à la limite se fera quand $t\rightarrow 1$. Dans \cite{locally}, la définition est donnée pour des processus linéaire (MA($\infty$)). Rappelons que la représentation d'un processus linéaire $X_{t,T}$ est~:
 $$
 X_{t,T}=\mu\left(\frac{t}{T}\right)+\sum_{j=-\infty}^\infty a_{t,T}(j)\epsilon_{t-j}
 $$
-L'approximation de se processus va reposer sur l'estimation de $a_{t,T}(j)\approx a(\frac{t}{T},j)$ et donc imposer certaine régularité sur le coefficient a. Les conditions sur a telles que pour tout $u_0$
-Avec cette précision, l'idée principale de la stationnarité locale est que pour tout $u_0\in [0,1]$ le processus $X_{t,T}$ peut être approché par un processus stationnaire $\tilde{X}_t(u_0)$. Le processus stationnaire $\tilde{X}_t(u_0)$ s'écrit~:
+L'approximation de se processus va reposer sur l'estimation de $a_{t,T}(j)\approx a(\frac{t}{T},j)$ et donc imposer certaine régularité sur le coefficient a. 
+
+
+L'idée principale de la stationnarité locale est que pour tout $u_0\in [0,1]$ le processus $X_{t,T}$ peut être approché par un processus stationnaire $\tilde{X}_t(u_0)$. Le processus stationnaire $\tilde{X}_t(u_0)$ s'écrit~:
 $$
 \tilde{X}_t(u)=\mu(u)+\sum_{j=-\infty}^\infty a(u,j)\epsilon_{t-j}
 $$
@@ -321,22 +306,22 @@ La stationnarité d'ordre 2 se définie comme une invariance des moments d'ordre
 \begin{Def}
 $\Xt$ est un processus non-stationnaire TS s'il peut s'écrire sous la forme $X_t = f(t)+Z_t$ où $f(t)$ est une fonction déterministe du temps et $Z_t$ est un processus stationnaire.
 \end{Def}
-L'exemple le plus simple est celui de la tendance linéaire bruitée~:~$X_t=a+bt+\epsilon_t$. Ce processus admet une tendance déterministe $a+bt$. Les processus non-stationnaire TS non pas de persistance des chocs. L'influence d'un choc subit à un instant $\tau$ aura tendance ) s'estomper au cours du temps et la variable rejoint alors sa dynamique à long terme déterminé par $f(t)$. Cette propriété une conséquence directe de la décomposition de Wold.
+L'exemple le plus simple est celui de la tendance linéaire bruitée~:~$X_t=a+bt+\epsilon_t$. Ce processus admet une tendance déterministe $a+bt$. Les processus non-stationnaire TS non pas de persistance des chocs. L'influence d'un choc subit à un instant $\tau$ aura tendance à s'estomper au cours du temps. La variable rejoint alors sa dynamique à long terme déterminée par $f(t)$. Cette propriété est une conséquence directe de la décomposition de Wold (\ref{Wold}).
 \begin{Def}
 Un processus $\Xt$ est un processus non-stationnaire DS ou intégré d'ordre $d$ si le processus obtenu après $d$ différenciation est stationnaire.
 \end{Def}
-Le fait de différencier $d$ fois revient à multiplier par le polynôme de retard $(1-L)^d$ et cela revient donc à chercher les racines de l'unité. Car si le polynôme $\Phi(L)X_t$ est stationnaire et si 1 est une racine du polynôme $\Phi$ alors $\left(X_t\right)$ sera non stationnaire. C'est pour cela que les tests de détections de racine de l'unité sont utilisés pour la détection de non stationnarité.
+Les processus ARIMA sont des processus non-stationnaires DS car par différenciation un processus ARIMA se ramène à un processus stationnaire ARMA.
 
 
 \subsection{Prédiction de séries temporelles}
-La prédiction des séries temporelles consiste à construire à partir des données $X_t$ avec $0\leq t\leq T$ une série $\hat{X}_T(h)$ tel que pour tout $h$ $X_{T+h}\approx \hat{X}_T(h)$. La qualité de la prédiction dépendra de la qualité de l'approximation pour tout h.
+La prédiction des séries temporelles consiste à construire à partir des données $X_t$ avec $0\leq t\leq T$ une série $\hat{X}_T(h)$ tel que pour tout $h$  $\hat{X}_T(h)$ approxime $X_{T+h}$. 
 
 
-Les propriétés qui caractérisent un bon estimateur sont le fait d'être sans biais et de variance minimale. Afin d'étudier ses propriété on introduit la variable d'erreur de prévision à l'horizon h définie par~:
+Les propriétés qui caractérisent un bon estimateur sont le fait d'être sans biais et de variance minimale. Afin d'étudier ses propriété on définit la variable d'erreur de prévision à l'horizon h~:
 $$
 e_{T+h} = X_{T+h}-\hat{X}_T(h)
 $$
-La caractéristique principale d'un bon prédicteur set de minimiser cette erreur de prévision au sens d'un certain critère. Généralement, 3 critères d'erreur de prévision à l'horizon h sont retenues~:~l'erreur moyenne \textit{ME}, l'erreur absolue moyenne \textit{MAE}, l'erreur quadratique moyenne \textit{MSE}~:
+La caractéristique principale d'un bon prédicteur est de minimiser cette erreur de prévision selon une certaine métrique. Les métriques standards sont~:~l'erreur moyenne \textit{ME}, l'erreur absolue moyenne \textit{MAE}, l'erreur quadratique moyenne \textit{MSE}~:
 \begin{align*}
 ME&=E\left(e_{T+h}\right)\\
 MAE&=E\left(\left|e_{T+h}\right|\right)\\
@@ -354,21 +339,21 @@ L'utilisation des processus linéaire vient du Théorème de Wold, qui montre qu
 \begin{theorem}\label{Wold}
 Soit $X_t$ un processus stationnaire alors il existe une bruit blanc au sens faible $\epsilon_t$ et des coefficients réels $\left(\Psi_t\right)$ tel que~:
 $$
-X_t = m+\sum_{i\geq 0}\Psi_j\epsilon_j
+X_t = m+\sum_{j\geq 0}\Psi_j\epsilon_{t-j}
 $$
 avec $m$ le moment d'ordre 1 de $X_t$
 \end{theorem}
-En utilisant le théorème de Wold, on sait que le processus stationnaire $X_t$ est aussi un processus linéaire. Ainsi sur un échantillon de taille $T$, on connait le meilleur prédicateur $\hat{X}_T(h)$ au sens de la plus faible erreur quadratique moyenne. On note $I_T$ la sigma algèbre engendrée par $X_1,...,X_T$ et $M_T$ le sous espace vectoriel engendré par les variables $X_1,...,X_T$ muni de la norme $L^2$. Il s'agit du prédicteur des moindres carrées~:
+En utilisant le théorème de Wold, on sait qu'un processus stationnaire $X_t$ est aussi un processus linéaire. Ainsi sur un échantillon de taille $T$, on connait le meilleur prédicateur $\hat{X}_T(h)$ au sens de la plus faible erreur quadratique moyenne. On note $I_T$ la sigma algèbre engendrée par $X_1,...,X_T$ et $M_T$ le sous espace vectoriel engendré par les variables $X_1,...,X_T$ muni de la norme $L^2$. Il s'agit du prédicteur des moindres carrées~:
 $$
 \hat{X}_T(h)=E\left(X_{T+h}|I_T\right)=argmin_{Y\in M_T}\left(||X_{T+h}-Y||^2\right)
 $$
 Dans le cas des processus linéaire, l'erreur de prévision est d'espérance nulle~:
 $$
-E(e_{T+h}) = E(X_{T+h})-m-\sum_{i= 0}^{h-1}\Psi_iE(\epsilon_{i})=0
+E(e_{T+h}) = E(X_{T+h})-m-\sum_{i= 0}^{h-1}\Psi_iE(\epsilon_{T+h-i})=0
 $$
 et de variance~:
 $$
-V(e_{T+h}) = \sigma^2\sum_{i=0}^{h-1}\Psi_i^2=0
+V(e_{T+h}) = \sigma^2\sum_{i=0}^{h-1}\Psi_i^2
 $$
 La variance de l'erreur permet de déterminer l'intervalle de confiance. Ainsi pour un processus gaussien, on obtient un intervalle de confiance~:
 $$
@@ -380,7 +365,7 @@ avec $t_{1-\alpha}$ le quantile d'ordre $1-\alpha$. Ces résultats sur la qualit
 Dans l'intevalle de confiance la variance de l'erreur est constante au cours du temps, mais ce n'est pas le cas pour des processus de type GARCH par example dans ces cas là, il est intéressant d'étudier la variance conditionnelle et l'espérance conditionnelle.
 \subsection{Horizon de prévision}
 Dans le cas de processus stationnaire, la loi de distribution conditionnelle converge vers la loi de distribution non conditionnelle lorsque l'horizon tend vers l'infini, i.e~: $L(X_{T+h}|I_T)\rightarrow L(X_0)$. Seule la vitesse de convergence diffère en fonction de la mémoire du processus. Plus la mémoire du processus est courte et plus la vitesse de convergence est grande et inversement.
-Ainsi lorsqu'on utilise en prévision un processus ARMA, il est particulièrement recommandé que l'horizon soit de très court terme (h=1 ou 2) car ce type de processus étant à mémoire courte, au bout de quelques pas le prédicteur va être égal à la moyenne non conditionnelle de la série et l'on ne peut pas faire de prédiction à l'on terme. Si l'on désire effectuer des prévisions à long terme les processus à mémoire longue sont plus intéressants. 
+Ainsi lorsqu'on utilise en prévision un processus ARMA, il est particulièrement recommandé que l'horizon soit de très court terme (h=1 ou 2) car ce type de processus étant à mémoire courte, au bout de quelques pas le prédicteur va être égal à la moyenne non conditionnelle de la série et l'on ne peut pas faire de prédiction à long terme. Si l'on désire effectuer des prévisions à long terme les processus à mémoire longue sont plus intéressants. 
 
 \subsection*{Exemple}
 Soit $X_t$ un processus AR(1) stationnaire~:
@@ -430,7 +415,7 @@ V=\left[\eta\gamma(h)\gamma(k)+\sum_{i\in\mathbb{Z}}\gamma(i)\gamma(i+k-h)+\gamm
 $$
 \end{pro}
 \section{Processus}
-\subsection{processus MA}
+\subsection{Processus MA}
 \begin{Def}
 Le processus $\Xt$ est une moyenne mobile d'ordre q s'il existe un bruit blanc $\epsilon_t\sim BB(0,\sigma^2)$ et des réels $\theta_1,...,\theta_q$ tels que~:~
 $$
@@ -438,27 +423,27 @@ X_t=m+\epsilon_t+\theta_1\epsilon_{t-1}+...+\theta_q\epsilon_{t-q}
 $$ 
 On note MA(q) une moyenne mobile d'ordre q.
 \end{Def}
-Un processus MA(q) est stationnaire, la fonction d'auto-covariance est ~:
+Un processus MA(q) est stationnaire, la fonction d'autocovariance est ~:
 $$
 \gamma(h)=\left\{\begin{array}{cc}
 0 & \textrm{si |h|>q}\\
-\sigma^2(1+\sum_{i=1}^q\theta^2_i) & h=0\\
+\sigma^2\left(1+\sum_{i=1}^q\theta^2_i\right) & h=0\\
 \sigma^2 \theta^2_q & h=q\\
-\sigma^2(\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h}) & si 0<h<q\\
+\sigma^2\left(\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h}\right) & \textrm{si }0<h<q\\
 \end{array}
 \right.
 $$
-Il en résulte que la fonction d'auto-correlation s'écrit~:
+Il en résulte que la fonction d'autocorrélation s'écrit~:
 $$
 \gamma(h)=\left\{\begin{array}{cc}
 0 & \textrm{si |h|>q}\\
 1 & h=0\\
-\frac{\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h})}{1+\theta_1^2+...+\theta_q^2} & si 0<h\leq q\\
+\frac{\theta_h+\sum_{i=h+1}^q\theta_i\theta_{i-h}}{1+\theta_1^2+...+\theta_q^2} & \textrm{si } 0<h\leq q\\
 \end{array}
 \right.
 $$
-Il n'y a pas de résultats particulier pour les auto-corrélations partielles.
-\subsubsection{processus multidimensionnel : VMA(q)}
+Il n'y a pas de résultats particulier pour les autocorrélations partielles.
+\subsubsection{Processus multidimensionnel : VMA(q)}
 \begin{Def}
 Un processus vectoriel $\Xt$ de dimension (n,1) admet une représentation VMA d'ordre q, notée VMA(q) si~:
 $$
@@ -468,12 +453,12 @@ ou de façon équivalent~:
 $$
 X_t = \mu+\Psi(L)\epsilon_t
 $$
-où $\mu$ désigne l'espérance du processus vectoriel, $\Psi(L)=\sum_i\Psi_iL^i$. Le vecteur des innovation $\epsilon_t$ est i.i.d. centrée et de matrice covariance définie positive.
+où $\mu$ désigne l'espérance du processus vectoriel, $\Psi(L)=\sum_i\Psi_iL^i$ avec $\Psi_0=1$. Le vecteur des innovations $\epsilon_t$ est i.i.d. centrée et de matrice covariance définie positive.
 \end{Def}
 
 
 Le théorème de Wold (\ref{Wold}) s'applique également dans le cas multidimensionnel. En effet si un processus vectoriel est stationnaire à l'ordre 2 alors on peut le représenter sous la forme d'un processus VMA($\infty$).
-\subsection{processus AR}
+\subsection{Processus AR}
 \begin{Def}
 Un processus $\Xt$ est un processus auto-régressif d'ordre p noté AR(p) si~:
 \begin{itemize}
@@ -487,7 +472,7 @@ avec $\phi_p\not=0$ et $\epsilon_t\sim BB(0,\sigma^2)$
 \end{Def}
 On pose $\Phi(z)=1-\phi_1z-...-\phi_pz^p$, un processus AR(p) peut s'écrire à l'aide de polynôme de retard~:
 $$
-\Phi(L)X_t = mu + \epsilon_t
+\Phi(L)X_t = \mu + \epsilon_t
 $$
 A l'aide de cette formulation, on en déduit les racines du polynôme $\Phi$ sont toutes de module strictement supérieur à 1.
 \begin{pro}
@@ -500,7 +485,7 @@ Soit $\Xt$ un processus AR(p), alors~:
 Les processus AR(p) sont des processus stationnaires, on a vu que les racines du polynômes de retard sont toutes strictement supérieure à 1, cela signifie que l'on peut inverser le polynôme de retard. Ainsi tout processus AR(p) peut s'écrire : $X_t = \Phi(L)^{-1}\left(\mu + \epsilon_t\right)$. L'inverse donnant une somme infinie, cela veut dire que tout processus AR(p) peut s'écrire sous la forme MA($\infty$).
 
 \subsubsection{Propriétés des processus AR(p)}
-On a vu précédemment que d'un processus AR(p) admettant une espérance non nulle, on pouvait toujours se ramenait à un processus AR(p) d'espérance nulle. Dans la suite on considérera le processus AR(p) $\Xt$ d'espérance nulle. L'auto covariance s'écrit pour tout h>0 : 
+On a vu précédemment que d'un processus AR(p) admettant une espérance non nulle, on pouvait toujours se ramenait à un processus AR(p) d'espérance nulle. Dans la suite on considérera le processus AR(p) d'espérance nulle. L'autocovariance s'écrit pour tout h>0 : 
 \begin{align*}
 \gamma(h)&= Cov(X_t,X_{t-h})\\
 &= \mathbb{E}\left(X_tX_{t-h}\right)\\
@@ -515,11 +500,11 @@ Pour h=0, on a~:
 &= \sum_{i=1}^p\phi_i\gamma(i)+\mathbb{E}\left(\epsilon_t\epsilon_{t}\right)\\
 &=\sum_{i=1}^p\phi_i\gamma(i)+\sigma^2
 \end{align*}
-On a de même pour l'auto-corrélation~:~$\rho(h)=\phi_1\rho(h-1)+...+\phi_p\rho(h-p)$ pour tout h>0.
+On a de même pour l'autocorrélation~:~$\rho(h)=\phi_1\rho(h-1)+...+\phi_p\rho(h-p)$ pour tout h>0.
 Ces équations sont appelés equation de Yule-Walker. 
 On a une relation de récurrence~:
 $$
-r(0)=1=\sum_{i=1}^p\phi_i\rho(i)+\frac{\sigma^2}{\gamma(0)}
+\rho(0)=1=\sum_{i=1}^p\phi_i\rho(i)+\frac{\sigma^2}{\gamma(0)}
 $$
 d'où~:
 $$
@@ -554,7 +539,10 @@ $$
 \end{array}
 \right)
 $$
-Les solutions de ce système sont données par les valeurs initiales $\rho(i)$. Ainsi si l'on peut estimer les corrélation sur un échantillon donnée on pourra en déduire les coefficients du processus AR(p).
+Les solutions de ce système sont données par les valeurs initiales $\rho(i)$. Ainsi si l'on peut estimer les corrélation sur un échantillon donné on pourra en déduire les coefficients du processus AR(p).
+
+
+Une autre propriété intéressante pour les processus AR(p) est la valeur des ACF et PACF, ce qui permettra de déterminer $p$ lors de l'estimation des processus.
 \begin{pro}
 Soit $\Xt$ un processus AR(p) alors~:
 \begin{itemize}
@@ -562,7 +550,7 @@ Soit $\Xt$ un processus AR(p) alors~:
 \item[ii)] l'auto corrélation partielle est nulle pour h>p
 \end{itemize}
 \end{pro}
-On peut utiliser le polynome de retard afin déterminer l'auto correlation des processus AR.
+On peut utiliser le polynome de retard afin de déterminer l'autocorrelation des processus AR.
 \begin{pro}
 Si le polynome de retard $\Phi(L)$ définissant le processus AR(p) (i.e. $\Phi(L)X_t=m+\epsilon_t$ admet $p$ racines distinctes $(\lambda_i)^p_{i=1}$, l'autocorellation d'ordre k est déterminée par la relation~:
 $$
@@ -570,20 +558,20 @@ $$
 $$
 où les paramètres $A_i$ sont des constantes déterminées par les conditions initiales.
 \end{pro}
-Il en résulte que si les racines du  de retard sont de module strictement supérieur à 1 alors l'auto corrélation tend vers zéro. Si les racines sont réels on a une exponentielle amortie et si les racines sont complexes on aura une sinusoïdale amortie.
-\subsubsection{Exemples}
-Contrairement aux processus MA(q) les processus ne sont pas forcement des processus stationnaires. Cela va dépendre des valeurs des racines du polyname de retard définissant le processus.  Par exemple, ci dessous on a défini un processus AR(4), graphiquement on voit que la stationnarité semble respecter et on a le comportment attendu au niveau des coefficients ACF et PACF.
+Il en résulte que si les racines du  polynome de retard sont de modules strictement supérieur à 1 alors l'autocorrélation tend vers zéro. Si les racines sont réels on a une exponentielle amortie et si les racines sont complexes on aura une sinusoïdale amortie.
+\subsubsection*{Exemples}
+Contrairement aux processus MA(q) les processus AR(p) ne sont pas forcement des processus stationnaires. Cela va dépendre des valeurs des racines du polynome de retard définissant le processus.  Par exemple, ci dessous on a défini un processus AR(4), graphiquement on voit que la processus semble être stationnaire.  On a le comportement attendu au niveau des coefficients ACF et PACF.
 \begin{figure}[h]
    \includegraphics[scale=.5]{AR4.png}
 \end{figure}
-Afin de confirmer que la série n'est pas stationnaire, on peut utiliser le test de Dicker-Fuller augmenté. Dans ce cas on trouve unADF d'environ -33 alors que le seuil à 1\% est de  -3.437. On peut rejeter l'hypothèse de non stationnarité avec un seuil de confiance à 99%. 
+Afin de confirmer que la série n'est pas stationnaire, on peut utiliser le test de Dicker-Fuller augmenté (ADF). Dans ce cas on trouve un ADF d'environ -33 alors que le seuil à 1\% est de  -3.437. On peut rejeter l'hypothèse de non stationnarité avec un seuil de confiance à 99\%. 
 En générant un serie AR(4) non stationnaire on obtient les résultats suivants~:
 \begin{figure}[h]
    \includegraphics[scale=.5]{AR4NS.png}
 \end{figure}
-Graphiquement, on observe la non stationnarité des données et cela et vérifié par le test Dicker-Fuller augmenté : ADF : -1.4735 alors que les valeurs critiques sont 1\% : -3.437 5\%: -2.864 et 10\%: -2.568. On accepte l'hypothèse $H_0$ de non stationnarité.
+Graphiquement, on observe la non stationnarité des données et cela est vérifié par le test Dicker-Fuller augmenté : ADF : -1.4735 alors que les valeurs critiques sont 1\% : -3.437 5\%: -2.864 et 10\%: -2.568. On accepte l'hypothèse $H_0$ de non stationnarité.
 
-\subsubsection{processus mutlidimensionnel : VAR(p)}
+\subsubsection{Processus mutlidimensionnel : VAR(p)}
 \begin{Def}
 Un processus vectoriel $\Xt$ de dimension (n,1) admet une représentation VAR d'ordre p, notée VAR(p) si~:
 $$
@@ -887,15 +875,55 @@ $$
 V(z_t)=\E{y_t^2}=\frac{\omega}{1-\sum_{i=1}^{max(p,q)}\alpha_i+\beta_i}
 $$
 Comme pour les processus ARCH, les processus GARCH sont des processus de type \textit{fat tails}. Il existe des extensions des processus GARCH tels que les processus EGARCH \textit{exponential GARCH} ou IGARCH \textit{integrated GARCH}.
-\subsection{méthodologie de Box Jenkins}
+\subsection{Estimation des paramètres}
+\subsubsection{modèle ARMA}
+L'estimation des paramètres d'un modèle ARMA(p,q) lorsque les ordres p et q sont supposés connus peut se réaliser par différentes méthodes dans le domaine temporel~:
+\begin{itemize}
+\item Moindres carrés Ordinaires pour les modèles sans composante MA. Dans ce cas on utilise les équations de Yule Walker. En remplacant les autocorrélations théoriques par leurs estimateurs, on peut retrouver les estimateurs des MCO des parmètres du modèle par la résolution des équations de Yule Walker.\\
+\item maximum de vraisemblance
+\end{itemize}
+Je vais détailler ici l'approche par maximum de vraisemblance, elle sera utilisée dans les tests pratiques. Un rappel sur l'estimateur du maximum de vraisemblance se trouve en annexe.
+
+Afin de pour voir appliquer l'estimation par maximum de vraisemblance sur les modèles ARMA, on doit décrire la vraisemblance du modèle. Pour cela on va supposer que le bruit blanc décrivant le processus ARMA est gaussien de variance $\sigma^2$. Ainsi pour tout processus ARMA(p,q)~:~$\Phi(L)x_t = c+ \Theta(L)\epsilon_t$, avec $\theta_0=\phi_0=1$,  la vraisemblance associé au vecteur de réalisation $(x_1,..,x_T)$ s'écrit alors~:
+\begin{equation}\label{MLEARMA}
+(2\pi\sigma^2)^{-\frac{T}{2}}det\left[\right]^{-\frac{1}{2}}exp\left(-\frac{1}{2\sigma^2}x'\left[(\theta_i,\phi_i)]\right]^{-1}x\right)
+\end{equation}
+
+Les paramètres $\hat{\phi}$ et $\hat{\theta}$ sont ceux qui maximise cette fonction de vraisemblance, comme la fonction est $C^2$ on peut utiliser les dérivées partielles à l'ordre 2 pour les déterminer. Une fois ces paramètres trouver on va devoir appliquer plusieurs tests afin de simplifier la forme obtenue. Un premier test est le \textit{test de redondance} dont le but est de vérifier si les composantes AR et MA de l'ARMA non pas de racines communes. Si tel est le cas on peut alors se ramener à une représentation minimal excluant ces racines. En effet si le processus ARMA(p,q) $x_t$ est tel que~:
+$$
+\Phi(L)x_t=\Theta(L)\epsilon_t
+$$
+et que les polynomes $\Theta(L)$ et $\Phi(L)$ ont une racine commune $\lambda$ alors on a~:
+\begin{align*}
+\Phi(L)&=(1-\frac{L}{\lambda})\tilde{\Phi}(L)\\
+\Theta(L)&=(1-\frac{L}{\lambda})\tilde{\Theta}(L)\\
+\end{align*}
+avec $\tilde{\Phi(L)}$ (resp. $\tilde{\Theta(L)}$) un polynome de degré p-1 (resp. q-1). En divisant les polynomes par ce facteur commun, on obtient une nouvelle représentation de $x_t$~:
+$$
+\tilde{\Phi}(L)x_t=\tilde{\Theta}(L)\epsilon_t
+$$
+en faisant de même pour toutes les racines communes ont obtient la représentation minimale du processus. 
+
+Afin de vérifier que les paramètres obtenus sont significativement différent de 0, on applique un test de significativité des coefficents obtenues. Pour cela on utilise le résultat suivant 
+\begin{theorem}
+L'estimateur du maximum de vraisemblance du vecteur des paramètres du modèle ARMA(p,q), noté $\hat{\Delta}=\left(\hat{\phi}_1,...,\hat{\phi}_p,\hat{\theta}_1,...,\hat{\theta}_q\right)$ est asymptotiquement distribué suivant une loi normale de moyenne $\Delta$ et de matrice de covariance $\mathbb{E}\left(\hat{\Delta}\hat{\Delta}'\right)=\mathcal{F}^{-1}$, avec $\mathcal{F}$ la matrice d'information de Fischer~:
+$$
+\mathcal{F}=-\mathbb{E}\left(\frac{\partial^2L(x,\Delta)}{\partial\delta_i\delta_j}\right)
+$$
+avec $\delta_i,\delta_j\in \Delta$.
+\end{theorem}
+On peut donc appliquer à ces estimateurs les méthodes d'inférence tradionnelle car assymptotiquement distribué selon une loi normale. Ainsi si l'on montre qu'un ou plusieurs paramètres ne sont pas significativement différents de 0, on estime à nouveau le modèle en excluant les variables correspondantes.
+\subsubsection{processus ARIMA}
+Pour les processus ARIMA, on va se ramener par différences premieres à un processus ARMA, on va estimer les paramètres sur les données ainsi filtrés. On reconstruit ensuite par inversion du filtre sur la série initiale.
+\subsubsection{méthodologie de Box Jenkins}
 Une fois le modèle choisi on peut générer des échantillons suivant la diffusion du processus choisi. Pour cela on peut par example utiliser la librairie statsmodels en python. Mais le problème inverse est plus complexe. Comment à partir de données peut-on trouver le modèle qui estime au mieux ses données. La méthodologie de Box Jenkins propose une façon d'estimer les paramètres du modèle ARIMA.
 
 
 La méthode de Box-Jenkins \cite{BoxJenkins} ne présuppose d'aucun pattern dans les données. Il utilise tros étapes itératives~:
 \begin{itemize}
 \item[i)] identification du modele
-\item[ii)] estimation des paraèmetres
-\item[iii)] verfication
+\item[ii)] estimation des paramètres
+\item[iii)] verification
 \end{itemize}
 Cette méthode itérative permet de déterminer parmi les modeles ARIMA ceux qui correspondent aux mieux (selon un critère donné : AIC, BIC, HQIC ...) aux données.
 Une étape crucial dans la selection du modele est l'estimation des paramètre et le choix de la métrique de classification. Un critère pour le choix des paramètres va être fourni par l'ACF et le PACF. En effet, on peut calculer l'ACF et le PACF sur l'échantillon fournit et à l'aide des résultats théorique sur les procesus ARMA et ARIMA en déduire un intevalle de valeur possible pour les paramètres p,q et d. Une fois la grille fournit de test fournit on calcule les critères AIC ou BIC pour chacun des paramètre. Le meilleur modèle sera celui qui minimise les critères. Les critères AIC et BIC sont définis de la manière suivante~:
@@ -914,22 +942,30 @@ On dit que $X_t$ convergent en loi vers $X$ si et seulement si pour toute foncti
 $$
 \lim_{n}\mathcal{E}(\phi(X_n))=\mathcal{E}\left(\phi(X)\right)
 $$
-\subsection{Densité spectrale}
+\subsection{Inversibilité}
+Pour un processus définit à partir de bruit blanc, on aimerait pouvoir exprimer ce processus en fonction du passé (observé) et pas seulement en fonction du bruit blanc non observé. C'est la question de l'inversibilité du processus. Cela veut donc dire qu'un processus est inversible si on peut le représenter comme une autorégression infinie $AR(\infty)$. Ainsi un processus AR(p) est toujours inversible et pour un processus MA(q) la condition d'inversibilité est similaire à la condition de stationnarité des processus AR~:
 \begin{pro}
-Soit $(X_t)$ un processus stationnaire de la forme~:
-$$
-X_t = m+\sum_{j\geq 0}a_j\epsilon_{t-j}
-$$
-avec $\epsilon_t$ un bruit blanc $BB(0,\sigma^2)$ et $\sum_{j\geq 0}|a_j|<+\infty$. Alors~:
-\begin{itemize}
-\item $\sum_{h\in\mathbb{Z}}|\gamma(h)|<+\infty$\\
-\item $\forall \omega\in[-\pi,\pi],~f_X(\omega)=\frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma(h)e^{i\omega h}$ est la densité spectrale de $X_t$.
-\end{itemize}
+Un processus MA(q) défini par : $X_t=\Theta(L)\epsilon_t$, avec $\epsilon_t$ un bruit blanc et $\theta_0=1$, est inversible si les racines du polynome $ \Theta(L)$ sont, en module, strictement supérieures à 1
 \end{pro}
-Sous les hypothèses précédentes, on a~:
+\subsection{Densité spectrale}
+Les coefficients d'autocovariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgues sur $[-\pi,\pi]$ que nous noterons $f_X$.
+\begin{Def}
+Soit $\Xt$ un processus de fonction d'autocovariance $\gamma_X$ la densité spectrale $f_X$ de $\Xt$ s'écrit~:
 $$
-f_X(\omega)=\frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma(h)cos(\omega h)
+f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)e^{-i\omega h}\,.
 $$
+\end{Def}
+\begin{pro}
+Si $f_X$ est la densité spectrale de $\Xt$ alors~:
+$$
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega
+$$
+\end{pro}
+Le principal outil d'analyse dont on dispose pour estimer empiriquement la densité spectrale théorique du processus est le périodogramme $I_T$, défini sur l'intervalle $[0,2\pi[$ par~:
+$$
+I_T(\lambda)=\frac{1}{2\pi T}\left|\sum_{t=1}^Te^{-i\lambda t}X_t\right|^2
+$$
+
 \subsubsection*{Exemple}
 Par exemple pour un bruit blanc fort (\ref{BB}), on a~:
 $$
@@ -940,7 +976,7 @@ $$
 \end{array}
 \right.
 $$
-et donc la densité spectrale du bruit blanc fort est~:
+ainsi la densité spectrale du bruit blanc fort s'écrit~:
 $$
 f_X(\omega) = \frac{\sigma^2}{2\pi}
 $$
@@ -949,13 +985,13 @@ $$
 
 
 
-La densité spectrale peut être utilisée pour déterminer un processus est un bruit blanc.
+La densité spectrale peut être utilisée pour déterminer si un processus est un bruit blanc.
 \begin{pro}
 Si la densité spectrale d'une série $\Xt$ est constante alors ce processus est un bruit blanc fort.
 \end{pro}
 En effet~:
 $$
-\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega = K\int_{-\pi}^{\pi}e^{i\omega h)d\omega}
+\gamma_X(h)=\int_{-\pi}^{\pi}f_X(\omega)e^{i\omega h}d\omega = K\int_{-\pi}^{\pi}e^{i\omega h}d\omega
 $$
 et donc si $h=0$ alors $\gamma_X(h)=2\pi K$ et si $h\not=0$ alors $\gamma_X(h)=0$. Ceci caractérise un bruit blanc. La densité spectrale peut être utilisée pour décrire les dépendances entre les processus.
 \begin{pro}
@@ -968,7 +1004,7 @@ $$
 f_Y(\omega)=f_X(\omega)\left|\sum_{j\in\mathbb{Z}}\beta_je^{i\omega j}\right|^2
 $$
 \end{pro}
-Par exemple si $Y_t=X_t-\phi X_{t-1}$ on a~:$f_Y(\omega)=f_X(\omega)\left|1+\phi e^{i\omega}\right|^2.$
+Par exemple si $Y_t=X_t-\phi X_{t-1}$ on a~:$f_Y(\omega)=f_X(\omega)\left|1-\phi e^{i\omega}\right|^2.$
 \subsection{Estimateur empirique des moments}
 Soit $(X_t)_{t\in\mathbb{Z}}$ un processus stationnaire, on cherche à estimer l'espérance, les fonction d'auto-covariance, d'auto-corrélation et d'auto-corrélation partielle. On a un échantillon de taille T. On prend comme estimateur~:
 \begin{itemize}
@@ -1030,7 +1066,58 @@ $$
 Le processus $\left\{\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
 \end{theorem}
 Un processus AR(1) est un processus markovien, de même toute marche aléatoire une processus markovien d'ordre 1.
+\subsection{Estimateur du maximum de vraisemblance}
+\begin{Def}\label{estimateur}
+Soit $X$ une variable aléatoire de loi $P_{\theta}$. On note $f(x,\theta)$ la densité de $P_{\theta}$ et $f(x_1,...x_n,\theta)$ la densité empirique correspondante. On appelle vraisemblance du paramètre $\theta$ l'application $\Theta\rightarrow\mathbb{R}^+$ définie par~:
+\begin{align*}
+\Theta &\rightarrow \mathbb{R}^+\\
+\theta &\mapsto L(x_1,...,x_n,\theta)=\prod_{i=1}^n f(x_i,\theta)
+\end{align*}
+\end{Def}
+\begin{Def}\label{MLE}
+Soit $L(x,\theta)$ la vraisemblance au point $\theta$, on appelle estimateur du maximum de vraisemblance pour $\theta$ la statistique $\hat{\theta}$ pour les observations $x_1,...,x_n$ telle que~:
+$$
+\forall \theta \, ,  L(x,\hat{\theta})\geq L(x,\theta)
+$$
+\end{Def}
+Le principe de vraisemblance revient à déterminer la valeur du paramètre $\theta$, fonction des observations $x_1,...,x_n$, qui assure la plus grande porbabilité d'apparition de ces observations $(x_1,...,x_n)$.
+\begin{corollary}
+Lorsque l'on suppose que $X$ est à valeur dans un ensemble qui est indépendant de $\theta$ et que la fonction de vraisemblance $L$ est $C^2$ par rapport à $\theta$, alors l'estimateur du maximum de vraisemblance $\hat{\theta}$ est solution du système~:
+\begin{eqnarray}
+\left(\frac{\partial L(x,\theta)}{\partial \theta}\right)&=&0\\
+\left(\frac{\partial^2 L(x,\theta)}{\partial \theta^2}\right)&<&0
+\end{eqnarray}
+\end{corollary}
+Afin de déterminer la qualité d'une estimation il existe différentes métriques comme par exemple le coefficient de détermination. Le coefficient de détermination donne une information sur la part de la variance de la variable endogène (ici $x_t$) qui peut être expliquée par la modèle estimé.
+\begin{Def}
+Soit un processus $x_t$, on note $\hat{\epsilon}_t$ le résidu d'estimation du modèle. Les coefficients de détermination $R^2$ et $\overline{R}^2$ sont alors définis par~:
 
+\begin{eqnarray}
+R^2&=&1-\frac{\sum_{t=1}^T\hat{\epsilon}_t^2}{\sum_{t=1}^T\left(x_t-\overline{x}\right)^2}\\
+\overline{R}^2&=&1-\frac{T-1}{T-n}\frac{\sum_{t=1}^T\hat{\epsilon}_t^2}{\sum_{t=1}^T\left(x_t-\overline{x}\right)}
+\end{eqnarray}
+avec $n$ le nombre de paramètres à estimer, par exemple pour un modèle ARMA(p,q) on a $n=p+q$.
+\end{Def}
+Un ajustement parfait est obtenue pour $R^2=1$.
+\subsection{Test statistiques}
+\subsubsection{Test de bruit blanc}
+Lorsque le processus est bien estimé, les résidus entre les valeurs observées et les valeurs estimées par le modèle doivent se conporter comme un bruit blanc. On notera par la suite $\hat{\epsilon}_t$ le résidu d'estimation du modèle. Pour un modèle ARMA ou ARIMA on suppose que le processus $\epsilon_t$ est un bruit blanc gaussien centré de variance $\sigma^2$, ainsi par le théorème centrale limite on doit avoir :
+$$
+\frac{\overline{\epsilon}_t\sqrt{T}}{\sigma^2}\rightarrow_{T\rightarrow\infty}\mathcal{N}(0,1)
+$$
+avec $\overline{\epsilon}_t$ la moyenne des résidus. on peut donc test la nullité de la moyenne des résidus en construisant un intervalle de confiance au seuil adequat.
+
+On peut aussi vérifier l'autocorellation des résidus via les tests de Durbin-Watson, test de Box et Pierce ou de Ljung-Box par exemple. Si les résidus obéissent à un bruit blanc il ne doit pas y avoir d'autocorrélation dans la série.
+
+Afin de vérifier si les résidus sont des processus gaussien on peut utiliser des tests de normalité tels que le test de Jarque et Bera.
+\subsection{Critère de convergence}
+Pour les modèles AR, MA, ARMA et ARIMA par exemple plutot que d'utiliser les métriques classiques telles que MAE, RMSE par exemple on va utiliser les critères tenant compte de la complexité du modèle~:
+\begin{itemize}
+\item[$\bullet$] Critère de Akaike (AIC) : le meilleur des modèles ARMA(p,q) est le modèle qui minimise~: $AIC(p,q)=T\log\left(\sigma_{\hat{\epsilon}_t}^2\right)+2(p+q)$\\
+\item[$\bullet$] Critère d'information Bayésien (BIC) : ce critère présente l'avantage de plus pénaliser les modèles où les paramètres sont en surnombre comparativement à l'AIC~: $$BIC(p,q)=T\log\left(\sigma_{\hat{\epsilon}_t}^2\right)-(n-p-q)\log\left(1-\frac{p+q}{T}\right)+(p+q)\log(T)+\log\left((p+q)^{-1}\left(\frac{\sigma_x^2}{\sigma_{\hat{\epsilon}^2}-1}\right)\right)$$
+\item[$\bullet$] le critère de Schwarz~:~$SC(p,q)=T\log\left(\sigma_{\hat{\epsilon}}^2\right)+(p+q)\log(T)$\\
+\item[$\bullet$] le critère de Hannan-Quin~:~$HQ(p,q)=\log(\sigma_{\hat{\epsilon}}^2)+(p+q)c\log\left(\frac{log(T)}{T}\right)$ avec $c$ une constante à spécifier.
+\end{itemize}
 \bibliographystyle{amsplain}
 %\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
 \bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
