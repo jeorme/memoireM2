@@ -934,7 +934,7 @@ Une étape crucial dans la selection du modele est l'estimation des paramètre e
 AIC(p)&=n\ln\left({\frac{\hat{\sigma}_e^2}{n}}\right)+2p\\
 BIC(p)&=n\ln\left({\frac{\hat{\sigma}_e^2}{n}}\right)+p+p\ln(n)
 \end{align*}
-avec n le nombre d'observations utilisé pour estimer le modele, p est le nombre de paramètres du modèle et $\hat{sigma}_e^2$ est la somme des résidus (SSR). L'intéret des critères AIC et BIC et de tenir compte l'erreur quadratique (SSR) mais aussi de la complexity du modèle. Ainsi le modele qui minise les critères ACI ou BIC sera celui qui fournit une bonne approximation relativement à la complexité du modele.
+avec n le nombre d'observations utilisé pour estimer le modele, p est le nombre de paramètres du modèle et $\hat{sigma}_e^2$ est la somme des résidus (SSR). L'intéret des critères AIC et BIC et de tenir compte l'erreur quadratique (SSR) mais aussi de la complexity du modèle. Ainsi le modele qui minimise les critères ACI ou BIC sera celui qui fournit une bonne approximation relativement à la complexité du modele.
 \section{Réseaux de neurones}
 \subsection{RNN}
 Les réseaux récurrents – RNNs dans la suite – permettent de traiter des données séquentielles, une suite d’entrées $x_0, . . . ,x_m$. En effet au temps $t$ ils calculent leur sortie en fonction de l’entrée $x_t$ mais aussi de l’état de la couche cachée au temps précédent. Ainsi ils font évoluer un état interne qui fait office de mémoire à court terme et qui permet de prendre en compte les dépendances temporelles que manifestent les entrées. Les RNNs les plus simples se décrivent de la manière suivante~:
@@ -998,7 +998,7 @@ On peut visualiser ces RNNs sous forme de graphe~:
     \node[annot,right of=h2] {Couche de sortie};
 \end{tikzpicture}
 \end{center}
-
+Les RNNs forment un modèle très puissant, ils sont Turing complet et on peut implémenter n'importe quel algorithme avec cette architecture. Mais en pratique, il est difficile d'entrainer les RNNs à cause du \textit{vansihing or exploding gradient}. Lors de la descente du gradient temporelle BTT \textit{Backpropagation Through Time} le gradient s'anulle ou explose numériquement. C'est pour remédier à ce problème de \textit{vanishing gradient} que le modèle LSTM a été créé \cite{LSTM}
 \subsection{LSTM}
 \subsection{GRU}
 \section{Annexe}
@@ -1189,5 +1189,5 @@ Pour les modèles AR, MA, ARMA et ARIMA par exemple plutot que d'utiliser les m�
 \end{itemize}
 \bibliographystyle{amsplain}
 %\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
-\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
+\bibliography{C:/Users/jerom/PycharmProjects/memoireM2/biblio}
 \end{document}
