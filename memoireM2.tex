@@ -21,6 +21,7 @@
 
 \documentclass[11pt]{scrartcl} % Font size
 \usepackage{hyperref} % for url
+\usepackage{tikz} %for RNN
 
 \input{structure.tex} % Include the file specifying the document structure and custom commands
 \newtheorem{theorem}{Théorème}[section]
@@ -33,6 +34,8 @@
 \newcommand{\Xt}{\left(X_t\right)_{t\in\mathbb{Z}}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\var}[1]{\mathbb{V}\left(#1\right)}
 \newcommand{\E}[1]{\mathbb{E}\left(#1\right)}
 \newcommand{\bb}[1]{\mathcal{BB}\left(0,#1\right)}
@@ -931,7 +934,73 @@ Une étape crucial dans la selection du modele est l'estimation des paramètre e
 AIC(p)&=n\ln\left({\frac{\hat{\sigma}_e^2}{n}}\right)+2p\\
 BIC(p)&=n\ln\left({\frac{\hat{\sigma}_e^2}{n}}\right)+p+p\ln(n)
 \end{align*}
-avec n le nombre d'observations utilisé pour estimer le modele, p est le nombre de paramètres du modèle et $\hat{sigma}_e^2$ est la somme des résidus (SSR). L'intéret des critères AIC et BIC et de tenir compte l'erreur quadratique (SSR) mais aussi de la complexity du modèle. Ainsi le modele qui minise les critères ACI ou BIC sera celui qui fournit une bonne approximation relativement à la complexité du modele.
+avec n le nombre d'observations utilisé pour estimer le modele, p est le nombre de paramètres du modèle et $\hat{sigma}_e^2$ est la somme des résidus (SSR). L'intéret des critères AIC et BIC et de tenir compte l'erreur quadratique (SSR) mais aussi de la complexity du modèle. Ainsi le modele qui minimise les critères ACI ou BIC sera celui qui fournit une bonne approximation relativement à la complexité du modele.
+\section{Réseaux de neurones}
+\subsection{RNN}
+Les réseaux récurrents – RNNs dans la suite – permettent de traiter des données séquentielles, une suite d’entrées $x_0, . . . ,x_m$. En effet au temps $t$ ils calculent leur sortie en fonction de l’entrée $x_t$ mais aussi de l’état de la couche cachée au temps précédent. Ainsi ils font évoluer un état interne qui fait office de mémoire à court terme et qui permet de prendre en compte les dépendances temporelles que manifestent les entrées. Les RNNs les plus simples se décrivent de la manière suivante~:
+\begin{Def}\label{VanillaRNN}
+Soient $n,p,k\in \N$, $x_0,...,x_m$ une suite d'entrée, $W\in \R^{k,n}$, $W_h\in \R^{k,k}$, $O\in \R^{p,k}$ et $h_{-1}\in\R^k$ alors la dynamique du RNN simple (ou Vanilla RNN) associé est décrite par~:
+\begin{eqnarray}
+h_t &=& \sigma(Wx_t+W_gh_{t-1})\\
+y_t&=&Oh_t
+\end{eqnarray}
+avec $h_t$ l'état de la couche cachée et $y_t$ l'état de la couche de sortie. Dans la suite on utilisera indifféremment RNN pour \textit{Vanilla RNN}.
+\end{Def}
+On peut visualiser ces RNNs sous forme de graphe~:
+\begin{center}
+\def\layersep{2.5cm}
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=green!50];
+    \tikzstyle{output neuron}=[neuron, fill=red!50];
+    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+    % Draw the input layer nodes
+    \foreach \name / \y in {1,...,4}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        \node[input neuron, pin=left: $(x_t)_\y$] (I-\name) at (0,-\y) {};
+
+    % Draw the hidden layer nodes
+    \foreach \name / \y in {1,...,5}
+        \path[yshift=0.5cm]
+            node[hidden neuron] (H1-\name) at (\layersep,-\y cm) {};
+    
+    % Draw the hidden layer nodes
+    \foreach \name / \y in {1,...,5}
+        \path[yshift=0.5cm]
+            node[hidden neuron] (H2-\name) at (2*\layersep,-\y cm) {};
+
+    % Draw the output layer node
+    \node[output neuron,pin={[pin edge={->}]right:$y_t$}, right of=H2-3] (O) {};
+
+    % Connect every node in the input layer with every node in the
+    % hidden layer.
+    \foreach \source in {1,...,4}
+        \foreach \dest in {1,...,5}
+            \path (I-\source) edge (H1-\dest);
+	
+	% Connect every node in the input layer with every node in the
+    % hidden layer.
+    \foreach \source in {1,...,5}
+        \foreach \dest in {1,...,5}
+            \path (H1-\source) edge (H2-\dest);	
+	
+    % Connect every node in the hidden layer with the output layer
+    \foreach \source in {1,...,5}
+        \path (H2-\source) edge (O);
+
+    % Annotate the layers
+    \node[annot,above of=H1-1, node distance=1cm] (hl) {Couche cachée à t-1};
+    \node[annot,above of=H2-1, node distance=1cm] (h2) {Couche cachée à t};
+    \node[annot,left of=hl] {Couche d'entrée};
+    \node[annot,right of=h2] {Couche de sortie};
+\end{tikzpicture}
+\end{center}
+Les RNNs forment un modèle très puissant, ils sont Turing complet et on peut implémenter n'importe quel algorithme avec cette architecture. Mais en pratique, il est difficile d'entrainer les RNNs à cause du \textit{vansihing or exploding gradient}. Lors de la descente du gradient temporelle BTT \textit{Backpropagation Through Time} le gradient s'anulle ou explose numériquement. C'est pour remédier à ce problème de \textit{vanishing gradient} que le modèle LSTM a été créé \cite{LSTM}
+\subsection{LSTM}
+\subsection{GRU}
 \section{Annexe}
 \subsection{Convergence}
 Convergence $\mathcal{L}^2$~:
@@ -1063,7 +1132,7 @@ $$
 $$
 \end{Def}
 \begin{theorem}
-Le processus $\left\{\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
+Le processus $\left\{X_t\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
 \end{theorem}
 Un processus AR(1) est un processus markovien, de même toute marche aléatoire une processus markovien d'ordre 1.
 \subsection{Estimateur du maximum de vraisemblance}
@@ -1120,5 +1189,5 @@ Pour les modèles AR, MA, ARMA et ARIMA par exemple plutot que d'utiliser les m�
 \end{itemize}
 \bibliographystyle{amsplain}
 %\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
-\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
+\bibliography{C:/Users/jerom/PycharmProjects/memoireM2/biblio}
 \end{document}
