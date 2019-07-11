@@ -1,0 +1,39 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{1}
+
+\bibitem{Bengio}
+Frassconi~P. Bengio~Y., Simard~P., \emph{Learning long-term depencies with
+  gradient descent is difficult}, IEE Transactions on Neural Networks
+  \textbf{5} (1994), no.~2, 157--166.
+
+\bibitem{NonLinDef}
+Lo~A.~W. Campbell J.~Y. and Mackinlay~A. C., \emph{The econometrics of
+  financial markets}, Princeton, New Jersey, University Press, 1997.
+
+\bibitem{locally}
+R.~Dahlaus, \emph{Locally stationary process}, arxiv:1109.4174v2, 2012.
+
+\bibitem{archEngle}
+R.~Engle, \emph{Autorregressive conditional heteroskedasticy with estimates of
+  united kingdom inflation}, Econometrica \textbf{50} (1982), 987--1008.
+
+\bibitem{BoxJenkins}
+G.~Jenkins G.E.P.~Box, \emph{Time series analysis, forecasting and control},
+  Holden-Day, San Francisco, 1970.
+
+\bibitem{LSTM}
+Schmidhuber~J. Hochreiter~S., \emph{Long short-term memory}, Neural Computation
+  \textbf{9} (1997), 1735--1780.
+
+\bibitem{NonSta}
+Charles Nelson and Charles Plosser, \emph{{t}rends and random walks in
+  macroeconmic time series: {s}ome evidence and implications.}, Journal of
+  Monetary Economics \textbf{10} (1982), no.~2, 139--162.
+
+\end{thebibliography}

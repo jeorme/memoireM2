@@ -937,15 +937,50 @@ BIC(p)&=n\ln\left({\frac{\hat{\sigma}_e^2}{n}}\right)+p+p\ln(n)
 avec n le nombre d'observations utilisé pour estimer le modele, p est le nombre de paramètres du modèle et $\hat{sigma}_e^2$ est la somme des résidus (SSR). L'intéret des critères AIC et BIC et de tenir compte l'erreur quadratique (SSR) mais aussi de la complexity du modèle. Ainsi le modele qui minimise les critères ACI ou BIC sera celui qui fournit une bonne approximation relativement à la complexité du modele.
 \section{Réseaux de neurones}
 \subsection{RNN}
-Les réseaux récurrents – RNNs dans la suite – permettent de traiter des données séquentielles, une suite d’entrées $x_0, . . . ,x_m$. En effet au temps $t$ ils calculent leur sortie en fonction de l’entrée $x_t$ mais aussi de l’état de la couche cachée au temps précédent. Ainsi ils font évoluer un état interne qui fait office de mémoire à court terme et qui permet de prendre en compte les dépendances temporelles que manifestent les entrées. Les RNNs les plus simples se décrivent de la manière suivante~:
+Les réseaux récurrents – RNNs dans la suite – permettent de traiter des données séquentielles par exemple une suite d’entrées $x_0, . . . ,x_m$. En effet au temps $t$ ils calculent leur sortie en fonction de l’entrée $x_t$ mais aussi de l’état de la couche cachée au temps précédent. Ainsi ils font évoluer un état interne qui fait office de mémoire à court terme et qui permet de prendre en compte les dépendances temporelles que manifestent les entrées. On les représentent de la façon suivante~:
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=.3]{RNN-rolled.png}
+	\end{center}
+\end{figure}
+\captionof{figure}{RNN}
+Dans le diagramm ci dessus $A$ correspond à un réseau de neuronnes qui prend en entrée la variable $x_t$ et qui donne en sortie $h_t$. La boucle siginifie que l'information de l'état précédent est passé à l'état actuel. Afin de comprendre comment l'information est passé d'un état à l'autre, on peut réprésenter de manière séquantielle les réseaux de neurones récurrents~: 
+
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=.3]{RNN-unrolled.png}
+	\end{center}
+\end{figure}
+\captionof{figure}{RNN : représentation séquentielle}
+
+Les RNNs les plus simples se décrivent de la manière suivante~:
 \begin{Def}\label{VanillaRNN}
 Soient $n,p,k\in \N$, $x_0,...,x_m$ une suite d'entrée, $W\in \R^{k,n}$, $W_h\in \R^{k,k}$, $O\in \R^{p,k}$ et $h_{-1}\in\R^k$ alors la dynamique du RNN simple (ou Vanilla RNN) associé est décrite par~:
 \begin{eqnarray}
-h_t &=& \sigma(Wx_t+W_gh_{t-1})\\
+h_t &=& f(Wx_t+W_gh_{t-1})\\
 y_t&=&Oh_t
 \end{eqnarray}
-avec $h_t$ l'état de la couche cachée et $y_t$ l'état de la couche de sortie. Dans la suite on utilisera indifféremment RNN pour \textit{Vanilla RNN}.
+avec $h_t$ l'état de la couche cachée, $y_t$ l'état de la couche de sortie et $f$ une fonction différentiable. Dans la suite on utilisera indifféremment RNN pour \textit{Vanilla RNN}.
 \end{Def}
+
+
+
+Dans le cas où la fonction d'activation est la fonction $\tanh$, on a la représentation séquentielle d'un RNN vanille~: 
+\newline
+
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=.5]{LSTM3-SimpleRNN.png}
+	\end{center}
+	\captionof{figure}{RNN Vanille : représentation séquentielle}
+\end{figure}
+
+
+
+
 On peut visualiser ces RNNs sous forme de graphe~:
 \begin{center}
 \def\layersep{2.5cm}
@@ -998,8 +1033,26 @@ On peut visualiser ces RNNs sous forme de graphe~:
     \node[annot,right of=h2] {Couche de sortie};
 \end{tikzpicture}
 \end{center}
-Les RNNs forment un modèle très puissant, ils sont Turing complet et on peut implémenter n'importe quel algorithme avec cette architecture. Mais en pratique, il est difficile d'entrainer les RNNs à cause du \textit{vansihing or exploding gradient}. Lors de la descente du gradient temporelle BTT \textit{Backpropagation Through Time} le gradient s'anulle ou explose numériquement. C'est pour remédier à ce problème de \textit{vanishing gradient} que le modèle LSTM a été créé \cite{LSTM}
+Les RNNs forment un modèle très puissant, ils sont Turing complet et on peut implémenter n'importe quel algorithme avec cette architecture. En théorie les RNN sont capables de prédire les données futures dans le cas de dépendance à long terme, mais en pratique ce n'est pas le cas. Cela vient du problème de \textit{vansihing or exploding gradient}. Lors de la descente du gradient temporelle BTT \textit{Backpropagation Through Time} le gradient s'anulle ou explose numériquement \cite{Bengio}. C'est pour remédier à ce problème de \textit{vanishing gradient} que le modèle LSTM a été créé \cite{LSTM}
 \subsection{LSTM}
+L'architecture LSTM a permis de résoudre le problème du \textit{vansishing gradient} pour les réseaux RNN et de permettre l'apprentissage lors de dépendance à long terme. Le principe des réseaux LSTM reposent sur l'utilisation de portes (\textit{gates}) et de garder en mémoire l'information relatives aux cellules précédentes. 
+
+ \begin{figure}[h]
+ \begin{center}
+   \includegraphics[scale=.7]{LSTM.png}
+\captionof{figure}{architecture d'un LSTM}
+\end{center}
+\end{figure}
+
+
+La fonction $\sigma$ définie dans l'architecture du LSTM correspond à la fonction sigmoïd. Les équation de la dynamique de ce modèle sont les suivantes~:
+\begin{eqnarray}
+i&=&\sigma(U^ix_t+W^ih_{t-1})\\
+f&=&\sigma(U^fx_t+W^fh_{t-1})\\
+o&=&\sigma(U^ox_t+W^oh_{t-1})\\
+c_t&=&c_t{t-1}\\
+y_t&=&Oh_t
+\end{eqnarray}
 \subsection{GRU}
 \section{Annexe}
 \subsection{Convergence}
@@ -1188,6 +1241,5 @@ Pour les modèles AR, MA, ARMA et ARIMA par exemple plutot que d'utiliser les m�
 \item[$\bullet$] le critère de Hannan-Quin~:~$HQ(p,q)=\log(\sigma_{\hat{\epsilon}}^2)+(p+q)c\log\left(\frac{log(T)}{T}\right)$ avec $c$ une constante à spécifier.
 \end{itemize}
 \bibliographystyle{amsplain}
-\bibliography{C:/Users/jerpetit/Desktop/master/TRIED/memoireM2/biblio}
-%\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
+\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
 \end{document}
