@@ -1034,8 +1034,8 @@ On peut visualiser ces RNNs sous forme de graphe~:
 \end{tikzpicture}
 \end{center}
 Les RNNs forment un modèle très puissant, ils sont Turing complet et on peut implémenter n'importe quel algorithme avec cette architecture. En théorie les RNN sont capables de prédire les données futures dans le cas de dépendance à long terme, mais en pratique ce n'est pas le cas. Cela vient du problème de \textit{vansihing or exploding gradient}. Lors de la descente du gradient temporelle BTT \textit{Backpropagation Through Time} le gradient s'anulle ou explose numériquement \cite{Bengio}. C'est pour remédier à ce problème de \textit{vanishing gradient} que le modèle LSTM a été créé \cite{LSTM}
-\subsection{LSTM}
-L'architecture LSTM a permis de résoudre le problème du \textit{vansishing gradient} pour les réseaux RNN et de permettre l'apprentissage lors de dépendance à long terme. Le principe des réseaux LSTM reposent sur l'utilisation de portes (\textit{gates}) et de garder en mémoire l'information relatives aux cellules précédentes. 
+\subsection{LSTM} 
+L'architecture LSTM a permis de résoudre le problème du \textit{vansishing gradient} pour les réseaux RNN et de permettre l'apprentissage lors de dépendance à long terme. Le principe des réseaux LSTM reposent sur l'utilisation de portes (\textit{gates}) et de garder en mémoire l'information relatives aux cellules précédentes.  
 
  \begin{figure}[h]
  \begin{center}
@@ -1047,12 +1047,20 @@ L'architecture LSTM a permis de résoudre le problème du \textit{vansishing gra
 
 La fonction $\sigma$ définie dans l'architecture du LSTM correspond à la fonction sigmoïd. Les équation de la dynamique de ce modèle sont les suivantes~:
 \begin{eqnarray}
-i&=&\sigma(U^ix_t+W^ih_{t-1})\\
-f&=&\sigma(U^fx_t+W^fh_{t-1})\\
+i_t&=&\sigma(U^ix_t+W^ih_{t-1}+b_i)\\
+f_t&=&\sigma(U^fx_t+W^fh_{t-1}+b_f)\\
 o&=&\sigma(U^ox_t+W^oh_{t-1})\\
-c_t&=&c_t{t-1}\\
-y_t&=&Oh_t
+c_t&=&c_{t-1}f+\tanh\left(U^{\tilde{c}}x_t+W^{\tilde{c}}h_{t-1}\right)i\\
+y_t&=&O\tanh\left(c_t\right)o
 \end{eqnarray}
+En pratique le réseau LSTM peut conserver une information en utilisant la focntion sigmoïde qui va retourner une valeur comprise en 0 et 1. Ainsi si on a une valeur de 0 cela signifie que l'on ne tient pas compte de cette information. Ainsi la porte d'oublie (\textit{forget gate}) on obtient l'état $f_t$ à partir des éléments $h_{t-1}$ et $x_t$~:
+\begin{itemize}
+\item[$\bullet$] \textit{forget gate} : $f_t = \sigma\left(U^fx_t+W^fh_{t-1}+b_f\right)$
+\end{itemize}
+L'état $f_t$ est un réel compris entre 0 et 1. A partir de cette information on applique un deuxieme filtre via la porte d'entrée (\textit{input gate})~:
+\begin{itemize}
+\item[$\bullet$] \textit{input gate} : $i_t = \sigma\left(U^ix_t+W^ih_{t-1}+b_i\right)$
+\end{itemize}
 \subsection{GRU}
 \section{Annexe}
 \subsection{Convergence}
@@ -1060,7 +1068,7 @@ Convergence $\mathcal{L}^2$~:
 $$
 X_n\rightarrow_{\mathcal{L^2}} X \Leftrightarrow  \lim_{n\rightarrow \infty}||X_n-X||_2=0
 $$
-On dit que $X_t$ convergent en loi vers $X$ si et seulement si pour toute fonction bornée $\phi$, on a~:~
+On dit que $X_t$ converge en loi vers $X$ si et seulement si pour toute fonction bornée $\phi$, on a~:~
 $$
 \lim_{n}\mathcal{E}(\phi(X_n))=\mathcal{E}\left(\phi(X)\right)
 $$
