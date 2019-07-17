@@ -31,6 +31,17 @@ G.~Jenkins G.E.P.~Box, \emph{Time series analysis, forecasting and control},
 Schmidhuber~J. Hochreiter~S., \emph{Long short-term memory}, Neural Computation
   \textbf{9} (1997), 1735--1780.
 
+\bibitem{PerfLstmGru}
+K.~Cho~Y.Bengio J.~Chung, C.~Gulcehre, \emph{Empirical evaluation of gated
+  recurrent neural networks on sequence modeling}, NIPS 2014 Workshop on Deep
+  Learning (2014).
+
+\bibitem{GRU}
+Dzmitry Bahdanau Yoshua~Bengio Kyunghyun~Cho, Bart van~Merriënboer, \emph{On
+  the properties of neural machine translation: Encoder–decoder approaches},
+  Proceedings of SSST-8, Eighth Workshop on Syntax, Semantics and Structure in
+  Statistical Translation (2014), 103--111.
+
 \bibitem{NonSta}
 Charles Nelson and Charles Plosser, \emph{{t}rends and random walks in
   macroeconmic time series: {s}ome evidence and implications.}, Journal of

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf45f2ce-ace1-4cd1-9989-8d538256740d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/memoireM2.log" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memoireM2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.tex" afterDir="false" />
-    </list>
+    <list default="true" id="bf45f2ce-ace1-4cd1-9989-8d538256740d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,27 +10,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/memoireM2.tex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4675">
-              <caret line="275" column="7" selection-start-line="275" selection-start-column="7" selection-end-line="275" selection-end-column="7" />
-              <folding>
-                <element signature="e#633#654#2" expanded="true" />
-                <element signature="e#12956#12959#3" expanded="true" />
-                <element signature="e#13458#13462#2" expanded="true" />
-                <element signature="e#13474#13478#2" expanded="true" />
-                <element signature="e#13488#13492#2" expanded="true" />
-                <element signature="e#13508#13512#2" expanded="true" />
-                <element signature="e#13538#13542#2" expanded="true" />
-                <element signature="e#13552#13556#2" expanded="true" />
-                <element signature="e#13642#13646#2" expanded="true" />
-                <element signature="e#13658#13662#2" expanded="true" />
-                <element signature="e#13670#13674#2" expanded="true" />
-                <element signature="e#13690#13694#2" expanded="true" />
-                <element signature="e#13720#13724#2" expanded="true" />
-                <element signature="e#13734#13738#2" expanded="true" />
-              </folding>
+            <state relative-caret-position="220">
+              <caret line="255" column="25" lean-forward="true" selection-start-line="255" selection-start-column="25" selection-end-line="255" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -68,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/simulation_modelARMA.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -149,7 +130,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,6 +146,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -398,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558524245125</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add box jenkins algo">
+      <created>1563314626322</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1563314626322</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -413,7 +401,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.35820895" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3619403" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="aws.explorer" order="3" side_tool="true" />
@@ -426,10 +414,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49205378" visible="true" weight="0.30119178" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.4914712" visible="true" weight="0.30119178" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5079462" side_tool="true" visible="true" weight="0.3012318" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50852877" side_tool="true" visible="true" weight="0.30119178" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="JIRA" order="13" />
       <window_info anchor="bottom" id="AWS Tail" order="14" />
@@ -539,35 +527,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/biblio.bib">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/statsmodels/tsa/statespace/sarimax.py" />
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="17" selection-start-column="17" selection-end-line="11" />
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memoireM2.tex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4675">
-          <caret line="275" column="7" selection-start-line="275" selection-start-column="7" selection-end-line="275" selection-end-column="7" />
-          <folding>
-            <element signature="e#633#654#2" expanded="true" />
-            <element signature="e#12956#12959#3" expanded="true" />
-            <element signature="e#13458#13462#2" expanded="true" />
-            <element signature="e#13474#13478#2" expanded="true" />
-            <element signature="e#13488#13492#2" expanded="true" />
-            <element signature="e#13508#13512#2" expanded="true" />
-            <element signature="e#13538#13542#2" expanded="true" />
-            <element signature="e#13552#13556#2" expanded="true" />
-            <element signature="e#13642#13646#2" expanded="true" />
-            <element signature="e#13658#13662#2" expanded="true" />
-            <element signature="e#13670#13674#2" expanded="true" />
-            <element signature="e#13690#13694#2" expanded="true" />
-            <element signature="e#13720#13724#2" expanded="true" />
-            <element signature="e#13734#13738#2" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/matplotlib/backends/_backend_tk.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tkinter/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/RNN-rolled.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ui.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -576,6 +547,20 @@
           <folding>
             <element signature="e#191#201#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui_support.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/biblio.bib">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -589,14 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/statsmodels/tsa/statespace/sarimax.py" />
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simulation/simulation_modelARMA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -606,17 +583,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui_support.py">
+    <entry file="file://$PROJECT_DIR$/memoireM2.tex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        <state relative-caret-position="220">
+          <caret line="255" column="25" lean-forward="true" selection-start-line="255" selection-start-column="25" selection-end-line="255" selection-end-column="25" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/matplotlib/backends/_backend_tk.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tkinter/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/RNN-rolled.png">
-      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>

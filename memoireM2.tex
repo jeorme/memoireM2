@@ -1062,6 +1062,14 @@ L'état $f_t$ est un réel compris entre 0 et 1. A partir de cette information o
 \item[$\bullet$] \textit{input gate} : $i_t = \sigma\left(U^ix_t+W^ih_{t-1}+b_i\right)$
 \end{itemize}
 \subsection{GRU}
+En 2014 \cite{GRU}, une version simplifiée de LSTM nommée GRU (\textit{Gates Recurrent Unit}) a été introduite, elle possède moins de paramètres que le modèle LSTM~:
+\begin{eqnarray}
+z_t&=&\sigma\left(U^zx_t+W^zh_{t-1}+b_z\right)\\
+r_t&=&\sigma\left(U^rx_t+W^rh_{t-1}+b_r\right)\\
+h_t&=&(1-z_t)\tanh\left(U^hx_t+W^hh_{t-1}r\right)+z_th_{t-1}\\
+y_t&=&Oh_t
+\end{eqnarray}
+Dans \cite{PerfLstmGru}, les auteurs démontrent que le modèle GRU a des perfomances équivalentes au modèles LSTM de base.
 \section{Annexe}
 \subsection{Convergence}
 Convergence $\mathcal{L}^2$~:
@@ -1249,5 +1257,6 @@ Pour les modèles AR, MA, ARMA et ARIMA par exemple plutot que d'utiliser les m�
 \item[$\bullet$] le critère de Hannan-Quin~:~$HQ(p,q)=\log(\sigma_{\hat{\epsilon}}^2)+(p+q)c\log\left(\frac{log(T)}{T}\right)$ avec $c$ une constante à spécifier.
 \end{itemize}
 \bibliographystyle{amsplain}
-\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
+%\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
+\bibliography{C:/Users/jerom/PycharmProjects/memoireM2/biblio}
 \end{document}
