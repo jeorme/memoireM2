@@ -924,9 +924,9 @@ Une fois le modèle choisi on peut générer des échantillons suivant la diffus
 
 La méthode de Box-Jenkins \cite{BoxJenkins} ne présuppose d'aucun pattern dans les données. Il utilise tros étapes itératives~:
 \begin{itemize}
-\item[i)] identification du modele
+\item[i)] identification du modèle
 \item[ii)] estimation des paramètres
-\item[iii)] verification
+\item[iii)] vérification
 \end{itemize}
 Cette méthode itérative permet de déterminer parmi les modeles ARIMA ceux qui correspondent aux mieux (selon un critère donné : AIC, BIC, HQIC ...) aux données.
 Une étape crucial dans la selection du modele est l'estimation des paramètre et le choix de la métrique de classification. Un critère pour le choix des paramètres va être fourni par l'ACF et le PACF. En effet, on peut calculer l'ACF et le PACF sur l'échantillon fournit et à l'aide des résultats théorique sur les procesus ARMA et ARIMA en déduire un intevalle de valeur possible pour les paramètres p,q et d. Une fois la grille fournit de test fournit on calcule les critères AIC ou BIC pour chacun des paramètre. Le meilleur modèle sera celui qui minimise les critères. Les critères AIC et BIC sont définis de la manière suivante~:
@@ -945,7 +945,7 @@ Les réseaux récurrents – RNNs dans la suite – permettent de traiter des do
 	\end{center}
 \end{figure}
 \captionof{figure}{RNN}
-Dans le diagramm ci dessus $A$ correspond à un réseau de neuronnes qui prend en entrée la variable $x_t$ et qui donne en sortie $h_t$. La boucle siginifie que l'information de l'état précédent est passé à l'état actuel. Afin de comprendre comment l'information est passé d'un état à l'autre, on peut réprésenter de manière séquantielle les réseaux de neurones récurrents~: 
+Dans le diagramme ci dessus $A$ correspond à un réseau de neurones qui prend en entrée la variable $x_t$ et qui donne en sortie $h_t$. La boucle signifie que l'information de l'état précédent est passé à l'état actuel. Afin de comprendre comment l'information est passé d'un état à l'autre, on peut représenter de manière séquentielle les réseaux de neurones récurrents~: 
 
 
 \begin{figure}[h]
@@ -957,17 +957,17 @@ Dans le diagramm ci dessus $A$ correspond à un réseau de neuronnes qui prend e
 
 Les RNNs les plus simples se décrivent de la manière suivante~:
 \begin{Def}\label{VanillaRNN}
-Soient $n,p,k\in \N$, $x_0,...,x_m$ une suite d'entrée, $W\in \R^{k,n}$, $W_h\in \R^{k,k}$, $O\in \R^{p,k}$ et $h_{-1}\in\R^k$ alors la dynamique du RNN simple (ou Vanilla RNN) associé est décrite par~:
+Soient $n,p,k\in \N$, $x_0,...,x_m$ une suite d'entrée, $W\in \R^{k,n}$, $W_h\in \R^{k,k}$, $O\in \R^{p,k}$ et $h_{-1}\in\R^k$ alors la dynamique du RNN Vanille (ou Vanilla RNN) associée est décrite par~:
 \begin{eqnarray}
 h_t &=& f(Wx_t+W_gh_{t-1})\\
 y_t&=&Oh_t
 \end{eqnarray}
-avec $h_t$ l'état de la couche cachée, $y_t$ l'état de la couche de sortie et $f$ une fonction différentiable. Dans la suite on utilisera indifféremment RNN pour \textit{Vanilla RNN}.
+avec $h_t$ l'état de la couche cachée, $y_t$ l'état de la couche de sortie et $f$ une fonction différentiable. Dans la suite on utilisera indifféremment RNN pour \textit{RNN Vanille}.
 \end{Def}
 
 
 
-Dans le cas où la fonction d'activation est la fonction $\tanh$, on a la représentation séquentielle d'un RNN vanille~: 
+Dans le cas où la fonction d'activation est la fonction $\tanh$, on a~: 
 \newline
 
 
@@ -975,13 +975,13 @@ Dans le cas où la fonction d'activation est la fonction $\tanh$, on a la repré
 	\begin{center}
 		\includegraphics[scale=.5]{LSTM3-SimpleRNN.png}
 	\end{center}
-	\captionof{figure}{RNN Vanille : représentation séquentielle}
+	\captionof{figure}{RNN Vanille avec fonction d'activation $\tanh$}
 \end{figure}
 
 
 
 
-On peut visualiser ces RNNs sous forme de graphe~:
+On peut également visualiser ces RNNs sous forme de graphe~:
 \begin{center}
 \def\layersep{2.5cm}
 \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
@@ -1033,9 +1033,9 @@ On peut visualiser ces RNNs sous forme de graphe~:
     \node[annot,right of=h2] {Couche de sortie};
 \end{tikzpicture}
 \end{center}
-Les RNNs forment un modèle très puissant, ils sont Turing complet et on peut implémenter n'importe quel algorithme avec cette architecture. En théorie les RNN sont capables de prédire les données futures dans le cas de dépendance à long terme, mais en pratique ce n'est pas le cas. Cela vient du problème de \textit{vansihing or exploding gradient}. Lors de la descente du gradient temporelle BTT \textit{Backpropagation Through Time} le gradient s'anulle ou explose numériquement \cite{Bengio}. C'est pour remédier à ce problème de \textit{vanishing gradient} que le modèle LSTM a été créé \cite{LSTM}
+Les RNNs forment un modèle très puissant, ils sont Turing complet et on peut implémenter n'importe quel algorithme avec cette architecture. En théorie les RNN sont capables de prédire les données futures dans le cas de dépendance à long terme, mais en pratique ce n'est pas le cas. Cela vient du problème du \textit{vansihing or exploding gradient}. Lors de la descente du gradient temporelle BTT (\textit{Backpropagation Through Time}) le gradient s'annule ou explose numériquement \cite{Bengio}. C'est pour remédier à ce problème du \textit{vanishing gradient} que le modèle LSTM a été créé \cite{LSTM}
 \subsection{LSTM} 
-L'architecture LSTM a permis de résoudre le problème du \textit{vansishing gradient} pour les réseaux RNN et de permettre l'apprentissage lors de dépendance à long terme. Le principe des réseaux LSTM reposent sur l'utilisation de portes (\textit{gates}) et de garder en mémoire l'information relatives aux cellules précédentes.  
+L'architecture LSTM a permis de résoudre le problème du \textit{vansishing gradient} et de permettre l'apprentissage lors de dépendance à long terme. Le principe des réseaux LSTM reposent sur l'utilisation de cellules d'états (\textit{cell state}) qui permettent de transporter l'information de cellule en cellule et de portes (\textit{gates}). Les portes permettent de filtrer l'information et de contrôler ce que garde comme l'information la cellule d'état. Dans le schema ci-dessous la cellule d'état est l'information qui traverse la cellule en haut. L'entrée est $C_{t-1}$ auquel on va multipliée une valeur puis ajouter une valeur est en utilisée la valeur de la cellule d'état $C_t$ pour calculer la sortie du cellule.
 
  \begin{figure}[h]
  \begin{center}
@@ -1045,31 +1045,40 @@ L'architecture LSTM a permis de résoudre le problème du \textit{vansishing gra
 \end{figure}
 
 
-La fonction $\sigma$ définie dans l'architecture du LSTM correspond à la fonction sigmoïd. Les équation de la dynamique de ce modèle sont les suivantes~:
+La fonction $\sigma$ définie dans l'architecture du LSTM correspond à la fonction sigmoïde. Les symboles multiplcations (resp. additions) correspondent à la multiplication (resp. addition) point par point. Les équation de la dynamique de ce modèle sont les suivantes~:
 \begin{eqnarray}
-i_t&=&\sigma(U^ix_t+W^ih_{t-1}+b_i)\\
 f_t&=&\sigma(U^fx_t+W^fh_{t-1}+b_f)\\
-o&=&\sigma(U^ox_t+W^oh_{t-1})\\
-c_t&=&c_{t-1}f+\tanh\left(U^{\tilde{c}}x_t+W^{\tilde{c}}h_{t-1}\right)i\\
+i_t&=&\sigma(U^ix_t+W^ih_{t-1}+b_i)\\
+o_t&=&\sigma(U^ox_t+W^oh_{t-1})\\
+C_t&=&C_{t-1}f_t+\tanh\left(U^{\tilde{c}}x_t+W^{\tilde{c}}h_{t-1}\right)i_t\\
 y_t&=&O\tanh\left(c_t\right)o
 \end{eqnarray}
-En pratique le réseau LSTM peut conserver une information en utilisant la focntion sigmoïde qui va retourner une valeur comprise en 0 et 1. Ainsi si on a une valeur de 0 cela signifie que l'on ne tient pas compte de cette information. Ainsi la porte d'oublie (\textit{forget gate}) on obtient l'état $f_t$ à partir des éléments $h_{t-1}$ et $x_t$~:
-\begin{itemize}
-\item[$\bullet$] \textit{forget gate} : $f_t = \sigma\left(U^fx_t+W^fh_{t-1}+b_f\right)$
-\end{itemize}
-L'état $f_t$ est un réel compris entre 0 et 1. A partir de cette information on applique un deuxieme filtre via la porte d'entrée (\textit{input gate})~:
-\begin{itemize}
-\item[$\bullet$] \textit{input gate} : $i_t = \sigma\left(U^ix_t+W^ih_{t-1}+b_i\right)$
-\end{itemize}
+Le terme $f_t$ va être multiplié à la cellule $C_{t-1}$, cette opération est réalisée par la porte d'oubli (\textit{forget gate}). Elle permet de pondérer l'état précédent en effet la fonction sigmoïde retourne des valeurs comprises entre 0 et 1 et donc si $f_t$ vaut zero cela signifie que l'on ne tient pas compte de l'état précédent.
+
+Après ce passage on va modifier la cellule d'état $C_{t-1}$ afin d'obtenir la valeur à l'instant $t$. Cette opération est réalisée par l'\textit{input gate}. Cette porte va ajouter une information à la cellule $C_{t-1}$ afin d'obtenir la cellule $C_t$. L'\textit{input gate} réalise l'opération suivante~:
+\begin{align*}
+C_t&=\sigma(U^fx_t+W^fh_{t-1}+b_f) *C_{t-1}+\sigma(U^ix_t+W^ih_{t-1}+b_i)* \tanh\left(U^{\tilde{c}}x_t+W^{\tilde{c}}h_{t-1}\right)\\
+&=f_t*C_{t-1}+i_t*\tilde{C}_t
+\end{align*}
+
+Après le passage de la deuxième porte on a mis à jour la cellule d'état $C_t$ en fonction des données passées et des nouvelles données. On utilise alors cette cellule d'état pour déterminer la valeur de sortie. Cette opération est réalisée par la porte de sortie (\textit{output gate}). Afin de déterminer quelle valeur on va sortir, on va filtrer la valeur $C_t$ à l'aide de la porte de sortie. Pour cela on applique une fonction sigmoide sur les données d'entrée que l'on va multiplier à $\tanh(C_t)$. On utilise $\tanh$ afin de normalisée la sortie sur l'intervalle $[-1,1]$, la valeur de sortie $h_t$ est~:
+\begin{align*}
+h_t&=\sigma(U^ox_t+W^oh_{t-1})\tanh\left(C_t\right)\\
+&=o_t\tanh\left(C_t\right)
+\end{align*}
 \subsection{GRU}
-En 2014 \cite{GRU}, une version simplifiée de LSTM nommée GRU (\textit{Gates Recurrent Unit}) a été introduite, elle possède moins de paramètres que le modèle LSTM~:
-\begin{eqnarray}
-z_t&=&\sigma\left(U^zx_t+W^zh_{t-1}+b_z\right)\\
-r_t&=&\sigma\left(U^rx_t+W^rh_{t-1}+b_r\right)\\
-h_t&=&(1-z_t)\tanh\left(U^hx_t+W^hh_{t-1}r\right)+z_th_{t-1}\\
-y_t&=&Oh_t
-\end{eqnarray}
-Dans \cite{PerfLstmGru}, les auteurs démontrent que le modèle GRU a des perfomances équivalentes au modèles LSTM de base.
+En 2014 \cite{GRU} ont définit une version simplifiée du LSTM, appelée GRU (\textit{Gates Recurrent Unit}). Ce modèle possède moins de paramètres que le modèle LSTM~:
+
+ \begin{figure}[h]
+ \begin{center}
+   \includegraphics[scale=.7]{LSTM3-var-GRU.png}
+\captionof{figure}{architecture d'un LSTM}
+\end{center}
+\end{figure}
+Parmi les différences notables, on remarque que le réseau GRU combine les portes d'entrée et d'oubli en une seule porte appelée pourt de mise à jour (\textit{update gate}) et qu'il combine la cellule d'état $C_t$ avec la cellule $h_t$.
+
+
+Dans \cite{PerfLstmGru}, les auteurs démontrent que le modèle GRU a des performances équivalentes au modèles LSTM de base.
 \section{Annexe}
 \subsection{Convergence}
 Convergence $\mathcal{L}^2$~:
@@ -1081,14 +1090,14 @@ $$
 \lim_{n}\mathcal{E}(\phi(X_n))=\mathcal{E}\left(\phi(X)\right)
 $$
 \subsection{Inversibilité}
-Pour un processus définit à partir de bruit blanc, on aimerait pouvoir exprimer ce processus en fonction du passé (observé) et pas seulement en fonction du bruit blanc non observé. C'est la question de l'inversibilité du processus. Cela veut donc dire qu'un processus est inversible si on peut le représenter comme une autorégression infinie $AR(\infty)$. Ainsi un processus AR(p) est toujours inversible et pour un processus MA(q) la condition d'inversibilité est similaire à la condition de stationnarité des processus AR~:
+Pour un processus définit à partir de bruit blanc, on aimerait pouvoir exprimer ce processus en fonction du passé (observé) et pas seulement en fonction du bruit blanc non observé. C'est la question de l'inversibilité du processus. Cela veut donc dire qu'un processus est inversible si on peut le représenter comme une auto-régression infinie $AR(\infty)$. Ainsi un processus AR(p) est toujours inversible et pour un processus MA(q) la condition d'inversibilité est similaire à la condition de stationnarité des processus AR~:
 \begin{pro}
-Un processus MA(q) défini par : $X_t=\Theta(L)\epsilon_t$, avec $\epsilon_t$ un bruit blanc et $\theta_0=1$, est inversible si les racines du polynome $ \Theta(L)$ sont, en module, strictement supérieures à 1
+Un processus MA(q) défini par : $X_t=\Theta(L)\epsilon_t$, avec $\epsilon_t$ un bruit blanc et $\theta_0=1$, est inversible si les racines du polynôme $ \Theta(L)$ sont, en module, strictement supérieures à 1
 \end{pro}
 \subsection{Densité spectrale}
-Les coefficients d'autocovariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgues sur $[-\pi,\pi]$ que nous noterons $f_X$.
+Les coefficients d'auto-covariance d'une série stationnaire correspondent aux coefficients de Fourier d'une mesure positive, appelée mesure spectrale du processus. Il est possible de montrer que cette mesure spectrale admet un densité, dite spectrale, par rapport à la mesure de Lebesgue sur $[-\pi,\pi]$ que nous noterons $f_X$.
 \begin{Def}
-Soit $\Xt$ un processus de fonction d'autocovariance $\gamma_X$ la densité spectrale $f_X$ de $\Xt$ s'écrit~:
+Soit $\Xt$ un processus de fonction d'auto-covariance $\gamma_X$ la densité spectrale $f_X$ de $\Xt$ s'écrit~:
 $$
 f_X(\omega) = \frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_X(h)e^{-i\omega h}\,.
 $$
@@ -1201,7 +1210,7 @@ $$
 $$
 \end{Def}
 \begin{theorem}
-Le processus $\left\{X_t\right\}_{t\in\mathbb{N}}$ est une chaine de markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
+Le processus $\left\{X_t\right\}_{t\in\mathbb{N}}$ est une chaine de Markov d'ordre 1 si et seulement s'il existe une fonction $g$ mesurable et un processus $\epsilon_t$ tel que $X_t=g(X_{t-1},\epsilon_t)$ avec $\epsilon_t$ une suite de variable aléatoire indépendante et de même loi.
 \end{theorem}
 Un processus AR(1) est un processus markovien, de même toute marche aléatoire une processus markovien d'ordre 1.
 \subsection{Estimateur du maximum de vraisemblance}
@@ -1218,7 +1227,7 @@ $$
 \forall \theta \, ,  L(x,\hat{\theta})\geq L(x,\theta)
 $$
 \end{Def}
-Le principe de vraisemblance revient à déterminer la valeur du paramètre $\theta$, fonction des observations $x_1,...,x_n$, qui assure la plus grande porbabilité d'apparition de ces observations $(x_1,...,x_n)$.
+Le principe de vraisemblance revient à déterminer la valeur du paramètre $\theta$, fonction des observations $x_1,...,x_n$, qui assure la plus grande probabilité d'apparition de ces observations $(x_1,...,x_n)$.
 \begin{corollary}
 Lorsque l'on suppose que $X$ est à valeur dans un ensemble qui est indépendant de $\theta$ et que la fonction de vraisemblance $L$ est $C^2$ par rapport à $\theta$, alors l'estimateur du maximum de vraisemblance $\hat{\theta}$ est solution du système~:
 \begin{eqnarray}
@@ -1239,17 +1248,17 @@ avec $n$ le nombre de paramètres à estimer, par exemple pour un modèle ARMA(p
 Un ajustement parfait est obtenue pour $R^2=1$.
 \subsection{Test statistiques}
 \subsubsection{Test de bruit blanc}
-Lorsque le processus est bien estimé, les résidus entre les valeurs observées et les valeurs estimées par le modèle doivent se conporter comme un bruit blanc. On notera par la suite $\hat{\epsilon}_t$ le résidu d'estimation du modèle. Pour un modèle ARMA ou ARIMA on suppose que le processus $\epsilon_t$ est un bruit blanc gaussien centré de variance $\sigma^2$, ainsi par le théorème centrale limite on doit avoir :
+Lorsque le processus est bien estimé, les résidus entre les valeurs observées et les valeurs estimées par le modèle doivent se comporter comme un bruit blanc. On notera par la suite $\hat{\epsilon}_t$ le résidu d'estimation du modèle. Pour un modèle ARMA ou ARIMA on suppose que le processus $\epsilon_t$ est un bruit blanc gaussien centré de variance $\sigma^2$, ainsi par le théorème centrale limite on doit avoir :
 $$
 \frac{\overline{\epsilon}_t\sqrt{T}}{\sigma^2}\rightarrow_{T\rightarrow\infty}\mathcal{N}(0,1)
 $$
-avec $\overline{\epsilon}_t$ la moyenne des résidus. on peut donc test la nullité de la moyenne des résidus en construisant un intervalle de confiance au seuil adequat.
+avec $\overline{\epsilon}_t$ la moyenne des résidus. on peut donc test la nullité de la moyenne des résidus en construisant un intervalle de confiance au seuil adéquat.
 
-On peut aussi vérifier l'autocorellation des résidus via les tests de Durbin-Watson, test de Box et Pierce ou de Ljung-Box par exemple. Si les résidus obéissent à un bruit blanc il ne doit pas y avoir d'autocorrélation dans la série.
+On peut aussi vérifier l'auto-corrélation des résidus via les tests de Durbin-Watson, test de Box et Pierce ou de Ljung-Box par exemple. Si les résidus obéissent à un bruit blanc il ne doit pas y avoir d'auto-corrélation dans la série.
 
 Afin de vérifier si les résidus sont des processus gaussien on peut utiliser des tests de normalité tels que le test de Jarque et Bera.
 \subsection{Critère de convergence}
-Pour les modèles AR, MA, ARMA et ARIMA par exemple plutot que d'utiliser les métriques classiques telles que MAE, RMSE par exemple on va utiliser les critères tenant compte de la complexité du modèle~:
+Pour les modèles AR, MA, ARMA et ARIMA par exemple plutôt que d'utiliser les métriques classiques telles que MAE, RMSE par exemple on va utiliser les critères tenant compte de la complexité du modèle~:
 \begin{itemize}
 \item[$\bullet$] Critère de Akaike (AIC) : le meilleur des modèles ARMA(p,q) est le modèle qui minimise~: $AIC(p,q)=T\log\left(\sigma_{\hat{\epsilon}_t}^2\right)+2(p+q)$\\
 \item[$\bullet$] Critère d'information Bayésien (BIC) : ce critère présente l'avantage de plus pénaliser les modèles où les paramètres sont en surnombre comparativement à l'AIC~: $$BIC(p,q)=T\log\left(\sigma_{\hat{\epsilon}_t}^2\right)-(n-p-q)\log\left(1-\frac{p+q}{T}\right)+(p+q)\log(T)+\log\left((p+q)^{-1}\left(\frac{\sigma_x^2}{\sigma_{\hat{\epsilon}^2}-1}\right)\right)$$
