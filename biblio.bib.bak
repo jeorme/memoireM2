@@ -76,13 +76,4 @@
   month   = dec,
 }
 
-@Article{AIForFinance,
-  author  = {Calvalcante, Rodolfo C., Rodrigo C; Brasileiro, Victor L. P. Souza, Jarley P. Nobrega and Adriano L. I. Oliveira},
-  title   = {Computational Intelligence and Financial Markets : A Survey and Future Directions},
-  journal = {Expert Systems with Applications},
-  year    = {2016},
-  volume  = {55},
-  pages   = {194-211},
-}
-
 @Comment{jabref-meta: databaseType:bibtex;}

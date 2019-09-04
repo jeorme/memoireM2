@@ -1,3 +1,13 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: memoireM2.aux
 The style file: amsplain.bst
-Database file #1: C:/Users/jerpetit/PycharmProjects/memoireM2/biblio.bib
+Database file #1: C:/Users/jerom/PycharmProjects/memoireM2/biblio.bib
+Too many commas in name 1 of "Kyunghyun Cho, Bart van Merriënboer, Dzmitry Bahdanau, Yoshua Bengio" for entry GRU
+while executing---line 1139 of file amsplain.bst
+Too many commas in name 1 of "J. Chung, C. Gulcehre, K. Cho, Y.Bengio" for entry PerfLstmGru
+while executing---line 1139 of file amsplain.bst
+Too many commas in name 1 of "J. Chung, C. Gulcehre, K. Cho, Y.Bengio" for entry PerfLstmGru
+while executing---line 1223 of file amsplain.bst
+Warning--missing pages in PerfLstmGru
+Too many commas in name 1 of "Kyunghyun Cho, Bart van Merriënboer, Dzmitry Bahdanau, Yoshua Bengio" for entry GRU
+while executing---line 1223 of file amsplain.bst
+(There were 4 error messages)

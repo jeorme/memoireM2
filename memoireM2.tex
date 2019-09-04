@@ -1062,6 +1062,25 @@ L'état $f_t$ est un réel compris entre 0 et 1. A partir de cette information o
 \item[$\bullet$] \textit{input gate} : $i_t = \sigma\left(U^ix_t+W^ih_{t-1}+b_i\right)$
 \end{itemize}
 \subsection{GRU}
+\section{Comparaison des méthodes}
+Afin de comparer les méthodes de prédiction classiques aux méthodes par réseaux de neurones, j'ai procédé à l'étude de différent cas. Tout d'abord j'ai réalisé une comparaison sur la qualité de l'apprentissage lorsuqe l'on connait le processus généré, puis connaissant le processus j'ai comparé les qualité de la prédiction sur différente période de temps.
+\subsection{Comparaison des méthodes sur un un jeu de données générées}
+Pour cette comparaison, j'ai réalisé l'expérience suivante~:
+\begin{itemize}
+\item en utilisant la librarie statsmodels, je génére des processus MA, AR et ARMA\\
+\item la taille des échantillons est de : 100, 500, 1000, 200, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000\\
+\item pour chaque échantillon généré je verifie que la série est inversible et stationnaire. (le coefficients des processus sont choisis de telle sorte que les processus soient stationnaire et inversible)\\
+\item une fois les données obtenues je compare les methodes LSTM, GRU et par maximum de vraisemblance   
+\end{itemize}
+Le but de l'étude est de comparaison les techniques à des architectures de types reseaux de neurones et de voir quel niveau de complexité doit on avoir  sur les réseaux de neurones afin d'être aussi performant que les méthodes classiques. J'ai observé qu'avec un réseau LSTM Vanille sans besoin de fine tuning spécifique ou de beaucoup de couche cachée, les performances du LSTM sont meilleurs que les méthodes "statistiques classique"~:
+
+\subsubsection{Cas des processus stationnaires}
+\subsubsection{Cas des processus non stationnaires de type ARIMA}
+\subsection{Cas des processus non stationnaires de type ARCH}
+\subsection{Comparaison des méthodes sur de la prediction}
+\subsubsection{Cas des processus stationnaires}
+\subsubsection{Cas des processus non stationnaires de type ARIMA}
+\subsection{Cas des processus non stationnaires de type ARCH}
 \section{Annexe}
 \subsection{Convergence}
 Convergence $\mathcal{L}^2$~:
