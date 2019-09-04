@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf45f2ce-ace1-4cd1-9989-8d538256740d" name="Default Changelist" comment="">
+    <list default="true" id="bf45f2ce-ace1-4cd1-9989-8d538256740d" name="Default Changelist" comment="add box jenkins algo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biblio.bib.bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biblio2.bib.bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memoireM2.aux" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memoireM2.log" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memoireM2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/memoireM2.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +15,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/memoireM2.tex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
+            <state relative-caret-position="19023">
               <caret line="1119" column="31" selection-start-line="1119" selection-start-column="31" selection-end-line="1119" selection-end-column="31" />
             </state>
           </provider>
@@ -43,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/nonstationnarityTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="102">
               <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
@@ -73,7 +68,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation/simulation_modelARMA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
+            <state relative-caret-position="289">
               <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="71" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -425,9 +420,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="7" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3673594" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37713936" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="aws.explorer" order="3" side_tool="true" />
@@ -440,13 +434,14 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49205378" visible="true" weight="0.3012318" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.4908313" visible="true" weight="0.3012318" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="11" sideWeight="0.5079462" side_tool="true" visible="true" weight="0.3012318" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5091687" side_tool="true" visible="true" weight="0.3012318" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="JIRA" order="13" />
       <window_info anchor="bottom" id="AWS Tail" order="14" />
+      <window_info anchor="bottom" id="Messages" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -562,7 +557,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/memoireM2.tex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
+        <state relative-caret-position="19023">
           <caret line="1119" column="31" selection-start-line="1119" selection-start-column="31" selection-end-line="1119" selection-end-column="31" />
         </state>
       </provider>
@@ -576,7 +571,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/nonstationnarityTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="102">
           <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
@@ -600,7 +595,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation/simulation_modelARMA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="289">
           <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="71" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
