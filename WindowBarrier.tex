@@ -1,0 +1,78 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wenneker Assignment
+% LaTeX Template
+% Version 2.0 (12/1/2019)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Vel (vel@LaTeXTemplates.com)
+% Frits Wenneker
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{scrartcl} % Font size
+\usepackage{hyperref} % for url
+\usepackage{tikz} %for RNN
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{Def}[theorem]{Definition}
+\newtheorem{pro}[theorem]{Proposition}
+
+%%newcommand
+\newcommand{\Xt}{\left(X_t\right)_{t\in\mathbb{Z}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\var}[1]{\mathbb{V}\left(#1\right)}
+\newcommand{\E}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\bb}[1]{\mathcal{BB}\left(0,#1\right)}
+\newcommand{\bbn}[1]{\mathcal{BBN}\left(0,#1\right)}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{	
+	\normalfont\normalsize
+	\textsc{CNAM}\\ % Your university, school and/or department name(s)
+	\vspace{25pt} % Whitespace
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{20pt} % Whitespace
+	{\huge Series temporelles : ARIMA, LSTM?}\\ % The assignment title
+	\vspace{12pt} % Whitespace
+	\rule{\linewidth}{2pt}\\ % Thick bottom horizontal rule
+	\vspace{12pt} % Whitespace
+}
+
+\author{\LARGE Jérôme Petit} % Your name
+
+\date{\normalsize\today} % Today's date (\today) or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	FIGURE EXAMPLE
+%----------------------------------------------------------------------------------------
+%
+\section{Introduction}
+Window barrier options are extension of American barrier options. The difference being that Window barriers are active only for a subsection of the life of the option. The two main window barrier variations are front-window barriers (barriers active from the horizon until a specified date prior to expiry) and rear-window barriers (barriers actives from a specified date after the horizon until expiry).
+\section{Front-Window Barrier options}
+Front-window barrier options, also called early ending options
+\section{Definition}
+\bibliographystyle{amsplain}
+\bibliography{C:/Users/jerpetit/PycharmProjects/memoireM2/biblio}
+\end{document}
